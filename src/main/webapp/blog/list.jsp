@@ -29,15 +29,15 @@
             <c:forEach var="blog" items="${blogs}">
                 <tr>
                     <td>${blog.id}</td>
-                    <td><a href="/blogs?action=view&id=${blog.id}">${blog.name}</a></td>
-                    <td>${blog.tittle}</td>
-                    <td>${blog.description}</td>
+                    <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.tittle}</a></td>
+                    <td>${map_userId_userName.get(blog.user_id)}</td>
+                    <td>${blog.dateModified}</td>
                     <td>
-                        <a class="btn btn-info" href="/products?action=edit&id=${product.id}">
+                        <a class="btn btn-info" href="/blog?action=edit&id=${blog.id}">
                             <i class="fas fa-edit"></i>
                         </a>
                     </td>
-                    <td><a class="btn btn-danger" href="/products?action=delete&id=${product.id}"><i
+                    <td><a class="btn btn-danger" href="/blog?action=delete&id=${blog.id}"><i
                             class="fas fa-trash"></i></a></td>
                 </tr>
             </c:forEach>

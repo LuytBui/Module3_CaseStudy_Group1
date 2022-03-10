@@ -2,9 +2,11 @@ package com.codegym.service.blog;
 
 import com.codegym.dao.blog.IBlogDAO;
 import com.codegym.model.Blog;
+import com.codegym.model.Category;
 import com.codegym.service.IGeneralService;
 
 import java.util.List;
+import java.util.Map;
 
 public class BlogService implements IBlogService{
     IBlogDAO blogDAO;
@@ -36,5 +38,20 @@ public class BlogService implements IBlogService{
     @Override
     public boolean updateById(int id, Blog blog) {
         return blogDAO.updateById(id, blog);
+    }
+
+    @Override
+    public Category findCategoryByBlogId(int id) {
+        return null;
+    }
+
+    @Override
+    public String getUserNameByBlogId(int id) {
+        return blogDAO.getUserNameByBlogId(id);
+    }
+
+    @Override
+    public Map<Integer, String> getMap_userId_userName() {
+        return blogDAO.getMap_userId_userName();
     }
 }
