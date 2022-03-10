@@ -1,9 +1,18 @@
 package com.codegym.model;
 
 public class Category {
+<<<<<<< HEAD
     private int id;
     private String name;
 
+=======
+
+    private int id;
+
+    private String name;
+
+
+>>>>>>> dev
     public Category() {
     }
 

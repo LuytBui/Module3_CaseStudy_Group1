@@ -21,16 +21,16 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public boolean create(Category category) {
-        return false;
+        return categoryDAO.create(category);
     }
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+        return categoryDAO.deleteById(id);
     }
 
     @Override
     public boolean updateById(int id, Category category) {
-        return false;
+        return categoryDAO.updateById(id ,category);
     }
 }
