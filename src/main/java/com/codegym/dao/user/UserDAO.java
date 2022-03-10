@@ -12,35 +12,22 @@ import java.util.Date;
 import java.util.List;
 
 public class UserDAO implements IUserDAO {
-    public static final String SQL_SELECT_ALL_USER = "SELECT * FROM user ";
-    public static final String SQL_SELECT_USER_BY_ID = "SELECT * from user where  id = ?";
-    public static final String SQL_INSERT_USER = "INSERT into user (username,passwork,phone,email,dateOfBirth,gender,address,status,role_id) value (?,?,?,?,?,?,?,?,?)";
-    public static final String SQL_UPDATE_USER_BY_ID = "update user set username =?,password =?,phone =?,email =?,dateOfBirth =?,gender=?,address = ?,status =? , role_id =?";
-    public static final String SQL_DELETE_USER_BY_ID = "delete  from user where  id = ?";
+    public static final String SQL_SELECT_ALL_USER = "SELECT * FROM users ";
+    public static final String SQL_SELECT_USER_BY_ID = "SELECT * from users where  id = ?";
+    public static final String SQL_INSERT_USER = "INSERT into users (username,passwork,phone,email,dateOfBirth,gender,address,status,role_id) value (?,?,?,?,?,?,?,?,?)";
+    public static final String SQL_UPDATE_USER_BY_ID = "update users set username =?,password =?,phone =?,email =?,dateOfBirth =?,gender=?,address = ?,status =? , role_id =?";
+    public static final String SQL_DELETE_USER_BY_ID = "delete  from users where  id = ?";
+    public static final String SELECT_FROM_USERS_WHERE_EMAIL = "SELECT *from users where email =?";
     private Connection connection = DBConnection.getConnection();
 
     @Override
     public List<User> findAll() {
-        List<User> users = new ArrayList<>();
+        List<User> users = null;
+        PreparedStatement preparedStatement = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_USER);
+            preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_USER);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-
-                String username = resultSet.getString("username");
-                String password = resultSet.getString("password");
-                String phone = resultSet.getString("phone");
-                String email = resultSet.getString("email");
-                Date dateOfBirth = resultSet.getDate("dateOfBirth");
-                Boolean gender = resultSet.getBoolean("gender");
-                String address = resultSet.getString("address");
-                boolean status = resultSet.getBoolean("status");
-                int roleId = resultSet.getInt("role_id");
-                User user = new User(id, username, password, phone, email, dateOfBirth, gender, address,status);
-                user.setRole_id(roleId);
-                users.add(user);
-            }
+            users = getListUserFromResultSet(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,44 +35,52 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public User findByID(int id) {
+    public User findByID(int search) {
         User user = new User();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, search);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                String username = resultSet.getString("username");
-                String password = resultSet.getString("password");
-                String phone = resultSet.getString("phone");
-                String email = resultSet.getString("email");
-                Date dateOfBirth = resultSet.getDate("dateOfBirth");
-                Boolean gender = resultSet.getBoolean("gender");
-                String address = resultSet.getString("address");
-                boolean status = resultSet.getBoolean("status");
-                int roleId = resultSet.getInt("role_id");
-                user = new User(id, username, password, phone, email, dateOfBirth, gender, address,status);
-                user.setRole_id(roleId);
-            }
+            user = getListUserFromResultSet(resultSet).get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
     }
 
+    private List<User> getListUserFromResultSet(ResultSet resultSet) throws SQLException {
+        List<User> users = new ArrayList<>();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            String phone = resultSet.getString("phone");
+            String email = resultSet.getString("email");
+            Date dateOfBirth = resultSet.getDate("dateOfBirth");
+            Boolean gender = resultSet.getBoolean("gender");
+            String address = resultSet.getString("address");
+            boolean status = resultSet.getBoolean("status");
+            int roleId = resultSet.getInt("role_id");
+            User user = new User(id, username, password, phone, email, dateOfBirth, gender, address, status);
+            user.setRole_id(roleId);
+            users.add(user);
+        }
+        return users;
+    }
+
     @Override
     public boolean create(User user) {
         try {
-            PreparedStatement preparedStatement =connection.prepareStatement(SQL_INSERT_USER);
-            preparedStatement.setString(1,user.getUsername());
-            preparedStatement.setString(2,user.getPassword());
-            preparedStatement.setString(3,user.getPhone());
-            preparedStatement.setString(4,user.getEmail());
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USER);
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getPhone());
+            preparedStatement.setString(4, user.getEmail());
             preparedStatement.setDate(5, (java.sql.Date) user.getDateOfBirth());
-            preparedStatement.setBoolean(6,user.isGender());
-            preparedStatement.setString(7,user.getAddress());
-            preparedStatement.setBoolean(8,user.isStatus());
-            preparedStatement.setInt(9,user.getRole_id());
+            preparedStatement.setBoolean(6, user.isGender());
+            preparedStatement.setString(7, user.getAddress());
+            preparedStatement.setBoolean(8, user.isStatus());
+            preparedStatement.setInt(9, user.getRole_id());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,8 +91,8 @@ public class UserDAO implements IUserDAO {
     public boolean deleteById(int id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER_BY_ID);
-            preparedStatement.setInt(1,id);
-            return preparedStatement.executeUpdate() >0;
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -109,19 +104,32 @@ public class UserDAO implements IUserDAO {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_BY_ID);
-            preparedStatement.setString(1,user.getUsername());
-            preparedStatement.setString(2,user.getPassword());
-            preparedStatement.setString(3,user.getPhone());
-            preparedStatement.setString(4,user.getEmail());
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getPhone());
+            preparedStatement.setString(4, user.getEmail());
             preparedStatement.setDate(5, (java.sql.Date) user.getDateOfBirth());
-            preparedStatement.setBoolean(6,user.isGender());
-            preparedStatement.setString(7,user.getAddress());
-            preparedStatement.setBoolean(8,user.isStatus());
-            preparedStatement.setInt(9,user.getRole_id());
-            return preparedStatement.executeUpdate() >0;
+            preparedStatement.setBoolean(6, user.isGender());
+            preparedStatement.setString(7, user.getAddress());
+            preparedStatement.setBoolean(8, user.isStatus());
+            preparedStatement.setInt(9, user.getRole_id());
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-     return false;
+        return false;
+    }
+
+    public User GetUserByEmail(String email) {
+        User user = new User();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_USERS_WHERE_EMAIL);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            user=getListUserFromResultSet(resultSet).get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

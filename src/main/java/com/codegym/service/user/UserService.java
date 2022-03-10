@@ -1,39 +1,50 @@
 package com.codegym.service.user;
 
 import com.codegym.dao.user.IUserDAO;
+import com.codegym.dao.user.UserDAO;
 import com.codegym.model.User;
 
 import java.util.List;
 
 public class UserService implements IUserService {
-    private IUserDAO userDAO;
+    private IUserDAO iUserDAO;
 
-    public UserService(IUserDAO userDAO) {
+    private UserDAO userDAO;
+
+    public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
+    }
+
+    public UserService(IUserDAO iUserDAO) {
+        this.iUserDAO = iUserDAO;
     }
 
     @Override
     public List<User> findAll() {
-        return userDAO.findAll();
+        return iUserDAO.findAll();
     }
 
     @Override
     public User findByID(int id) {
-        return userDAO.findByID(id);
+        return iUserDAO.findByID(id);
     }
 
     @Override
     public boolean create(User user) {
-        return userDAO.create(user);
+        return iUserDAO.create(user);
     }
 
     @Override
     public boolean deleteById(int id) {
-        return userDAO.deleteById(id);
+        return iUserDAO.deleteById(id);
     }
 
     @Override
     public boolean updateById(int id, User user) {
-        return userDAO.updateById(id, user);
+        return iUserDAO.updateById(id, user);
+    }
+
+    public User GetUserByEmail(String email) {
+        return userDAO.GetUserByEmail(email);
     }
 }
