@@ -65,11 +65,26 @@ public class CategoryDAO implements ICategoryDAO{
 
     @Override
     public boolean deleteById(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE from categories where  id = ?");
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean updateById(int id, Category category) {
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categories set id = ?, name = ? where id= ?");
+            preparedStatement.setInt(1, category.getId());
+            preparedStatement.setString(2, category.getName());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }
