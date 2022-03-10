@@ -120,7 +120,7 @@ public class UserDAO implements IUserDAO {
         return false;
     }
 
-    public User GetUserByEmail(String email) {
+    public User findByEmail(String email) {
         User user = new User();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_USERS_WHERE_EMAIL);
