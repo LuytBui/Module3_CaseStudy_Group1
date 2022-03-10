@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class User {
     private int id;
+    private int role_id ;
     private String username;
     private String password;
     private String phone;
@@ -11,11 +12,12 @@ public class User {
     private Date dateOfBirth;
     private boolean gender;
     private String address;
+    private boolean status;
 
     public User() {
     }
 
-    public User(String username, String password, String phone, String email, Date dateOfBirth, boolean gender, String address) {
+    public User(String username, String password, String phone, String email, Date dateOfBirth, boolean gender, String address, boolean status) {
         this.username = username;
         this.password = password;
         this.phone = phone;
@@ -23,9 +25,10 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.address = address;
+        this.status = status;
     }
 
-    public User(int id, String username, String password, String phone, String email, Date dateOfBirth, boolean gender, String address) {
+    public User(int id, String username, String password, String phone, String email, Date dateOfBirth, boolean gender, String address, boolean status) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -34,6 +37,20 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.address = address;
+        this.status = status;
+    }
+
+    public User(int id, int role_id, String username, String password, String phone, String email, Date dateOfBirth, boolean gender, String address, boolean status) {
+        this.id = id;
+        this.role_id = role_id;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.address = address;
+        this.status = status;
     }
 
     public int getId() {
@@ -98,5 +115,21 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
