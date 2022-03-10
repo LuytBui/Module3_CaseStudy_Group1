@@ -33,9 +33,7 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-//        User user = userService.GetUserByEmail(email);
-//        User user = new User();
-        User user = null;
+        User user = userService.findByEmail(email);
 
         if (user == null) {
             request.setAttribute("message", USER_NOT_EXIST);
