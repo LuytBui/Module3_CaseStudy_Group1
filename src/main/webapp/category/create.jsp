@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <a href="/categories">Danh sách thể loại</a>
-    <h1>Tạo mới sản phẩm</h1>
+    <h1>Tạo mới thể loại</h1>
     <c:if test="${message!=null}">
         <p class="alert alert-success">${message}</p>
     </c:if>

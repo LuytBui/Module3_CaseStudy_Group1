@@ -9,13 +9,12 @@
 <body>
 <div class="container">
     <h1>Danh sách thể loại</h1>
-    <a class="btn btn-primary float-end" href="/categories?action=create">Tạo mới sản phẩm</a>
+    <a class="btn btn-primary float-end" href="/categories?action=create">Tạo mới thể loại</a>
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th scope="col">Mã sản phẩm</th>
-            <th scope="col">Tên sản phẩm</th>
-            <th colspan="2"></th>
+            <th scope="col">Mã thể loại</th>
+            <th scope="col">Tên thể loại</th>
         </tr>
         </thead>
         <tbody>
