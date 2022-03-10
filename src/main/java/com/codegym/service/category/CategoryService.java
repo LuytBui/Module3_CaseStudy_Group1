@@ -3,12 +3,16 @@ package com.codegym.service.category;
 import com.codegym.dao.category.CategoryDAO;
 import com.codegym.model.Category;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryService implements ICategoryService{
-    private static List<Category> categories = new ArrayList<>();
+
     private CategoryDAO categoryDAO;
+
+    public CategoryService() {
+        this.categoryDAO = new CategoryDAO();
+    }
+
     @Override
     public List<Category> findAll() {
         return categoryDAO.findAll();
