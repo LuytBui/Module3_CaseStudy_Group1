@@ -2,12 +2,14 @@ package com.codegym.service.category;
 
 import com.codegym.model.Category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryService implements ICategoryService{
+    private static List<Category> categories = new ArrayList<>();
     @Override
     public List<Category> findAll() {
-        return null;
+        return categories;
     }
 
     @Override
