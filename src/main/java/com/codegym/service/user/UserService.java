@@ -44,7 +44,7 @@ public class UserService implements IUserService {
         return iUserDAO.updateById(id, user);
     }
 
-    public User GetUserByEmail(String email) {
-        return userDAO.GetUserByEmail(email);
+    public User findByEmail(String email) {
+        return userDAO.findByEmail(email);
     }
 }
