@@ -46,6 +46,18 @@ public class BlogServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
+            case "edit": {
+                List<Category> categories = categoryService.findAll();
+                request.setAttribute("categories", categories);
+                int id = Integer.parseInt(request.getParameter("id"));
+                Blog blog = blogService.findByID(id);
+                request.setAttribute("blog", blog);
+                Category blogCategory = blogService.findCategoryByBlogId(id);
+                request.setAttribute("blogCategory", blogCategory);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/blog/edit.jsp");
+                requestDispatcher.forward(request, response);
+                break;
+            }
             default: {
                 List<Blog> blogs = blogService.findAll();
                 request.setAttribute("blogs", blogs);

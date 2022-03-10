@@ -42,7 +42,7 @@ public class BlogService implements IBlogService{
 
     @Override
     public Category findCategoryByBlogId(int id) {
-        return null;
+        return blogDAO.findCategoryByBlogId(id);
     }
 
     @Override

@@ -33,11 +33,11 @@
                     <td>${map_userId_userName.get(blog.user_id)}</td>
                     <td>${blog.dateModified}</td>
                     <td>
-                        <a class="btn btn-info" href="/blog?action=edit&id=${blog.id}">
+                        <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}">
                             <i class="fas fa-edit"></i>
                         </a>
                     </td>
-                    <td><a class="btn btn-danger" href="/blog?action=delete&id=${blog.id}"><i
+                    <td><a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i
                             class="fas fa-trash"></i></a></td>
                 </tr>
             </c:forEach>

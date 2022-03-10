@@ -112,7 +112,7 @@ public class BlogDAO implements IBlogDAO {
     public Category findCategoryByBlogId(int id) {
         Category category = new Category();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select C.id, C.name from blogs B join category C on B.category_id = C.id where B.id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("select C.id, C.name from blogs B join categories C on B.category_id = C.id where B.id = ?");
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
