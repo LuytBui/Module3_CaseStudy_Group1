@@ -4,7 +4,7 @@ import com.codegym.model.Category;
 
 import java.util.List;
 
-public class CategoryService implements ICategoryService{
+public class CategoryService implements ICategoryService {
     @Override
     public List<Category> findAll() {
         return null;
