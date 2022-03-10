@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <title>Lis all blogs</title>
@@ -13,7 +13,7 @@
 <body>
 <div class="container">
         <h1>Blogs Management</h1>
-        <a class="btn btn-primary float-end" href="/products?action=create">Add New blog</a>
+        <a class="btn btn-primary float-end" href="/blogs?action=create">Add New blog</a>
         <table class="table table-bordered">
             <thead>
             <tr>

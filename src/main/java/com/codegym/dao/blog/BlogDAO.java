@@ -110,12 +110,20 @@ public class BlogDAO implements IBlogDAO {
 
     @Override
     public Category findCategoryByBlogId(int id) {
+        Category category = new Category();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select C.id, C.name from product P join category C on P.category_id = C.id where p.id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("select C.id, C.name from blogs B join category C on B.category_id = C.id where B.id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int cId = rs.getInt("id");
+                String name = rs.getString("name");
+                category = new Category(cId, name);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return category;
     }
 
     @Override
@@ -125,7 +133,7 @@ public class BlogDAO implements IBlogDAO {
             PreparedStatement preparedStatement = connection.prepareStatement("select U.username from blogs B join users U on B.user_id = U.id where B.id = ?");
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 username = rs.getString("username");
             }
         } catch (SQLException e) {
