@@ -58,6 +58,16 @@ public class BlogServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             }
+            case "delete": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Blog blog = blogService.findByID(id);
+                request.setAttribute("blog", blog);
+                Category category = blogService.findCategoryByBlogId(id);
+                request.setAttribute("category", category);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/delete.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
             default: {
                 List<Blog> blogs = blogService.findAll();
                 request.setAttribute("blogs", blogs);
@@ -83,6 +93,22 @@ public class BlogServlet extends HttpServlet {
                 String content = request.getParameter("content");
                 Blog blog = new Blog(category_id, tittle, content);
                 blogService.create(blog);
+                response.sendRedirect("/blogs");
+                break;
+            }
+            case "edit": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                String tittle = request.getParameter("tittle");
+                String content = request.getParameter("content");
+                int category_id = Integer.parseInt(request.getParameter("category_id"));
+                Blog blog = new Blog(id, category_id, content, tittle);
+                blogService.updateById(id, blog);
+                response.sendRedirect("/blogs");
+                break;
+            }
+            case "delete": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                blogService.deleteById(id);
                 response.sendRedirect("/blogs");
                 break;
             }
