@@ -2,13 +2,17 @@ package com.codegym.dao.blog;
 
 import com.codegym.dao.DBConnection;
 import com.codegym.model.Blog;
+import com.codegym.model.Category;
+import com.codegym.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BlogDAO implements IBlogDAO {
         Connection connection = DBConnection.getConnection();
@@ -102,5 +106,58 @@ public class BlogDAO implements IBlogDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public Category findCategoryByBlogId(int id) {
+        Category category = new Category();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select C.id, C.name from blogs B join category C on B.category_id = C.id where B.id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int cId = rs.getInt("id");
+                String name = rs.getString("name");
+                category = new Category(cId, name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
+    }
+
+    @Override
+    public String getUserNameByBlogId(int id) {
+        String username = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select U.username from blogs B join users U on B.user_id = U.id where B.id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                username = rs.getString("username");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return username;
+    }
+
+    @Override
+    public Map<Integer, String> getMap_userId_userName() {
+        Map<Integer, String> map_userId_userName = new HashMap<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select id, username from users");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                map_userId_userName.put(id, username);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return map_userId_userName;
     }
 }
