@@ -19,6 +19,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tittle </th>
+                <th scope="col">Content </th>
                 <th scope="col">Author</th>
                 <th scope="col">Date Modify</th>
                 <th scope="col">Edit</th>
@@ -30,6 +31,7 @@
                 <tr>
                     <td>${blog.id}</td>
                     <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.tittle}</a></td>
+                    <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.content}</a></td>
                     <td>${map_userId_userName.get(blog.user_id)}</td>
                     <td>${blog.dateModified}</td>
                     <td>
