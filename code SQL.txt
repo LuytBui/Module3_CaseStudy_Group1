@@ -1,0 +1,84 @@
+
+// ĐIỀU CHỈNH THIẾT KẾ DATABASE
+// 2022-03-10  10:42
+
+//   + thêm bảng roles
+//   + sửa bảng (sửa cả class) users:
+//      - thêm trường role_id
+//      - thêm trường status  (đang hoạt hay không), mặc định true
+//
+
+//          mọi người chạy toàn bộ code bên dưới là được nhé
+
+
+drop database blog_management;
+create database blog_management;
+use blog_management;
+
+create table roles (
+                       id int auto_increment primary key,
+                       role varchar(10) unique
+);
+
+
+create table blogs (
+                       id int auto_increment primary key,
+                       category_id int,
+                       user_id int,
+                       tittle varchar(200),
+                       content varchar(2000) not null,
+                       dateModified DateTime
+);
+
+create table users(
+                      id int auto_increment primary key,
+                      role_id int default 2,
+                      status bit default 1,
+                      username varchar(30) not null unique,
+                      password varchar(100) not null,
+                      phone varchar(10) not null unique,
+                      email varchar(50) not null unique,
+                      dateOfBirth date,
+                      gender bit,
+                      address varchar(50)
+);
+
+create table categories(
+                           id int auto_increment primary key,
+                           name varchar(50) not null unique
+);
+
+alter table users
+    add foreign key(role_id) references roles(id);
+
+alter table blogs
+    add foreign key(user_id) references users(id);
+
+alter table blogs
+    add foreign key(category_id) references categories(id);
+
+
+
+insert into categories (name) value ('Phong cach song'),  ('Cong nghe'), ('Giai tri');
+insert into roles (role) value ('admin'), ('blogger');
+
+insert into users (username, password, email, phone, role_id) value
+    ('admin', '123456', 'admin@gmail.com', '0123456799', 1);
+
+insert into users (username, password, email, phone) value
+    ('luyt', '123456', 'luyt@gmail.com', '0123456789'),
+    ('binh', '123456', 'binh@gmail.com', '0154857464'),
+    ('toan', '123456', 'toan@gmail.com', '545874245'),
+    ('viet', '123456', 'viet@gmail.com', '454554562'),
+    ('cuong', '123456', 'cuong@gmail.com', '455454223');
+
+
+insert into blogs (user_id, category_id, tittle, content, dateModified) value
+    (1, 1, 'tittle 1', 'content 1', '2022-03-08 01:02:03'),
+    (1, 2, 'tittle 2', 'content 7', '2022-03-08 01:02:03'),
+    (2, 1, 'tittle 3', 'content 6', '2022-03-08 01:02:03'),
+    (4, 3, 'tittle 4', 'content 5', '2022-03-08 01:02:03'),
+    (3, 1, 'tittle 5', 'content 4', '2022-03-08 01:02:03'),
+    (5, 3, 'tittle 6', 'content 3', '2022-03-08 01:02:03'),
+    (5, 2, 'tittle 7', 'content 2', '2022-03-08 01:02:03'),
+    (2, 1, 'tittle 8', 'content 1', '2022-03-08 01:02:03');
