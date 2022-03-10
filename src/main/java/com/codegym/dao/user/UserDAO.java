@@ -2,9 +2,12 @@ package com.codegym.dao.user;
 
 import com.codegym.model.User;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements IUserDao{
+public class UserDAO implements IUserDAO {
     @Override
     public List<User> findAll() {
         return null;
