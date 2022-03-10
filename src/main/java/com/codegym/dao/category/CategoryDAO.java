@@ -1,32 +1,90 @@
 package com.codegym.dao.category;
 
+import com.codegym.dao.DBConnection;
 import com.codegym.model.Category;
 
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO implements ICategoryDAO{
+
+    public CategoryDAO() {
+    }
+    Connection connection = DBConnection.getConnection();
+
     @Override
     public List<Category> findAll() {
-        return null;
+        List<Category> categories = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Categories");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                Category category = new Category(id, name);
+                categories.add(category);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categories;
     }
 
     @Override
     public Category findByID(int id) {
-        return null;
+        Category category = new Category();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from categories where id =?");
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int Category_id = rs.getInt("id");
+                String name = rs.getString("name");
+                category = new Category(Category_id, name);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
     }
 
     @Override
     public boolean create(Category category) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO categories (id, name) values (?, ?)");
+            preparedStatement.setInt(1, category.getId());
+            preparedStatement.setString(2, category.getName());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean deleteById(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE from categories where  id = ?");
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean updateById(int id, Category category) {
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categories set id = ?, name = ? where id= ?");
+            preparedStatement.setInt(1, category.getId());
+            preparedStatement.setString(2, category.getName());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }

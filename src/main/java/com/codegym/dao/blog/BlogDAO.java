@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BlogDAO implements IBlogDAO {
-    Connection connection = DBConnection.getConnection();
+        Connection connection = DBConnection.getConnection();
 
     @Override
     public List<Blog> findAll() {
