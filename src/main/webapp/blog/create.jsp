@@ -22,7 +22,6 @@
         <div class="mb-3">
             <label for="content" class="form-label">Content </label>
             <textarea style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10"></textarea>
-<%--            <input type="text" class="form-control" id="price" name="price" >--%>
         </div>
         <div class="mb-3">
             <label for="category" class="form-label">Thêm bài viết vào</label>
