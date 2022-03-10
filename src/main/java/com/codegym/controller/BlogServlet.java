@@ -89,19 +89,21 @@ public class BlogServlet extends HttpServlet {
         switch (action) {
             case "create": {
                 int category_id = Integer.parseInt(request.getParameter("category_id"));
+                int user_id = 1;
                 String tittle = request.getParameter("tittle");
                 String content = request.getParameter("content");
-                Blog blog = new Blog(category_id, tittle, content);
+                Blog blog = new Blog(category_id,user_id, tittle, content);
                 blogService.create(blog);
                 response.sendRedirect("/blogs");
                 break;
             }
             case "edit": {
                 int id = Integer.parseInt(request.getParameter("id"));
+                int user_id = 1;
+                int category_id = Integer.parseInt(request.getParameter("category_id"));
                 String tittle = request.getParameter("tittle");
                 String content = request.getParameter("content");
-                int category_id = Integer.parseInt(request.getParameter("category_id"));
-                Blog blog = new Blog(id, category_id, content, tittle);
+                Blog blog = new Blog(id, category_id, user_id, tittle, content);
                 blogService.updateById(id, blog);
                 response.sendRedirect("/blogs");
                 break;
