@@ -36,12 +36,15 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public User findByID(int search) {
-        User user = new User();
+        User user = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_ID);
             preparedStatement.setInt(1, search);
             ResultSet resultSet = preparedStatement.executeQuery();
-            user = getListUserFromResultSet(resultSet).get(0);
+            List<User> result = getListUserFromResultSet(resultSet);
+            if (result.size() > 0){
+                user = result.get(0);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -121,12 +124,15 @@ public class UserDAO implements IUserDAO {
     }
 
     public User findByEmail(String email) {
-        User user = new User();
+        User user = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_USERS_WHERE_EMAIL);
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            user=getListUserFromResultSet(resultSet).get(0);
+            List<User> result = getListUserFromResultSet(resultSet);
+            if (result.size() > 0){
+                user = result.get(0);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
