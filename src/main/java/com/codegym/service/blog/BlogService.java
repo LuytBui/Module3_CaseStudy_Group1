@@ -42,7 +42,7 @@ public class BlogService implements IBlogService{
 
     @Override
     public Category findCategoryByBlogId(int id) {
-        return null;
+        return blogDAO.findCategoryByBlogId(id);
     }
 
     @Override
@@ -53,5 +53,15 @@ public class BlogService implements IBlogService{
     @Override
     public Map<Integer, String> getMap_userId_userName() {
         return blogDAO.getMap_userId_userName();
+    }
+
+    @Override
+    public List<Blog> findAllBlogByUserId() {
+        return null;
+    }
+
+    @Override
+    public List<Blog> findAllBlogByCategoryID() {
+        return null;
     }
 }

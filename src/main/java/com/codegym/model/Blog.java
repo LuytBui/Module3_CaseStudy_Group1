@@ -16,12 +16,12 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int category_id, int user_id, String tittle, String content, String dateModified) {
+    public Blog(int id, int category_id, int user_id, String tittle, String content) {
+        this.id = id;
         this.category_id = category_id;
         this.user_id = user_id;
         this.tittle = tittle;
         this.content = content;
-        this.dateModified = dateModified;
     }
 
     public Blog(int category_id, int user_id, String tittle, String content) {
@@ -29,12 +29,8 @@ public class Blog {
         this.user_id = user_id;
         this.tittle = tittle;
         this.content = content;
-    }
 
-    public Blog(int category_id, String tittle, String content) {
-        this.category_id = category_id;
-        this.tittle = tittle;
-        this.content = content;
+
     }
 
     public Blog(int id, int category_id, int user_id, String tittle, String content, String dateModified) {
