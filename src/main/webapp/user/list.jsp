@@ -14,33 +14,39 @@
 </head>
     <div class="container">
         <h1>Danh sách người dùng</h1>
-        <a href="/products">Danh sách sản phẩm</a>
-        <h1>Tạo mới sản phẩm</h1>
-        <c:if test="${message!=null}">
-            <p class="alert alert-success">${message}</p>
-        </c:if>
-        <form action="/products?action=create" method="post">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Mã sản phẩm:</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="id">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Tên sản phẩm:</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" name="name">
-            </div>
-            <div class="mb-3">
-                <label for="price" class="form-label">Giá sản phẩm:</label>
-                <input type="text" class="form-control" id="price" name="price">
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Mô tả sản phẩm:</label>
-                <input type="text" class="form-control" id="description" name="description">
-            </div>
-            <button type="submit" class="btn btn-primary">Tạo mới</button>
-        </form>
+        <a class="btn btn-primary float-end" href="/users?action=create">Add new user</a>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Mã người dùng</th>
+                <th scope="col">Username</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Ngày sinh</th>
+                <th scope="col">Address</th>
+                <th colspan="2"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="user" items="${listUser}">
+                <tr>
+                    <td>${user.id}</td>
+                    <td><a href="/users?action=view&id=${user.id}">${user.username}</a></td>
+                    <td>${user.phone}</td>
+                    <td>${user.email}</td>
+                    <td>${user.dateOfBirth}</td>
+                    <td>${user.address}</td>
+                    <td>
+                        <a class="btn btn-info" href="/users?action=edit&id=${user.id}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                    <td><a class="btn btn-danger" href="/users?action=delete&id=${users.id}"><i class="fas fa-trash"></i></a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
