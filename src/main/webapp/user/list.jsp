@@ -31,6 +31,7 @@
                 <tr>
                     <td>${user.id}</td>
                     <td><a href="/users?action=view&id=${user.id}">${user.username}</a></td>
+                    <td></td>
                     <td>
                         <a class="btn btn-info" href="/users?action=edit&id=${user.id}">
                             <i class="fas fa-edit"></i>
