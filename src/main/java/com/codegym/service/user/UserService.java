@@ -43,4 +43,9 @@ public class UserService implements IUserService {
     public User findByEmail(String email) {
         return ((UserDAO) userDAO).findByEmail(email);
     }
+
+    @Override
+    public User findByUsername(String searchUsername) {
+        return userDAO.findByUsername(searchUsername);
+    }
 }

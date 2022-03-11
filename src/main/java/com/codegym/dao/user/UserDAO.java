@@ -137,4 +137,21 @@ public class UserDAO implements IUserDAO {
         }
         return user;
     }
+
+    @Override
+    public User findByUsername(String searchUsername) {
+        User user = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where username = ?");
+            preparedStatement.setString(1, searchUsername);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<User> result = getListUserFromResultSet(resultSet);
+            if (result.size() > 0){
+                user = result.get(0);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }
