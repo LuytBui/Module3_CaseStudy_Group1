@@ -66,7 +66,9 @@
     <c:forEach var="blog" items="${blogs}" varStatus="loop">
         <div class="blog-container border" style="margin: 15px">
                 <div class="mb-3">
-                    <a href="/blogs?action=viewMyBlog"> ${map_userId_userName.get(blog.user_id)}</a>
+                    <a href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
+                            ${map_userId_userName.get(blog.user_id)}
+                    </a>
                 </div>
                 <div class="mb-3">
                     <p style="text-align: center; font-size: 200%">${blog.tittle}</p>

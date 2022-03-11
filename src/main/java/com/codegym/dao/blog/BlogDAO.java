@@ -22,8 +22,8 @@ public class BlogDAO implements IBlogDAO {
     public static final String SELECT_CATEGORY_BY_BLOG_ID = "select C.id, C.name from blogs B join categories C on B.category_id = C.id where B.id = ?";
     public static final String SELECT_USERNAME_BY_BLOG_ID = "select U.username from blogs B join users U on B.user_id = U.id where B.id = ?";
     public static final String SELECT_USERNAME_FROM_USERS = "select id, username from users";
-    public static final String SELECT_BLOGS_BY_USER_ID = "SELECT * FROM blogs WHERE user_id = ?";
-    public static final String SELECT_BLOGS_BY_CATEGORY_ID = "SELECT * FROM blogs WHERE category_id = ?";
+    public static final String SELECT_BLOGS_BY_USER_ID = "SELECT * FROM blogs WHERE user_id = ? order by dateModified desc";
+    public static final String SELECT_BLOGS_BY_CATEGORY_ID = "SELECT * FROM blogs  WHERE category_id = ? order by dateModified desc";
     Connection connection = DBConnection.getConnection();
 
     @Override
@@ -162,6 +162,7 @@ public class BlogDAO implements IBlogDAO {
                 int id = rs.getInt("id");
                 String username = rs.getString("username");
                 map_userId_userName.put(id, username);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -218,17 +219,6 @@ public class BlogDAO implements IBlogDAO {
         }
 
         return blogs;
-    }
-
-    @Override
-    public List<Blog> findAllBlogByUsername(String username) {
-        List<Blog> blogs = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM blogs WHERE category_id = ?");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }

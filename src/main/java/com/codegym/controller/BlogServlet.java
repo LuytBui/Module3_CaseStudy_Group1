@@ -94,6 +94,16 @@ public class BlogServlet extends HttpServlet {
                     dispatcher.forward(request, response);
                     break;
                 }
+                case "viewUserBlog": {
+                    int user_id = Integer.parseInt(request.getParameter("user_id"));
+                    List<Blog> blogs = blogService.findAllBlogByUserId(user_id);
+                    request.setAttribute("blogs", blogs);
+                    Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
+                    request.setAttribute("map_userId_userName", map_userId_userName);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                }
                 default: {
                     List<Blog> blogs = blogService.findAll();
                     String username = loginUser.getUsername();
