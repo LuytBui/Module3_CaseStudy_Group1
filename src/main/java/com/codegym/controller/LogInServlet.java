@@ -16,7 +16,7 @@ import java.io.IOException;
 
 
 @WebServlet(name = "LoginServlet", value = "")
-public class LoginServlet extends HttpServlet {
+public class LogInServlet extends HttpServlet {
 
     UserService userService = new UserService(new UserDAO());
     @Override
