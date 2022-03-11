@@ -35,6 +35,7 @@ public class CategoryServlet extends HttpServlet {
                 request.setAttribute("category", category);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/category/delete.jsp");
                 dispatcher.forward(request, response);
+                break;
             }
             case "edit": {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -42,6 +43,7 @@ public class CategoryServlet extends HttpServlet {
                 request.setAttribute("category", category);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/category/edit.jsp");
                 dispatcher.forward(request, response);
+                break;
             }
             default:{
                 showListCategory(request, response);
@@ -83,6 +85,7 @@ public class CategoryServlet extends HttpServlet {
                 Category category = new Category(id, name);
                 categoryService.updateById(id, category);
                 response.sendRedirect("/categories");
+                break;
             }
         }
     }

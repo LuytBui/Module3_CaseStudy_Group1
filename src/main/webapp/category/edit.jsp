@@ -7,10 +7,10 @@
 <body>
 <div class="container">
     <a href="/categories">Danh sách thể loại</a>
-    <h1>Cập nhật sản phẩm</h1>
+    <h1>Cập nhật </h1>
     <form action="/categories?action=edit&id=${category.id}" method="post">
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Tên sản phẩm:</label>
+            <label for="exampleInputPassword1" class="form-label">Tên thể loại:</label>
             <input type="text" class="form-control" id="exampleInputPassword1" name="name" value="${category.name}" >
         </div>
         <button type="submit" class="btn btn-primary">Cập nhật</button>

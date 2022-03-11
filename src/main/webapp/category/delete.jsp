@@ -11,11 +11,11 @@
     <h1>Xóa thể loại</h1>
     <form action="/categories?action=delete&id=${category.id}" method="post">
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Mã sản phẩm:</label>
+            <label for="exampleInputEmail1" class="form-label">Mã thể loại:</label>
             <input type="text" class="form-control" id="exampleInputEmail1" name="id" value="${category.id}" disabled>
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Tên sản phẩm:</label>
+            <label for="exampleInputPassword1" class="form-label">Tên thể loại:</label>
             <input type="text" class="form-control" id="exampleInputPassword1" name="name" value="${category.name}" disabled>
         </div>
         <button type="submit" class="btn btn-danger">Xóa</button>
