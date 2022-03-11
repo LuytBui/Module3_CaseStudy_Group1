@@ -56,7 +56,7 @@ public class UserDAO implements IUserDAO {
             String password = resultSet.getString("password");
             String phone = resultSet.getString("phone");
             String email = resultSet.getString("email");
-            Date dateOfBirth = resultSet.getDate("dateOfBirth");
+            String dateOfBirth = resultSet.getString("dateOfBirth");
             Boolean gender = resultSet.getBoolean("gender");
             String address = resultSet.getString("address");
             boolean status = resultSet.getBoolean("status");
@@ -76,7 +76,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPhone());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setDate(5, (java.sql.Date) user.getDateOfBirth());
+            preparedStatement.setString(5, user.getDateOfBirth());
             preparedStatement.setBoolean(6, user.isGender());
             preparedStatement.setString(7, user.getAddress());
             preparedStatement.setBoolean(8, user.isStatus());
@@ -108,7 +108,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPhone());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setDate(5, (java.sql.Date) user.getDateOfBirth());
+            preparedStatement.setString( 5,user.getDateOfBirth());
             preparedStatement.setBoolean(6, user.isGender());
             preparedStatement.setString(7, user.getAddress());
             preparedStatement.setBoolean(8, user.isStatus());

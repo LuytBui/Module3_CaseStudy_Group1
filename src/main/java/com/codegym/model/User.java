@@ -9,7 +9,7 @@ public class User {
     private String password;
     private String phone;
     private String email;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private boolean gender;
     private String address;
     private boolean status;
@@ -17,7 +17,7 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String phone, String email, Date dateOfBirth, boolean gender, String address, boolean status) {
+    public User(String username, String password, String phone, String email, String dateOfBirth, boolean gender, String address, boolean status) {
         this.username = username;
         this.password = password;
         this.phone = phone;
@@ -28,7 +28,7 @@ public class User {
         this.status = status;
     }
 
-    public User(int id, String username, String password, String phone, String email, Date dateOfBirth, boolean gender, String address, boolean status) {
+    public User(int id, String username, String password, String phone, String email, String dateOfBirth, boolean gender, String address, boolean status) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -40,7 +40,7 @@ public class User {
         this.status = status;
     }
 
-    public User(int id, int role_id, String username, String password, String phone, String email, Date dateOfBirth, boolean gender, String address, boolean status) {
+    public User(int id, int role_id, String username, String password, String phone, String email, String dateOfBirth, boolean gender, String address, boolean status) {
         this.id = id;
         this.role_id = role_id;
         this.username = username;
@@ -93,11 +93,11 @@ public class User {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
