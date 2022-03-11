@@ -18,12 +18,11 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th scope="col">Mã người dùng</th>
+                <th scope="col">STT</th>
                 <th scope="col">Username</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Email</th>
-                <th scope="col">Ngày sinh</th>
-                <th scope="col">Address</th>
+                <th scope="col">Số bài viết</th>
+                <th scope="col">Ngày viết bài gần đây</th>
+                <th scope="col">block</th>
                 <th colspan="2"></th>
             </tr>
             </thead>
@@ -32,10 +31,6 @@
                 <tr>
                     <td>${user.id}</td>
                     <td><a href="/users?action=view&id=${user.id}">${user.username}</a></td>
-                    <td>${user.phone}</td>
-                    <td>${user.email}</td>
-                    <td>${user.dateOfBirth}</td>
-                    <td>${user.address}</td>
                     <td>
                         <a class="btn btn-info" href="/users?action=edit&id=${user.id}">
                             <i class="fas fa-edit"></i>
