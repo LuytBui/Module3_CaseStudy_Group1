@@ -9,56 +9,77 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="style/blog-list.css">
 </head>
 <body>
-<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around fixed-top">
+    <div class="d-flex navbar-div-left">
+        <a class="navbar-brand main-logo" href="#">BlogSieuHay.com</a>
+
+        <form class="form-inline my-2 my-lg-0 d-flex">
+            <input class="form-control mr-sm-2 input-search" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="d-flex navbar-div-right">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li>
+                    <a class="button-new-blog btn btn-success" href="/blogs?action=create">Tao bai moi</a>
+                </li>
+                <%--                <li class="nav-item active container-username">--%>
+                <%--                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>--%>
+                <%--                </li>--%>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Username
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                Quan ly bai viet
+                            </a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a class="dropdown-item" href="/logout">
+                                Dang xuat
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <%--                    random image   credit: https://picsum.photos/--%>
+                    <img src="https://picsum.photos/150" class="image-avatar rounded" alt="Cinque Terre">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+<div class="div-middle container">
     <%--        <h1>Blogs Management</h1>--%>
-            <a class="btn btn-primary float-end" href="/blogs?action=create">Add New blog</a>
-    <%--        <table class="table table-bordered">--%>
-    <%--            <thead>--%>
-    <%--            <tr>--%>
-    <%--                <th scope="col">#</th>--%>
-    <%--                <th scope="col">Tittle </th>--%>
-    <%--                <th scope="col">Content </th>--%>
-    <%--                <th scope="col">Author</th>--%>
-    <%--                <th scope="col">Date Modify</th>--%>
-    <%--                <th scope="col">Edit</th>--%>
-    <%--                <th scope="col">Delete</th>--%>
-    <%--            </tr>--%>
-    <%--            </thead>--%>
-    <%--            <tbody>--%>
-    <%--            <c:forEach var="blog" items="${blogs}">--%>
-    <%--                <tr>--%>
-    <%--                    <td>${blog.id}</td>--%>
-    <%--                    <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.tittle}</a></td>--%>
-    <%--                    <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.content}</a></td>--%>
-    <%--                    <td>${map_userId_userName.get(blog.user_id)}</td>--%>
-    <%--                    <td>${blog.dateModified}</td>--%>
-    <%--                    <td>--%>
-<%--                            <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}">--%>
-<%--                                <i class="fas fa-edit"></i>--%>
-<%--                            </a>--%>
-    <%--                    </td>--%>
-<%--                        <td><a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i--%>
-<%--                                class="fas fa-trash"></i></a></td>--%>
-    <%--                </tr>--%>
+
     <c:forEach var="blog" items="${blogs}">
-     <div class="border" style="margin: 15px">
-         <form>
-             <div class="mb-3">
-                 <a href="/blogs?action=view&id=${blog.id}"> ${map_userId_userName.get(blog.user_id)}</a>
-             </div>
-             <div class="mb-3">
-                 <p style="text-align: center; font-size: 200%">${blog.tittle}</p>
-             </div>
-             <div class="mb-3">
-                 <textarea disabled  style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10">${blog.content}</textarea>
-             </div>
-             <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>
-             <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>
-             </a>
-         </form>
-     </div>
+        <div class="blog-container border" style="margin: 15px">
+                <div class="mb-3">
+                    <a href="/blogs?action=view&id=${blog.id}"> ${map_userId_userName.get(blog.user_id)}</a>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align: center; font-size: 200%">${blog.tittle}</p>
+                </div>
+                <div class="mb-3">
+                    <textarea disabled style="resize: none" class="form-control" name="content" id="content" cols="30"
+                              rows="10">${blog.content}</textarea>
+                </div>
+                <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>
+                <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>
+                </a>
+        </div>
     </c:forEach>
 
     </tbody>
