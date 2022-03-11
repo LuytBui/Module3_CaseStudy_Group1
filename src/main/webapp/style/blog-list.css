@@ -1,6 +1,11 @@
 
-.main-logo {
-    margin-left:50px;
+.navbar-div-left {
+    padding-left: 50px;
+    width: 60%;
+}
+.navbar-div-right {
+    padding-right: 50px;
+    width: 35%;
 }
 
 .blog-container {
