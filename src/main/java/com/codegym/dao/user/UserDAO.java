@@ -2,6 +2,7 @@ package com.codegym.dao.user;
 
 import com.codegym.dao.DBConnection;
 import com.codegym.model.User;
+import jdk.nashorn.internal.ir.WhileNode;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +42,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setInt(1, search);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<User> result = getListUserFromResultSet(resultSet);
-            if (result.size() > 0){
+            if (result.size() > 0) {
                 user = result.get(0);
             }
         } catch (SQLException e) {
@@ -110,7 +111,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPhone());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setString( 5,user.getDateOfBirth());
+            preparedStatement.setString(5, user.getDateOfBirth());
             preparedStatement.setBoolean(6, user.isGender());
             preparedStatement.setString(7, user.getAddress());
             preparedStatement.setBoolean(8, user.isStatus());
@@ -129,12 +130,31 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<User> result = getListUserFromResultSet(resultSet);
-            if (result.size() > 0){
+            if (result.size() > 0) {
                 user = result.get(0);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public int countBlog(User user) {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select users.id, count(users.id) as \"count\"\n" +
+                    "from users join blogs on users.id = blogs.user_id\n" +
+                    "where users.id = ?;");
+            preparedStatement.setInt(1,user.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() ){
+                count = resultSet.getInt("count");
+                break;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }

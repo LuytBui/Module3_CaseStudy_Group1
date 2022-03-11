@@ -41,6 +41,10 @@ public class UserService implements IUserService {
     }
 
     public User findByEmail(String email) {
-        return ((UserDAO) userDAO).findByEmail(email);
+        return userDAO.findByEmail(email);
+    }
+
+    public int countBlog(User user) {
+        return userDAO.countBlog(user);
     }
 }
