@@ -8,24 +8,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class UserDAO implements IUserDAO {
-    public static final String SQL_SELECT_ALL_USER = "SELECT * FROM users ";
-    public static final String SQL_SELECT_USER_BY_ID = "SELECT * from users where  id = ?";
-    public static final String SQL_INSERT_USER = "INSERT into users (username,passwork,phone,email,dateOfBirth,gender,address,status,role_id) value (?,?,?,?,?,?,?,?,?)";
-    public static final String SQL_UPDATE_USER_BY_ID = "update users set username =?,password =?,phone =?,email =?,dateOfBirth =?,gender=?,address = ?,status =? , role_id =?";
-    public static final String SQL_DELETE_USER_BY_ID = "delete  from users where  id = ?";
-    public static final String SELECT_FROM_USERS_WHERE_EMAIL = "SELECT *from users where email =?";
+    public static final String SQL_SELECT_ALL_USER = "SELECT * FROM users;";
+    public static final String SQL_SELECT_USER_BY_ID = "SELECT * from users where  id = ?;";
+    public static final String SQL_INSERT_USER = "INSERT into users (username,password,phone,email) value (?,?,?,?);";
+    public static final String SQL_UPDATE_USER_BY_ID = "update users set username =?,password =?,phone =?,email =?,dateOfBirth =?,gender=?,address = ?,status =? , role_id =?;";
+    public static final String SQL_DELETE_USER_BY_ID = "delete  from users where  id = ?;";
+    public static final String SELECT_FROM_USERS_WHERE_EMAIL = "SELECT *from users where email =?;";
     private Connection connection = DBConnection.getConnection();
 
     @Override
     public List<User> findAll() {
-        List<User> users = null;
-        PreparedStatement preparedStatement = null;
+        List<User> users = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_USER);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_USER);
             ResultSet resultSet = preparedStatement.executeQuery();
             users = getListUserFromResultSet(resultSet);
         } catch (SQLException e) {
@@ -42,7 +40,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setInt(1, search);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<User> result = getListUserFromResultSet(resultSet);
-            if (result.size() > 0){
+            if (result.size() > 0) {
                 user = result.get(0);
             }
         } catch (SQLException e) {
@@ -59,7 +57,7 @@ public class UserDAO implements IUserDAO {
             String password = resultSet.getString("password");
             String phone = resultSet.getString("phone");
             String email = resultSet.getString("email");
-            Date dateOfBirth = resultSet.getDate("dateOfBirth");
+            String dateOfBirth = resultSet.getString("dateOfBirth");
             Boolean gender = resultSet.getBoolean("gender");
             String address = resultSet.getString("address");
             boolean status = resultSet.getBoolean("status");
@@ -79,11 +77,8 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPhone());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setDate(5, (java.sql.Date) user.getDateOfBirth());
-            preparedStatement.setBoolean(6, user.isGender());
-            preparedStatement.setString(7, user.getAddress());
-            preparedStatement.setBoolean(8, user.isStatus());
-            preparedStatement.setInt(9, user.getRole_id());
+
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -111,7 +106,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPhone());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setDate(5, (java.sql.Date) user.getDateOfBirth());
+            preparedStatement.setString(5, user.getDateOfBirth());
             preparedStatement.setBoolean(6, user.isGender());
             preparedStatement.setString(7, user.getAddress());
             preparedStatement.setBoolean(8, user.isStatus());
@@ -130,6 +125,23 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<User> result = getListUserFromResultSet(resultSet);
+            if (result.size() > 0) {
+                user = result.get(0);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        User user = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where username = ?");
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<User> result = getListUserFromResultSet(resultSet);
             if (result.size() > 0){
                 user = result.get(0);
             }
@@ -137,5 +149,41 @@ public class UserDAO implements IUserDAO {
             e.printStackTrace();
         }
         return user;
+    }
+
+    @Override
+    public User findByPhone(String phone) {
+        User user = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where phone = ?");
+            preparedStatement.setString(1, phone);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<User> result = getListUserFromResultSet(resultSet);
+            if (result.size() > 0){
+                user = result.get(0);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public int countBlog(User user) {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select users.id, count(users.id) as \"count\"\n" +
+                    "from users join blogs on users.id = blogs.user_id\n" +
+                    "where users.id = ?;");
+            preparedStatement.setInt(1,user.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next() ){
+                count = resultSet.getInt("count");
+                break;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }

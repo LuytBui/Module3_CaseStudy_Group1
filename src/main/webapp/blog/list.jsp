@@ -14,7 +14,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around fixed-top">
     <div class="d-flex navbar-div-left">
-        <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
+        <a class="navbar-brand main-logo" href="#">BlogSieuHay.com</a>
 
         <form class="form-inline my-2 my-lg-0 d-flex">
             <input class="form-control mr-sm-2 input-search" type="search" placeholder="Search" aria-label="Search">
@@ -28,13 +28,13 @@
                 <li>
                     <a class="button-new-blog btn btn-success" href="/blogs?action=create">Tao bai moi</a>
                 </li>
-                                <li class="nav-item active container-username">
-                                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>
-                                </li>
+                <%--                <li class="nav-item active container-username">--%>
+                <%--                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>--%>
+                <%--                </li>--%>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown -1" role="button"
+                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        ${username}
+                        Username
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
