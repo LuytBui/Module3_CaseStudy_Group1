@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Lis all blogs</title>
@@ -12,39 +12,58 @@
 </head>
 <body>
 <div class="container">
-        <h1>Blogs Management</h1>
-        <a class="btn btn-primary float-end" href="/blogs?action=create">Add New blog</a>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tittle </th>
-                <th scope="col">Author</th>
-                <th scope="col">Date Modify</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="blog" items="${blogs}">
-                <tr>
-                    <td>${blog.id}</td>
-                    <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.tittle}</a></td>
-                    <td>${map_userId_userName.get(blog.user_id)}</td>
-                    <td>${blog.dateModified}</td>
-                    <td>
-                        <a class="btn btn-info" href="/blog?action=edit&id=${blog.id}">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
-                    <td><a class="btn btn-danger" href="/blog?action=delete&id=${blog.id}"><i
-                            class="fas fa-trash"></i></a></td>
-                </tr>
-            </c:forEach>
+    <%--        <h1>Blogs Management</h1>--%>
+            <a class="btn btn-primary float-end" href="/blogs?action=create">Add New blog</a>
+    <%--        <table class="table table-bordered">--%>
+    <%--            <thead>--%>
+    <%--            <tr>--%>
+    <%--                <th scope="col">#</th>--%>
+    <%--                <th scope="col">Tittle </th>--%>
+    <%--                <th scope="col">Content </th>--%>
+    <%--                <th scope="col">Author</th>--%>
+    <%--                <th scope="col">Date Modify</th>--%>
+    <%--                <th scope="col">Edit</th>--%>
+    <%--                <th scope="col">Delete</th>--%>
+    <%--            </tr>--%>
+    <%--            </thead>--%>
+    <%--            <tbody>--%>
+    <%--            <c:forEach var="blog" items="${blogs}">--%>
+    <%--                <tr>--%>
+    <%--                    <td>${blog.id}</td>--%>
+    <%--                    <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.tittle}</a></td>--%>
+    <%--                    <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.content}</a></td>--%>
+    <%--                    <td>${map_userId_userName.get(blog.user_id)}</td>--%>
+    <%--                    <td>${blog.dateModified}</td>--%>
+    <%--                    <td>--%>
+<%--                            <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}">--%>
+<%--                                <i class="fas fa-edit"></i>--%>
+<%--                            </a>--%>
+    <%--                    </td>--%>
+<%--                        <td><a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i--%>
+<%--                                class="fas fa-trash"></i></a></td>--%>
+    <%--                </tr>--%>
+    <c:forEach var="blog" items="${blogs}">
+     <div class="border" style="margin: 15px">
+         <form>
+             <div class="mb-3">
+                 <a href="/blogs?action=view&id=${blog.id}"> ${map_userId_userName.get(blog.user_id)}</a>
+             </div>
+             <div class="mb-3">
+                 <p style="text-align: center; font-size: 200%">${blog.tittle}</p>
+             </div>
+             <div class="mb-3">
+                 <textarea disabled  style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10">${blog.content}</textarea>
+             </div>
+             <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>
+             <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>
+             </a>
+         </form>
+     </div>
+    </c:forEach>
 
-            </tbody>
-        </table>
-    </div>
+    </tbody>
+    </table>
+</div>
 </div>
 
 

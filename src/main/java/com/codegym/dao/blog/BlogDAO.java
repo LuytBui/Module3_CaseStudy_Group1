@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BlogDAO implements IBlogDAO {
-        Connection connection = DBConnection.getConnection();
+    Connection connection = DBConnection.getConnection();
 
     @Override
     public List<Blog> findAll() {
@@ -112,7 +112,7 @@ public class BlogDAO implements IBlogDAO {
     public Category findCategoryByBlogId(int id) {
         Category category = new Category();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select C.id, C.name from blogs B join category C on B.category_id = C.id where B.id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("select C.id, C.name from blogs B join categories C on B.category_id = C.id where B.id = ?");
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -159,5 +159,23 @@ public class BlogDAO implements IBlogDAO {
         }
 
         return map_userId_userName;
+    }
+
+    @Override
+    public List<Blog> findAllBlogByUserId() {
+        List<Blog> blogs = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE user_id = ?");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return blogs;
+    }
+
+    @Override
+    public List<Blog> findAllBlogByCategoryID() {
+        return null;
     }
 }
