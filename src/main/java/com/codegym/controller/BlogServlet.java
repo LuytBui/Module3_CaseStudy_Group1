@@ -75,8 +75,8 @@ public class BlogServlet extends HttpServlet {
                     dispatcher.forward(request, response);
                     break;
                 }
-                case "viewUserBlog": {
-                    int id = Integer.parseInt(request.getParameter("id"));
+                case "viewMyBlog": {
+                    int id = loginUser.getId();
                     List<Blog> blogs = blogService.findAllBlogByUserId(id);
                     request.setAttribute("blogs", blogs);
                     Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
