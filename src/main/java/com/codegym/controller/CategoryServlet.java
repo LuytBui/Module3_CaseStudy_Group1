@@ -1,6 +1,7 @@
 package com.codegym.controller;
 
 import com.codegym.model.Category;
+import com.codegym.model.User;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
 
@@ -10,40 +11,63 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+
 @WebServlet(name = "CategoryServlet", value = "/categories")
 public class CategoryServlet extends HttpServlet {
     private ICategoryService categoryService;
-
+    public static final int ROLE_ID_ADMIN = 1;
     public CategoryServlet() {
         categoryService = new CategoryService();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute("user");
+        if (loginUser == null) {
+            response.sendRedirect("");
+        } else {
+            boolean isAdmin = loginUser.getRole_id() == ROLE_ID_ADMIN;
+            if (isAdmin) {
+                doGetAdmin(request, response);
+            } else {
+                response.sendRedirect("/blogs");
+            }
+
         }
-        switch (action) {
-            case "create": {
-                showCreateCategoryForm(request, response);
-                break;
+    }
+
+    protected void doGetAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute("user");
+        if (loginUser == null) {
+            response.sendRedirect("");
+        } else {
+            String action = request.getParameter("action");
+            if (action == null) {
+                action = "";
             }
-            case "delete": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Category category = categoryService.findByID(id);
-                request.setAttribute("category", category);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/category/delete.jsp");
-                dispatcher.forward(request, response);
-                break;
-            }
-            case "edit": {
-                showEditCategoryForm(request, response);
-                break;
-            }
-            default:{
-                showListCategory(request, response);
-                break;
+            switch (action) {
+                case "create": {
+                    showCreateCategoryForm(request, response);
+                    break;
+                }
+                case "delete": {
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    Category category = categoryService.findByID(id);
+                    request.setAttribute("category", category);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/category/delete.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                }
+                case "edit": {
+                    showEditCategoryForm(request, response);
+                    break;
+                }
+                default: {
+                    showListCategory(request, response);
+                    break;
+                }
             }
         }
     }

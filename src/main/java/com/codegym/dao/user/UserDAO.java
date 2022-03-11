@@ -22,10 +22,9 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public List<User> findAll() {
-        List<User> users = null;
-        PreparedStatement preparedStatement = null;
+        List<User> users = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_USER);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_USER);
             ResultSet resultSet = preparedStatement.executeQuery();
             users = getListUserFromResultSet(resultSet);
         } catch (SQLException e) {

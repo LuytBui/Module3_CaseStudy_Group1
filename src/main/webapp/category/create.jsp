@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -15,7 +15,7 @@
     </c:if>
     <form action="/categories?action=create" method="post">
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Tên sản phẩm:</label>
+            <label for="exampleInputPassword1" class="form-label">Tên thể loại:</label>
             <input type="text" class="form-control" id="exampleInputPassword1" name="name">
         </div>
         <button type="submit" class="btn btn-primary">Tạo mới</button>

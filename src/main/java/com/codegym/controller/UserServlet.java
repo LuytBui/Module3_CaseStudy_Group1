@@ -9,7 +9,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/users")
@@ -26,7 +25,6 @@ public class UserServlet extends HttpServlet {
             response.sendRedirect("");
         } else {
             boolean isAdmin = loginUser.getRole_id() == ROLE_ID_ADMIN;
-            ;
             if (isAdmin) {
                 doGetAdmin(request, response);
             } else {
@@ -50,10 +48,7 @@ public class UserServlet extends HttpServlet {
             }
             default: {
                 List<User> users = userService.findAll();
-                String q = request.getParameter("q");
-                if (q != null) {
-                    users = userService.findAll();
-                }
+
                 request.setAttribute("users", users);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/user/list.jsp");
                 dispatcher.forward(request, response);
