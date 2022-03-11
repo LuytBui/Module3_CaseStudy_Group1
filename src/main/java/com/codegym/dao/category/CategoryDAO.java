@@ -78,9 +78,9 @@ public class CategoryDAO implements ICategoryDAO{
     @Override
     public boolean updateById(int id, Category category) {
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categories set id = ?, name = ? where id= ?");
-            preparedStatement.setInt(1, category.getId());
-            preparedStatement.setString(2, category.getName());
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categories set name = ? where id= ?");
+            preparedStatement.setString(1, category.getName());
+            preparedStatement.setInt(2, category.getId());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

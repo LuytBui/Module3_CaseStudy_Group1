@@ -13,14 +13,14 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th scope="col">Mã thể loại</th>
+            <th scope="col">STT</th>
             <th scope="col">Tên thể loại</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="category" items="${categories}">
-            <tr>
-                <td>${category.id}</td>
+        <c:forEach var="category" items="${categories}" varStatus="loop">
+        <tr>
+                <td>${loop.count}</td>
                 <td><a href="/categories?action=view&id=${category.id}">${category.name}</a></td>
                 <td>
                     <a class="btn btn-info" href="/categories?action=edit&id=${category.id}">
