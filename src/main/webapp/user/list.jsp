@@ -27,16 +27,16 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${listUser}">
+            <c:forEach var="user" items="${users}" varStatus="loop">
                 <tr>
-                    <td>${user.id}</td>
+                    <td>${loop.count}</td>
                     <td><a href="/users?action=view&id=${user.id}">${user.username}</a></td>
                     <td>
                         <a class="btn btn-info" href="/users?action=edit&id=${user.id}">
                             <i class="fas fa-edit"></i>
                         </a>
                     </td>
-                    <td><a class="btn btn-danger" href="/users?action=delete&id=${users.id}"><i class="fas fa-trash"></i></a></td>
+                    <td><a class="btn btn-danger" href="/users?action=delete&id=${user.id}"><i class="fas fa-trash"></i></a></td>
                 </tr>
             </c:forEach>
             </tbody>
