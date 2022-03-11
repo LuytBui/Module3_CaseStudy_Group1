@@ -94,7 +94,7 @@ public class BlogServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) {
-            response.sendRedirect("");
+            response.sendRedirect("../");
         }
         else {
             String action = request.getParameter("action");
