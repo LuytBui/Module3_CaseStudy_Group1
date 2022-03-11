@@ -4,6 +4,7 @@ import com.codegym.model.Blog;
 import com.codegym.model.Category;
 import com.codegym.service.IGeneralService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -13,4 +14,6 @@ public interface IBlogService extends IGeneralService<Blog> {
     Map<Integer, String> getMap_userId_userName();
     List<Blog> findAllBlogByUserId (int user_id);
     List<Blog> findAllBlogByCategoryID (int category_id);
+    String getCurrentTime ();
 }
+

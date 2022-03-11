@@ -5,6 +5,8 @@ import com.codegym.model.Blog;
 import com.codegym.model.Category;
 import com.codegym.service.IGeneralService;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -63,5 +65,12 @@ public class BlogService implements IBlogService{
     @Override
     public List<Blog> findAllBlogByCategoryID(int category_id) {
         return blogDAO.findAllBlogByUserId(category_id);
+    }
+
+    @Override
+    public String getCurrentTime() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return String.valueOf(now);
     }
 }

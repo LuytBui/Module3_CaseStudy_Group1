@@ -52,7 +52,7 @@
                  <p style="text-align: center; font-size: 200%">${blog.tittle}</p>
              </div>
              <div class="mb-3">
-                 <textarea disabled  style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10">${blog.content}</textarea>
+                 <textarea disabled  style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10" >${blog.content}</textarea>
              </div>
              <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>
              <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>
