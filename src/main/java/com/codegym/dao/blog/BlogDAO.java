@@ -21,7 +21,7 @@ public class BlogDAO implements IBlogDAO {
     public static final String UPDATE_BLOG_BY_ID = "UPDATE blogs set category_id = ?, user_id = ?, tittle = ?, content = ?, dateModified = ? where id = ?";
     public static final String SELECT_CATEGORY_BY_BLOG_ID = "select C.id, C.name from blogs B join categories C on B.category_id = C.id where B.id = ?";
     public static final String SELECT_USERNAME_BY_BLOG_ID = "select U.username from blogs B join users U on B.user_id = U.id where B.id = ?";
-    public static final String SELECT_USENAME_FROM_USERS = "select id, username from users";
+    public static final String SELECT_USERNAME_FROM_USERS = "select id, username from users";
     public static final String SELECT_BLOGS_BY_USER_ID = "SELECT * FROM product WHERE user_id = ?";
     public static final String SELECT_BLOGS_BY_CATEGORY_ID = "SELECT * FROM product WHERE category_id = ?";
     Connection connection = DBConnection.getConnection();
@@ -156,7 +156,7 @@ public class BlogDAO implements IBlogDAO {
     public Map<Integer, String> getMap_userId_userName() {
         Map<Integer, String> map_userId_userName = new HashMap<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USENAME_FROM_USERS);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USERNAME_FROM_USERS);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
