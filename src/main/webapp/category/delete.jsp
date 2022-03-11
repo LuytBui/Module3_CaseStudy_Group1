@@ -12,7 +12,7 @@
     <form action="/categories?action=delete&id=${category.id}" method="post">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Mã thể loại:</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" name="id" value="${category.id}" disabled>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="d_id" value="${category.id}" disabled>
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Tên thể loại:</label>

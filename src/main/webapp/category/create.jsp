@@ -15,10 +15,6 @@
     </c:if>
     <form action="/categories?action=create" method="post">
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Mã thể loại:</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" name="id">
-        </div>
-        <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Tên sản phẩm:</label>
             <input type="text" class="form-control" id="exampleInputPassword1" name="name">
         </div>
