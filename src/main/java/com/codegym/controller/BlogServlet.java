@@ -43,16 +43,6 @@ public class BlogServlet extends HttpServlet {
                     requestDispatcher.forward(request, response);
                     break;
                 }
-                case "view": {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    Blog blog = blogService.findByID(id);
-                    request.setAttribute("blog", blog);
-                    Category category = blogService.findCategoryByBlogId(id);
-                    request.setAttribute("category", category);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/view.jsp");
-                    dispatcher.forward(request, response);
-                    break;
-                }
                 case "edit": {
                     List<Category> categories = categoryService.findAll();
                     request.setAttribute("categories", categories);
@@ -72,6 +62,36 @@ public class BlogServlet extends HttpServlet {
                     Category category = blogService.findCategoryByBlogId(id);
                     request.setAttribute("category", category);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/delete.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                }
+                case "view": {
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    Blog blog = blogService.findByID(id);
+                    request.setAttribute("blog", blog);
+                    Category category = blogService.findCategoryByBlogId(id);
+                    request.setAttribute("category", category);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/view.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                }
+                case "viewMyBlog": {
+                    int id = loginUser.getId();
+                    List<Blog> blogs = blogService.findAllBlogByUserId(id);
+                    request.setAttribute("blogs", blogs);
+                    Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
+                    request.setAttribute("map_userId_userName", map_userId_userName);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                }
+                case "viewCategoryBlog": {
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    List<Blog> blogs = blogService.findAllBlogByCategoryID(id);
+                    request.setAttribute("blogs", blogs);
+                    Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
+                    request.setAttribute("map_userId_userName", map_userId_userName);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
                     dispatcher.forward(request, response);
                     break;
                 }
@@ -107,7 +127,8 @@ public class BlogServlet extends HttpServlet {
                     int user_id =loginUser.getId();
                     String tittle = request.getParameter("tittle");
                     String content = request.getParameter("content");
-                    Blog blog = new Blog(category_id, user_id, tittle, content);
+                    String createModified = blogService.getCurrentTime();
+                    Blog blog = new Blog(category_id, user_id, tittle, content, createModified);
                     blogService.create(blog);
                     response.sendRedirect("/blogs");
                     break;
@@ -118,7 +139,8 @@ public class BlogServlet extends HttpServlet {
                     int category_id = Integer.parseInt(request.getParameter("category_id"));
                     String tittle = request.getParameter("tittle");
                     String content = request.getParameter("content");
-                    Blog blog = new Blog(id, category_id, user_id, tittle, content);
+                    String dateModified = blogService.getCurrentTime();
+                    Blog blog = new Blog(id, category_id, user_id, tittle, content, dateModified);
                     blogService.updateById(id, blog);
                     response.sendRedirect("/blogs");
                     break;

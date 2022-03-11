@@ -3,7 +3,6 @@ package com.codegym.dao.blog;
 import com.codegym.dao.DBConnection;
 import com.codegym.model.Blog;
 import com.codegym.model.Category;
-import com.codegym.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,13 +14,23 @@ import java.util.List;
 import java.util.Map;
 
 public class BlogDAO implements IBlogDAO {
+    public static final String SELECT_ALL_FROM_BLOGS_ORDER_BY_DATE_MODIFIED_DESC = "SELECT * FROM blogs order by dateModified desc";
+    public static final String SELECT_ALL_FROM_BLOGS_BY_ID = "SELECT * FROM blogs where id = ?";
+    public static final String INSERT_TO_BLOGS = "INSERT INTO blogs (category_id, user_id, tittle, content, dateModified) values  (?, ?, ?, ?, ?)";
+    public static final String DELETE_BLOG_BY_ID = "DELETE from blogs where  id = ?";
+    public static final String UPDATE_BLOG_BY_ID = "UPDATE blogs set category_id = ?, user_id = ?, tittle = ?, content = ?, dateModified = ? where id = ?";
+    public static final String SELECT_CATEGORY_BY_BLOG_ID = "select C.id, C.name from blogs B join categories C on B.category_id = C.id where B.id = ?";
+    public static final String SELECT_USERNAME_BY_BLOG_ID = "select U.username from blogs B join users U on B.user_id = U.id where B.id = ?";
+    public static final String SELECT_USERNAME_FROM_USERS = "select id, username from users";
+    public static final String SELECT_BLOGS_BY_USER_ID = "SELECT * FROM blogs WHERE user_id = ?";
+    public static final String SELECT_BLOGS_BY_CATEGORY_ID = "SELECT * FROM blogs WHERE category_id = ?";
     Connection connection = DBConnection.getConnection();
 
     @Override
     public List<Blog> findAll() {
         List<Blog> blogs = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM blogs");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FROM_BLOGS_ORDER_BY_DATE_MODIFIED_DESC);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -45,7 +54,7 @@ public class BlogDAO implements IBlogDAO {
     public Blog findByID(int id) {
         Blog blog = new Blog();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM blogs where id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FROM_BLOGS_BY_ID);
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -65,7 +74,7 @@ public class BlogDAO implements IBlogDAO {
     @Override
     public boolean create(Blog blog) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO blogs (category_id, user_id, tittle, content, dateModified) values  (?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TO_BLOGS);
             preparedStatement.setInt(1, blog.getCategory_id());
             preparedStatement.setInt(2, blog.getUser_id());
             preparedStatement.setString(3, blog.getTittle());
@@ -81,7 +90,7 @@ public class BlogDAO implements IBlogDAO {
     @Override
     public boolean deleteById(int id) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE from blogs where  id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BLOG_BY_ID);
             preparedStatement.setInt(1, id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -94,7 +103,7 @@ public class BlogDAO implements IBlogDAO {
     public boolean updateById(int id, Blog blog) {
         List<Blog> blogs = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE blogs set category_id = ?, user_id = ?, tittle = ?, content = ?, dateModified = ? where id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BLOG_BY_ID);
             preparedStatement.setInt(1, blog.getCategory_id());
             preparedStatement.setInt(2, blog.getUser_id());
             preparedStatement.setString(3, blog.getTittle());
@@ -112,7 +121,7 @@ public class BlogDAO implements IBlogDAO {
     public Category findCategoryByBlogId(int id) {
         Category category = new Category();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select C.id, C.name from blogs B join categories C on B.category_id = C.id where B.id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CATEGORY_BY_BLOG_ID);
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -130,7 +139,7 @@ public class BlogDAO implements IBlogDAO {
     public String getUserNameByBlogId(int id) {
         String username = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select U.username from blogs B join users U on B.user_id = U.id where B.id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USERNAME_BY_BLOG_ID);
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -147,7 +156,7 @@ public class BlogDAO implements IBlogDAO {
     public Map<Integer, String> getMap_userId_userName() {
         Map<Integer, String> map_userId_userName = new HashMap<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select id, username from users");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USERNAME_FROM_USERS);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -162,11 +171,23 @@ public class BlogDAO implements IBlogDAO {
     }
 
     @Override
-    public List<Blog> findAllBlogByUserId() {
+    public List<Blog> findAllBlogByUserId(int user_id) {
         List<Blog> blogs = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE user_id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BLOGS_BY_USER_ID);
+            preparedStatement.setInt(1, user_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("category_id");
+                int category_id = rs.getInt("category_id");
+                int user_idSql = rs.getInt("user_id");
+                String tittle = rs.getString("tittle");
+                String content = rs.getString("content");
+                String dateModified = rs.getString("dateModified");
 
+                Blog blog = new Blog(id, category_id, user_idSql, tittle, content, dateModified);
+                blogs.add(blog);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,7 +196,28 @@ public class BlogDAO implements IBlogDAO {
     }
 
     @Override
-    public List<Blog> findAllBlogByCategoryID() {
-        return null;
+    public List<Blog> findAllBlogByCategoryID(int category_id) {
+        List<Blog> blogs = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BLOGS_BY_CATEGORY_ID);
+            preparedStatement.setInt(1, category_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("category_id");
+                int category_idSql = rs.getInt("category_id");
+                int user_idSql = rs.getInt("user_id");
+                String tittle = rs.getString("tittle");
+                String content = rs.getString("content");
+                String dateModified = rs.getString("dateModified");
+
+                Blog blog = new Blog(id, category_idSql, user_idSql, tittle, content, dateModified);
+                blogs.add(blog);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return blogs;
     }
+
 }
