@@ -162,11 +162,23 @@ public class BlogDAO implements IBlogDAO {
     }
 
     @Override
-    public List<Blog> findAllBlogByUserId() {
+    public List<Blog> findAllBlogByUserId(int user_id) {
         List<Blog> blogs = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE user_id = ?");
+            preparedStatement.setInt(1, user_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("category_id");
+                int category_id = rs.getInt("category_id");
+                int user_idSql = rs.getInt("user_id");
+                String tittle = rs.getString("tittle");
+                String content = rs.getString("content");
+                String dateModified = rs.getString("dateModified");
 
+                Blog blog = new Blog(id, category_id, user_idSql, tittle, content, dateModified);
+                blogs.add(blog);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,7 +187,28 @@ public class BlogDAO implements IBlogDAO {
     }
 
     @Override
-    public List<Blog> findAllBlogByCategoryID() {
-        return null;
+    public List<Blog> findAllBlogByCategoryID(int category_id) {
+        List<Blog> blogs = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product WHERE category_id = ?");
+            preparedStatement.setInt(1, category_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("category_id");
+                int category_idSql = rs.getInt("category_id");
+                int user_idSql = rs.getInt("user_id");
+                String tittle = rs.getString("tittle");
+                String content = rs.getString("content");
+                String dateModified = rs.getString("dateModified");
+
+                Blog blog = new Blog(id, category_idSql, user_idSql, tittle, content, dateModified);
+                blogs.add(blog);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return blogs;
     }
+
 }

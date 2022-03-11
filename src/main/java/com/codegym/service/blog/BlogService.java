@@ -56,12 +56,12 @@ public class BlogService implements IBlogService{
     }
 
     @Override
-    public List<Blog> findAllBlogByUserId() {
-        return null;
+    public List<Blog> findAllBlogByUserId(int user_id) {
+        return blogDAO.findAllBlogByUserId(user_id);
     }
 
     @Override
-    public List<Blog> findAllBlogByCategoryID() {
-        return null;
+    public List<Blog> findAllBlogByCategoryID(int category_id) {
+        return blogDAO.findAllBlogByUserId(category_id);
     }
 }
