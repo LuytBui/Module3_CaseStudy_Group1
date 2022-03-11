@@ -7,6 +7,7 @@ import com.codegym.model.User;
 import java.util.List;
 
 public class UserService implements IUserService {
+
     private IUserDAO userDAO;
 
     public UserService(UserDAO userDAO) {

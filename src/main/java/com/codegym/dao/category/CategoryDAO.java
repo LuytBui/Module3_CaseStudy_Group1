@@ -17,7 +17,7 @@ public class CategoryDAO implements ICategoryDAO{
     public List<Category> findAll() {
         List<Category> categories = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Categories");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM categories");
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -53,9 +53,8 @@ public class CategoryDAO implements ICategoryDAO{
     @Override
     public boolean create(Category category) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO categories (id, name) values (?, ?)");
-            preparedStatement.setInt(1, category.getId());
-            preparedStatement.setString(2, category.getName());
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO categories ( name) values ( ?)");
+            preparedStatement.setString(1, category.getName());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,9 +77,9 @@ public class CategoryDAO implements ICategoryDAO{
     @Override
     public boolean updateById(int id, Category category) {
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categories set id = ?, name = ? where id= ?");
-            preparedStatement.setInt(1, category.getId());
-            preparedStatement.setString(2, category.getName());
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE categories set name = ? where id= ?");
+            preparedStatement.setString(1, category.getName());
+            preparedStatement.setInt(2, category.getId());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
