@@ -14,9 +14,6 @@ public class UserService implements IUserService {
         this.userDAO = userDAO;
     }
 
-    public UserService(IUserDAO iUserDAO) {
-        this.userDAO = iUserDAO;
-    }
 
     @Override
     public List<User> findAll() {
