@@ -220,4 +220,15 @@ public class BlogDAO implements IBlogDAO {
         return blogs;
     }
 
+    @Override
+    public List<Blog> findAllBlogByUsername(String username) {
+        List<Blog> blogs = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM blogs WHERE category_id = ?");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

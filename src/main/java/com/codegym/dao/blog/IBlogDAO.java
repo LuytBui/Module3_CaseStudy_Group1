@@ -14,4 +14,5 @@ public interface IBlogDAO extends IGeneralDAO<Blog> {
     Map<Integer, String>getMap_userId_userName();
     List<Blog> findAllBlogByUserId (int user_id);
     List<Blog> findAllBlogByCategoryID (int category_id);
+    List<Blog> findAllBlogByUsername (String username);
 }
