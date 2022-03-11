@@ -29,8 +29,7 @@ public class BlogServlet extends HttpServlet {
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) {
             response.sendRedirect("");
-        }
-        else {
+        } else {
             String action = request.getParameter("action");
             if (action == null) {
                 action = "";
@@ -97,7 +96,9 @@ public class BlogServlet extends HttpServlet {
                 }
                 default: {
                     List<Blog> blogs = blogService.findAll();
+                    String username = loginUser.getUsername();
                     request.setAttribute("blogs", blogs);
+                    request.setAttribute("username", username);
                     Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
                     request.setAttribute("map_userId_userName", map_userId_userName);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
@@ -115,8 +116,7 @@ public class BlogServlet extends HttpServlet {
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) {
             response.sendRedirect("../");
-        }
-        else {
+        } else {
             String action = request.getParameter("action");
             if (action == null) {
                 action = "";
@@ -124,7 +124,7 @@ public class BlogServlet extends HttpServlet {
             switch (action) {
                 case "create": {
                     int category_id = Integer.parseInt(request.getParameter("category_id"));
-                    int user_id =loginUser.getId();
+                    int user_id = loginUser.getId();
                     String tittle = request.getParameter("tittle");
                     String content = request.getParameter("content");
                     String createModified = blogService.getCurrentTime();

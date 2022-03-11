@@ -14,7 +14,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around fixed-top">
     <div class="d-flex navbar-div-left">
-        <a class="navbar-brand main-logo" href="#">BlogSieuHay.com</a>
+        <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
         <form class="form-inline my-2 my-lg-0 d-flex">
             <input class="form-control mr-sm-2 input-search" type="search" placeholder="Search" aria-label="Search">
@@ -34,7 +34,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Username
+                        ${username}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
@@ -62,19 +62,20 @@
 </nav>
 
 <div class="div-middle container">
-    <%--        <h1>Blogs Management</h1>--%>
 
-    <c:forEach var="blog" items="${blogs}">
+    <c:forEach var="blog" items="${blogs}" varStatus="loop">
         <div class="blog-container border" style="margin: 15px">
                 <div class="mb-3">
-                    <a href="/blogs?action=view&id=${blog.id}"> ${map_userId_userName.get(blog.user_id)}</a>
+                    <a href="/blogs?action=viewMyBlog"> ${map_userId_userName.get(blog.user_id)}</a>
                 </div>
                 <div class="mb-3">
                     <p style="text-align: center; font-size: 200%">${blog.tittle}</p>
                 </div>
                 <div class="mb-3">
-                    <textarea disabled style="resize: none" class="form-control" name="content" id="content" cols="30"
-                              rows="10">${blog.content}</textarea>
+                    <p  id="content${loop.count}"></p>
+                    <script>
+                        document.getElementById(`content${loop.count}`).innerHTML = `${blog.content}`;
+                    </script>
                 </div>
                 <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>
                 <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>
