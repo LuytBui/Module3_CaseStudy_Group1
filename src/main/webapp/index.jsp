@@ -41,9 +41,9 @@
                                                                                                   id="pwd"
                                                                                                   placeholder="Password">
         </div>
-        <button class="btn mt-3">Login</button>
+        <button class="btn btn-primary mt-3" type="submit">Dang nhap</button>
+        <a href="/register"><button class="btn btn-light mt-3" type="button">Dang ky</button></a>
     </form>
-    <div class="text-center fs-6"><a href="#">Forget password?</a> or <a href="#">Sign up</a></div>
 </div>
 
 </body>
