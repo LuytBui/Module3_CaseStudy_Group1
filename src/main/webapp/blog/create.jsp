@@ -11,16 +11,18 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
     <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
 
 </head>
 <body>
 <div class="container">
     <h1>Create blog</h1>
-    <a class="btn btn-primary float-end" href="/blogs">Back to blogs list</a>
+<%--    <a class="btn btn-primary float-end" href="/blogs">Back to blogs list</a>--%>
     <form action="/blogs?action=create" method="post">
         <div class="mb-3">
             <label for="tittle" class="form-label">Tittle</label>
-            <input type="text" class="form-control" id="tittle" name="tittle" >
+<%--            <input type="text" class="form-control" id="tittle" name="tittle">--%>
+            <textarea name="tittle" id="tittle" rows="2"></textarea>
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Content </label>
@@ -42,6 +44,16 @@
 
 <script>
     CKEDITOR.replace( 'content' );
+</script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#tittle' ) )
+        .then( editor => {
+            console.log( editor );
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

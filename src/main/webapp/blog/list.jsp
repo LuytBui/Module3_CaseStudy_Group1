@@ -28,11 +28,11 @@
                 <li>
                     <a class="button-new-blog btn btn-success" href="/blogs?action=create">Tao bai moi</a>
                 </li>
-                <%--                <li class="nav-item active container-username">--%>
-                <%--                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>--%>
-                <%--                </li>--%>
+                                <li class="nav-item active container-username">
+                                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>
+                                </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
+                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown -1" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         ${username}
                     </a>
@@ -71,7 +71,7 @@
                     </a>
                 </div>
                 <div class="mb-3">
-                    <p style="text-align: center; font-size: 200%">${blog.tittle}</p>
+                    <p style="font-size: 150%">${blog.tittle}</p>
                 </div>
                 <div class="mb-3">
                     <p  id="content${loop.count}"></p>
@@ -79,9 +79,30 @@
                         document.getElementById(`content${loop.count}`).innerHTML = `${blog.content}`;
                     </script>
                 </div>
-                <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>
-                <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>
-                </a>
+            <div style="float: right">
+                <li style="list-style-type: none" class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        ...
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="/blogs?action=edit&id=${blog.id}">
+                                Sua
+                            </a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a class="dropdown-item" href="/blogs?action=delete&id=${blog.id}">
+                                Xoa
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+<%--                <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>--%>
+<%--                <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>--%>
+<%--                </a>--%>
         </div>
     </c:forEach>
 
