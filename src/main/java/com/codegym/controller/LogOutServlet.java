@@ -1,10 +1,6 @@
 package com.codegym.controller;
 
 
-import com.codegym.dao.user.UserDAO;
-import com.codegym.model.User;
-import com.codegym.service.user.UserService;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,14 +14,12 @@ import java.io.IOException;
 @WebServlet(name = "LogOut", value = "/logout")
 public class LogOutServlet extends HttpServlet {
 
-    UserService userService = new UserService(new UserDAO());
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        HttpSession session = request.getSession();
        session.invalidate();
 
-       RequestDispatcher requestDispatcher = request.getRequestDispatcher("");
-       requestDispatcher.forward(request, response);
+       response.sendRedirect("/");
     }
 
     @Override

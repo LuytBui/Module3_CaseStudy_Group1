@@ -28,15 +28,32 @@
                 <li>
                     <a class="button-new-blog btn btn-success" href="/blogs?action=create">Tao bai moi</a>
                 </li>
-                <li class="nav-item active container-username">
-                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>
+                <%--                <li class="nav-item active container-username">--%>
+                <%--                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>--%>
+                <%--                </li>--%>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Username
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                Quan ly bai viet
+                            </a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a class="dropdown-item" href="/logout">
+                                Dang xuat
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
                 <li>
                     <%--                    random image   credit: https://picsum.photos/--%>
                     <img src="https://picsum.photos/150" class="image-avatar rounded" alt="Cinque Terre">
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Dang xuat <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -49,7 +66,6 @@
 
     <c:forEach var="blog" items="${blogs}">
         <div class="blog-container border" style="margin: 15px">
-            <form>
                 <div class="mb-3">
                     <a href="/blogs?action=view&id=${blog.id}"> ${map_userId_userName.get(blog.user_id)}</a>
                 </div>
@@ -63,7 +79,6 @@
                 <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>
                 <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>
                 </a>
-            </form>
         </div>
     </c:forEach>
 
