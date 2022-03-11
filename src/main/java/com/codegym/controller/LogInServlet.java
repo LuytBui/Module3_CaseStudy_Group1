@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(name = "LoginServlet", value = "")
+@WebServlet(name = "LoginServlet", value = "/login")
 public class LogInServlet extends HttpServlet {
 
     UserService userService = new UserService(new UserDAO());

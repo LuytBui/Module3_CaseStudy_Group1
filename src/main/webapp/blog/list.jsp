@@ -64,7 +64,8 @@
 <div class="div-middle container">
     <%--        <h1>Blogs Management</h1>--%>
 
-    <c:forEach var="blog" items="${blogs}">
+    <c:forEach var="blog"
+               items="${blogs}">
         <div class="blog-container border" style="margin: 15px">
                 <div class="mb-3">
                     <a href="/blogs?action=view&id=${blog.id}"> ${map_userId_userName.get(blog.user_id)}</a>

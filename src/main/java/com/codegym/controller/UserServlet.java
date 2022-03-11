@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/users")
@@ -49,7 +50,14 @@ public class UserServlet extends HttpServlet {
             default: {
                 List<User> users = userService.findAll();
 
+                List<Integer> blogCounts = new ArrayList<>();
+                for (User user : users) {
+                    int count = ((UserService) userService).countBlog(user);
+                    blogCounts.add(count);
+                }
+
                 request.setAttribute("users", users);
+                request.setAttribute("blogCounts", blogCounts);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/user/list.jsp");
                 dispatcher.forward(request, response);
                 break;

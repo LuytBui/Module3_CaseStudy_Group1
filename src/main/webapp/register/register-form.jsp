@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <style>
+        .message {
+            color: red;
+        }
+    </style>
 
 </head>
 <body>
@@ -29,19 +34,17 @@
 
                                 <form class="mx-1 mx-md-4" method="post">
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        aa
-                                        <c:if test='${requestScope["message"] != null}'>
-                                            <div class="message text-center mt-3 mb-3">
-                                                <p>${requestScope["message"]}</p>
-                                            </div>
-                                        </c:if>
-                                    </div>
+                                    <c:if test='${requestScope["message"] != null}'>
+                                        <div class="d-flex flex-row align-items-center mb-4 text-center">
+                                            <p class="message">${requestScope["message"]}</p>
+                                        </div>
+                                    </c:if>
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="form3Example1c" class="form-control" name="username"/>
+                                            <input type="text" id="form3Example1c" class="form-control"
+                                                   name="username"/>
                                             <label class="form-label" for="form3Example1c">Ten nguoi dung</label>
                                         </div>
                                     </div>
@@ -57,7 +60,8 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="phone" id="form3Example3c-1" class="form-control" name="phone"/>
+                                            <input type="phone" id="form3Example3c-1" class="form-control"
+                                                   name="phone"/>
                                             <label class="form-label" for="form3Example3c-1">So dien thoai</label>
                                         </div>
                                     </div>
@@ -65,7 +69,8 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="form3Example4c" class="form-control" name="password"/>
+                                            <input type="password" id="form3Example4c" class="form-control"
+                                                   name="password"/>
                                             <label class="form-label" for="form3Example4c">Password</label>
                                         </div>
                                     </div>
@@ -73,7 +78,8 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="form3Example4cd" class="form-control" name="password-repeat"/>
+                                            <input type="password" id="form3Example4cd" class="form-control"
+                                                   name="password-repeat"/>
                                             <label class="form-label" for="form3Example4cd">Repeat your password</label>
                                         </div>
                                     </div>
@@ -87,12 +93,13 @@
                                                 name="agree-ToS"
                                         />
                                         <label class="form-check-label" for="form2Example3c">
-                                            I agree all statements in <a href="register/terms-of-service.html">Terms of service</a>
+                                            I agree all statements in <a href="register/terms-of-service.html">Terms of
+                                            service</a>
                                         </label>
                                     </div>
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="button" class="btn btn-primary btn-lg">Register</button>
+                                        <button type="submit" class="btn btn-primary btn-lg">Register</button>
                                     </div>
 
                                 </form>

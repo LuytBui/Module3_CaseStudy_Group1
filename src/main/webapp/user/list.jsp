@@ -14,7 +14,6 @@
 </head>
     <div class="container">
         <h1>Danh sách người dùng</h1>
-        <a class="btn btn-primary float-end" href="/users?action=create">Add new user</a>
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -29,8 +28,11 @@
             <tbody>
             <c:forEach var="user" items="${users}" varStatus="loop">
                 <tr>
-                    <td>${loop.count}</td>
+                    <td>${loop.index}</td>
                     <td><a href="/users?action=view&id=${user.id}">${user.username}</a></td>
+                    <td>
+                        ${blogCounts.get(loop.index)}
+                    </td>
                     <td>
                         <a class="btn btn-info" href="/users?action=edit&id=${user.id}">
                             <i class="fas fa-edit"></i>

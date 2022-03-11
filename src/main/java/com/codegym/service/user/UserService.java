@@ -40,8 +40,18 @@ public class UserService implements IUserService {
         return userDAO.updateById(id, user);
     }
 
+    @Override
     public User findByEmail(String email) {
-        return ((UserDAO) userDAO).findByEmail(email);
+        return userDAO.findByEmail(email);
+    }
+
+    @Override
+    public User findByPhone(String phone) {
+        return userDAO.findByPhone(phone);
+    }
+
+    public int countBlog(User user) {
+        return userDAO.countBlog(user);
     }
 
     @Override
