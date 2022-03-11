@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="style/blog-list.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around fixed-top">
     <div class="d-flex navbar-div-left">
         <a class="navbar-brand main-logo" href="#">BlogSieuHay.com</a>
 
         <form class="form-inline my-2 my-lg-0 d-flex">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2 input-search" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
@@ -25,26 +25,18 @@
     <div class="d-flex navbar-div-right">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <li>
+                    <a class="button-new-blog btn btn-success" href="/blogs?action=create">Tao bai moi</a>
+                </li>
+                <li class="nav-item active container-username">
+                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <%--                    random image   credit: https://picsum.photos/--%>
+                    <img src="https://picsum.photos/150" class="image-avatar rounded" alt="Cinque Terre">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link" href="/logout">Dang xuat <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -52,37 +44,9 @@
 
 </nav>
 
-<div class="container">
+<div class="div-middle container">
     <%--        <h1>Blogs Management</h1>--%>
-    <a class="btn btn-primary float-end" href="/blogs?action=create">Add New blog</a>
-    <%--        <table class="table table-bordered">--%>
-    <%--            <thead>--%>
-    <%--            <tr>--%>
-    <%--                <th scope="col">#</th>--%>
-    <%--                <th scope="col">Tittle </th>--%>
-    <%--                <th scope="col">Content </th>--%>
-    <%--                <th scope="col">Author</th>--%>
-    <%--                <th scope="col">Date Modify</th>--%>
-    <%--                <th scope="col">Edit</th>--%>
-    <%--                <th scope="col">Delete</th>--%>
-    <%--            </tr>--%>
-    <%--            </thead>--%>
-    <%--            <tbody>--%>
-    <%--            <c:forEach var="blog" items="${blogs}">--%>
-    <%--                <tr>--%>
-    <%--                    <td>${blog.id}</td>--%>
-    <%--                    <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.tittle}</a></td>--%>
-    <%--                    <td><a href="/blogs?action=view&id=${blog.id}"> ${blog.content}</a></td>--%>
-    <%--                    <td>${map_userId_userName.get(blog.user_id)}</td>--%>
-    <%--                    <td>${blog.dateModified}</td>--%>
-    <%--                    <td>--%>
-    <%--                            <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}">--%>
-    <%--                                <i class="fas fa-edit"></i>--%>
-    <%--                            </a>--%>
-    <%--                    </td>--%>
-    <%--                        <td><a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i--%>
-    <%--                                class="fas fa-trash"></i></a></td>--%>
-    <%--                </tr>--%>
+
     <c:forEach var="blog" items="${blogs}">
         <div class="blog-container border" style="margin: 15px">
             <form>

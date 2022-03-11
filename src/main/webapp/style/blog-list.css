@@ -1,13 +1,47 @@
 
+.navbar {
+    height: 80px;
+}
 .navbar-div-left {
-    padding-left: 50px;
     width: 60%;
 }
+
+.navbar-div-left .input-search {
+    width: 400px;
+    margin-inline: 20px;
+}
+
 .navbar-div-right {
-    padding-right: 50px;
-    width: 35%;
+    margin-right: 80px;
+    width: 30%;
+}
+
+.div-middle{
+    margin-top: 100px;
 }
 
 .blog-container {
     border-radius: 8px;
+}
+
+.container-username {
+    color: blue;
+    font-weight: bold;
+}
+
+.button-new-blog {
+    width: 120px;
+}
+
+.navbar-div-right>div>ul li {
+    margin-inline: 10px;
+    align-self: center;
+}
+
+
+.image-avatar{
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
 }
