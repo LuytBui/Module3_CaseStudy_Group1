@@ -21,7 +21,7 @@ public class BlogDAO implements IBlogDAO {
     public List<Blog> findAll() {
         List<Blog> blogs = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM blogs");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM blogs order by dateModified desc ");
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
