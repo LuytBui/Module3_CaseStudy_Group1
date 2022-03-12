@@ -38,15 +38,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="/blogs?action=create">Bài viết mới </a>
             </li>
-
-            <li class="nav-item has-submenu">
-                <a class="nav-link" href="#"> Quản lý tài khoản
-                    <i class="bi bi-caret-down-fill"></i>
-                </a>
-                <ul class="submenu collapse">
-                    <li><a class="nav-link" href="/blogs?action=viewMyBlog">Quản lý Blog </a></li>
-                    <li><a class="nav-link" href="/logout">Đăng xuất </a></li>
-                </ul>
+            <li class="nav-item">
+                <a class="nav-link" href="/blogs?action=viewMyBlog">Quản lý Blog </a>
             </li>
             <li class="nav-item has-submenu">
                 <a class="nav-link" href="#"> Danh mục bài viết
@@ -71,6 +64,8 @@
                 </li>
             </c:if>
 
+            <a class="nav-link btn btn-secondary btn-logout" href="/logout">Đăng xuất </a></li>
+
             <%--            <li class="nav-item">--%>
             <%--                <a class="nav-link" href="#"> Other link </a>--%>
             <%--            </li>--%>
@@ -80,8 +75,7 @@
     <!-- Middle Section  -->
     <div class="div-middle container">
         <%--        <h1>Blogs Management</h1>--%>
-        <c:forEach var="blog"
-                   items="${blogs}">
+        <c:forEach var="blog" items="${blogs}" varStatus="loop">
             <div class="blog-container border" style="margin: 15px">
 
                 <c:if test="${blog.user_id == loginUserId}">
@@ -108,15 +102,19 @@
                     </div>
                 </c:if>
                 <div class="blog-heading d-flex justify-content-between">
-                    <a class="author" href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
-                            ${map_userId_userName.get(blog.user_id)}
-                    </a>
-
-                    <div class="d-flex justify-content-between">
-                        <p>
-                        <span class="span-date mr-2">Đã tạo ngày ${blog.dateModified}</span>
-                        <span class="span-category-label"> trong
-                            <a class="span-category" href="/blogs?action=viewCategoryBlog&id=${category.id}">
+                    <div>
+                        <a class="blog-title" href="/blogs?action=view&id=${blog.id}">${blog.tittle}</a>
+                    </div>
+                    <div>
+                        <p class="text-right">
+                            <span>
+                                <a class="author" href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
+                                        ${map_userId_userName.get(blog.user_id)}
+                                </a>
+                            </span>
+                            <span class="span-date mr-2">Đã tạo ngày ${blog.dateModified}</span>
+                            <span class="span-category-label"> trong
+                            <a class="span-category" href="/blogs?action=viewCategoryBlog&id=${blog.category_id}">
                                     ${map_categoryId_categoryName.get(blog.category_id)}
                             </a>
                         </span>
@@ -124,16 +122,15 @@
                     </div>
                 </div>
                 <div class="mb-3">
-
                 </div>
-                <div class="mb-3">
-                    <p class="blog-title">${blog.tittle}</p>
-                </div>
-                <div class="mb-3">
-                    <p id="content${loop.count}"></p>
+                <div class="mb-1">
+                    <p class="blog-content-preview " id="content${loop.count}"></p>
                     <script>
                         document.getElementById(`content${loop.count}`).innerHTML = `${blog.getContentPreview()}`;
                     </script>
+                </div>
+                <div>
+                    <a href="/blogs?action=view&id=${blog.id}" class="btn-view-blog">Xem bài viết >>></a>
                 </div>
             </div>
         </c:forEach>

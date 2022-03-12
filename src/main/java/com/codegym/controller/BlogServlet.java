@@ -13,6 +13,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,8 +93,14 @@ public class BlogServlet extends HttpServlet {
                     break;
                 }
                 case "viewCategoryBlog": {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    List<Blog> blogs = blogService.findAllBlogByCategoryID(id);
+                    List<Blog> blogs= new ArrayList<>();
+                    try {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        blogs = blogService.findAllBlogByCategoryID(id);
+                    } catch (NumberFormatException e){
+                        e.printStackTrace();
+                    }
+
                     request.setAttribute("blogs", blogs);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
                     dispatcher.forward(request, response);

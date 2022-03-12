@@ -22,19 +22,39 @@ nav.sidebar {
     border-radius: 0;
     border: 1px solid black;
 }
+
 .username {
     font-size: 108%;
     font-weight: bold;
     color: darkslateblue;
 }
-.sidebar>ul li>a {
+
+.image-avatar {
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar > ul li > a {
     text-decoration: underline;
     color: darkslateblue;
 }
 
-.div-middle{
+.sidebar .btn-logout {
+    height: 40px;
+    width: 70%;
+    margin: auto;
+    position: absolute;
+    bottom: 100px;
+    transform: translate(0%, 0);
+    color: #fff;
+    padding: auto;
+}
+
+.div-middle {
     margin-top: 100px;
-    width: calc(90% - 250px );
+    width: calc(90% - 250px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,10 +64,12 @@ nav.sidebar {
 .blog-container {
     position: relative;
     width: 100%;
-    max-width: 860px;
+    max-width: 1080px;
     border-radius: 6px;
     background: #E9ECEF;
-    padding: 15px;
+    padding-inline: 15px;
+    padding-top: 15px;
+    padding-bottom: 40px;
 }
 
 .blog-container .blog-heading .author {
@@ -55,16 +77,18 @@ nav.sidebar {
     color: darkslateblue;
 }
 
-
 .blog-title {
+    color: blue;
     font-weight: bold;
     text-decoration: underline;
 }
+
 .blog-container .blog-heading .span-date {
-    font-size:80%;
+    font-size: 80%;
     font-style: italic;
     font-weight: lighter;
 }
+
 .blog-container .blog-heading .span-category {
     font-weight: bold;
 }
@@ -74,36 +98,45 @@ nav.sidebar {
     bottom: 0;
     right: 0;
 }
-.image-avatar{
-    width: 60px;
-    height: 60px;
-    margin: 0;
-    padding: 0;
+
+.blog-container .btn-view-blog {
+    font-size: 85%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 15px;
+}
+
+.blog-container .blog-content-preview {
+    margin-left: 25px;
 }
 
 @media only screen and (max-width: 600px) {
     nav.sidebar {
         width: 100px;
     }
+
     nav.sidebar .sidebar-heading {
         flex-direction: column;
     }
 
     .div-middle {
         margin-left: 100px;
-        width: calc(90% - 100px );
+        width: calc(90% - 100px);
     }
 }
+
 @media only screen and (max-width: 1380px) {
     nav.sidebar {
         width: 150px;
     }
+
     nav.sidebar .sidebar-heading {
         flex-direction: column;
     }
 
     .div-middle {
         margin-left: 150px;
-        width: calc(90% - 150px );
+        width: calc(90% - 150px);
     }
 }

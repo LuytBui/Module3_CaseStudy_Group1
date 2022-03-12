@@ -1,7 +1,7 @@
 package com.codegym.model;
 
 public class Blog {
-    public static final int MAX_CHAR_PREVIEW = 50;
+    public static final int MAX_CHAR_PREVIEW = 500;
     private int id;
 
     private int category_id;
@@ -100,6 +100,6 @@ public class Blog {
     public String getContentPreview(){
         if (content.length() <= MAX_CHAR_PREVIEW)
             return content;
-        return content.substring(0, MAX_CHAR_PREVIEW) + "...";
+        return content.substring(0, MAX_CHAR_PREVIEW) + " .....";
     }
 }
