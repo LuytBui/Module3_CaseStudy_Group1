@@ -29,8 +29,7 @@ public class BlogServlet extends HttpServlet {
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) {
             response.sendRedirect("");
-        }
-        else {
+        } else {
             String action = request.getParameter("action");
             if (action == null) {
                 action = "";
@@ -78,9 +77,11 @@ public class BlogServlet extends HttpServlet {
                 case "viewMyBlog": {
                     int id = loginUser.getId();
                     List<Blog> blogs = blogService.findAllBlogByUserId(id);
-                    request.setAttribute("blogs", blogs);
                     Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
+                    String username = loginUser.getUsername();
+                    request.setAttribute("blogs", blogs);
                     request.setAttribute("map_userId_userName", map_userId_userName);
+                    request.setAttribute("username", username);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
                     dispatcher.forward(request, response);
                     break;
@@ -88,17 +89,33 @@ public class BlogServlet extends HttpServlet {
                 case "viewCategoryBlog": {
                     int id = Integer.parseInt(request.getParameter("id"));
                     List<Blog> blogs = blogService.findAllBlogByCategoryID(id);
-                    request.setAttribute("blogs", blogs);
                     Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
+                    String username = loginUser.getUsername();
+                    request.setAttribute("blogs", blogs);
                     request.setAttribute("map_userId_userName", map_userId_userName);
+                    request.setAttribute("username", username);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                }
+                case "viewUserBlog": {
+                    int user_id = Integer.parseInt(request.getParameter("user_id"));
+                    List<Blog> blogs = blogService.findAllBlogByUserId(user_id);
+                    Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
+                    String username = loginUser.getUsername();
+                    request.setAttribute("blogs", blogs);
+                    request.setAttribute("map_userId_userName", map_userId_userName);
+                    request.setAttribute("username", username);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
                     dispatcher.forward(request, response);
                     break;
                 }
                 default: {
                     List<Blog> blogs = blogService.findAll();
-                    request.setAttribute("blogs", blogs);
                     Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
+                    String username = loginUser.getUsername();
+                    request.setAttribute("blogs", blogs);
+                    request.setAttribute("username", username);
                     request.setAttribute("map_userId_userName", map_userId_userName);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
                     dispatcher.forward(request, response);
@@ -115,8 +132,7 @@ public class BlogServlet extends HttpServlet {
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) {
             response.sendRedirect("../");
-        }
-        else {
+        } else {
             String action = request.getParameter("action");
             if (action == null) {
                 action = "";
@@ -124,7 +140,7 @@ public class BlogServlet extends HttpServlet {
             switch (action) {
                 case "create": {
                     int category_id = Integer.parseInt(request.getParameter("category_id"));
-                    int user_id =loginUser.getId();
+                    int user_id = loginUser.getId();
                     String tittle = request.getParameter("tittle");
                     String content = request.getParameter("content");
                     String createModified = blogService.getCurrentTime();

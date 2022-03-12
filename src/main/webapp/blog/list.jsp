@@ -16,14 +16,13 @@
 <!-- Navbar  -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around fixed-top">
     <div class="d-flex navbar-div-left">
-        <a class="navbar-brand main-logo" href="#">BlogSieuHay.com</a>
+        <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
         <form class="form-inline my-2 my-lg-0 d-flex">
             <input class="form-control mr-sm-2 input-search" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
-
 
     <div class="d-flex navbar-div-right">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -35,9 +34,9 @@
                 <%--                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>--%>
                 <%--                </li>--%>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle container-username" role="button"
+                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Username
+                        ${username}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
@@ -103,31 +102,54 @@
                    items="${blogs}">
             <div class="blog-container border" style="margin: 15px">
                 <div class="mb-3">
-                    <a href="/blogs?action=view&id=${blog.id}"> ${map_userId_userName.get(blog.user_id)}</a>
+                    <a href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
+                            ${map_userId_userName.get(blog.user_id)}
+                    </a>
                 </div>
                 <div class="mb-3">
-                    <p style="text-align: center; font-size: 200%">${blog.tittle}</p>
+                    <p style="font-size: 150%">${blog.tittle}</p>
                 </div>
                 <div class="mb-3">
-                    <textarea disabled style="resize: none" class="form-control" name="content" id="content" cols="30"
-                              rows="10">${blog.content}</textarea>
+                    <p  id="content${loop.count}"></p>
+                    <script>
+                        document.getElementById(`content${loop.count}`).innerHTML = `${blog.content}`;
+                    </script>
                 </div>
-                <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>
-                <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>
-                </a>
+            <div style="position: relative; left: 1180px">
+                <li style="list-style-type: none" class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        ...
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="/blogs?action=edit&id=${blog.id}">
+                                Sua
+                            </a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a class="dropdown-item" href="/blogs?action=delete&id=${blog.id}">
+                                Xoa
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </div>
-        </c:forEach>
+<%--                <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>--%>
+<%--                <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>--%>
+<%--                </a>--%>
+        </div>
+    </c:forEach>
 
-        </tbody>
-        </table>
-    </div>
+    </tbody>
+    </table>
+</div>
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-
-<script src="js/sidebar.js"></script>
 </body>
 </html>
