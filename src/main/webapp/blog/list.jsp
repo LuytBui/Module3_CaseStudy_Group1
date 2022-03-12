@@ -32,7 +32,7 @@
                 <%--                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>--%>
                 <%--                </li>--%>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
+                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown-1" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Username
                     </a>
