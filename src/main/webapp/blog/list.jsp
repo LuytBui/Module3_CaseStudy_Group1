@@ -34,7 +34,7 @@
                 <%--                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>--%>
                 <%--                </li>--%>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
+                    <a href="#" class="nav-link dropdown-toggle container-username" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         ${username}
                     </a>
@@ -117,7 +117,7 @@
                 </div>
             <div style="position: relative; left: 1180px">
                 <li style="list-style-type: none" class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
+                    <a href="#" class="nav-link dropdown-toggle container-username" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         ...
                     </a>
@@ -151,5 +151,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<script src="js/sidebar.js"></script>
+
 </body>
 </html>
