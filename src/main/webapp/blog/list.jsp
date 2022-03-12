@@ -10,8 +10,10 @@
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="style/blog-list.css">
+    <link rel="stylesheet" href="style/blog-sidebar.css">
 </head>
 <body>
+<!-- Navbar  -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around fixed-top">
     <div class="d-flex navbar-div-left">
         <a class="navbar-brand main-logo" href="#">BlogSieuHay.com</a>
@@ -21,6 +23,7 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
+
 
     <div class="d-flex navbar-div-right">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -32,7 +35,7 @@
                 <%--                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>--%>
                 <%--                </li>--%>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
+                    <a href="#" class="nav-link dropdown-toggle container-username" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Username
                     </a>
@@ -52,7 +55,7 @@
                 </li>
 
                 <li>
-                    <%--                    random image   credit: https://picsum.photos/--%>
+                    <%--  random image   credit: https://picsum.photos/--%>
                     <img src="https://picsum.photos/150" class="image-avatar rounded" alt="Cinque Terre">
                 </li>
             </ul>
@@ -61,12 +64,44 @@
 
 </nav>
 
-<div class="div-middle container">
-    <%--        <h1>Blogs Management</h1>--%>
+<div class="wrapper d-flex">
+    <!-- Sidebar  -->
+    <nav class="sidebar card py-2 mb-4 fixed-top">
+        <ul class="nav flex-column" id="nav_accordion">
+            <li class="nav-item">
+                <a class="nav-link" href="#"> Link name </a>
+            </li>
+            <li class="nav-item has-submenu">
+                <a class="nav-link" href="#"> Admin menu  </a>
+                <ul class="submenu collapse">
+                    <li><a class="nav-link" href="#">Bài Viết mới </a></li>
+                    <li><a class="nav-link" href="#">Quản lý Blog </a></li>
+                    <li><a class="nav-link" href="#">Đăng xuất </a> </li>
+                </ul>
+            </li>
+            <li class="nav-item has-submenu">
+                <a class="nav-link" href="#"> More menus  </a>
+                <ul class="submenu collapse">
+                    <li><a class="nav-link" href="#">Quản lý User </a></li>
+                    <li><a class="nav-link" href="#">Quản lý Category </a></li>
+                    <li><a class="nav-link" href="#">Quản lý Blog </a> </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"> Something </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"> Other link </a>
+            </li>
+        </ul>
+    </nav>
 
-    <c:forEach var="blog"
-               items="${blogs}">
-        <div class="blog-container border" style="margin: 15px">
+    <!-- Middle Section  -->
+    <div class="div-middle container">
+        <%--        <h1>Blogs Management</h1>--%>
+        <c:forEach var="blog"
+                   items="${blogs}">
+            <div class="blog-container border" style="margin: 15px">
                 <div class="mb-3">
                     <a href="/blogs?action=view&id=${blog.id}"> ${map_userId_userName.get(blog.user_id)}</a>
                 </div>
@@ -80,17 +115,19 @@
                 <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>
                 <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>
                 </a>
-        </div>
-    </c:forEach>
+            </div>
+        </c:forEach>
 
-    </tbody>
-    </table>
-</div>
+        </tbody>
+        </table>
+    </div>
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+
+<script src="js/sidebar.js"></script>
 </body>
 </html>
