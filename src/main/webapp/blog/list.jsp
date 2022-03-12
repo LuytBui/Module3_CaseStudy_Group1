@@ -14,7 +14,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around fixed-top">
     <div class="d-flex navbar-div-left">
-        <a class="navbar-brand main-logo" href="#">BlogSieuHay.com</a>
+        <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
         <form class="form-inline my-2 my-lg-0 d-flex">
             <input class="form-control mr-sm-2 input-search" type="search" placeholder="Search" aria-label="Search">
@@ -34,7 +34,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown-1" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Username
+                        ${username}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
@@ -79,7 +79,7 @@
                         document.getElementById(`content${loop.count}`).innerHTML = `${blog.content}`;
                     </script>
                 </div>
-            <div style="float: right">
+            <div style="position: relative; left: 1180px">
                 <li style="list-style-type: none" class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle container-username" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
