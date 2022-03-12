@@ -1,9 +1,7 @@
 package com.codegym.model;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Blog {
+    public static final int MAX_CHAR_PREVIEW = 50;
     private int id;
 
     private int category_id;
@@ -97,5 +95,11 @@ public class Blog {
 
     public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
+    }
+
+    public String getContentPreview(){
+        if (content.length() <= MAX_CHAR_PREVIEW)
+            return content;
+        return content.substring(0, MAX_CHAR_PREVIEW) + "...";
     }
 }

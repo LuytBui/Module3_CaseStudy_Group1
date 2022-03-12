@@ -2,16 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Lis all blogs</title>
-
+    <title>BlogSieuHay.com</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style/blog-list.css">
-    <link rel="stylesheet" href="style/blog-sidebar.css">
+    <link type="text/css" rel="stylesheet" href="style/blog-list.css">
+    <link type="text/css" rel="stylesheet" href="style/blog-sidebar.css">
 </head>
 <body>
 <!-- Navbar  -->
@@ -19,66 +18,32 @@
     <div class="d-flex navbar-div-left">
         <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
-        <form class="form-inline my-2 my-lg-0 d-flex">
-            <input class="form-control mr-sm-2 input-search" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <form class="form-inline my-2 my-lg-0 d-flex" action="/blogs/search" method="get">
+            <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm gì đó ..."
+                   aria-label="Search" name="q">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
         </form>
     </div>
-
-    <div class="d-flex navbar-div-right">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li>
-                    <a class="button-new-blog btn btn-success" href="/blogs?action=create">Tao bai moi</a>
-                </li>
-                <%--                <li class="nav-item active container-username">--%>
-                <%--                    <a class="nav-link" href="#">Username <span class="sr-only">(current)</span></a>--%>
-                <%--                </li>--%>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle container-username" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        ${username}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="/blogs?action=viewMyBlog">
-                                Quan ly bai viet
-                            </a>
-                        </li>
-                        <hr>
-                        <li>
-                            <a class="dropdown-item" href="/logout">
-                                Dang xuat
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <%--  random image   credit: https://picsum.photos/--%>
-                    <img src="https://picsum.photos/150" class="image-avatar rounded" alt="Cinque Terre">
-                </li>
-            </ul>
-        </div>
-    </div>
-
 </nav>
 
 <div class="wrapper d-flex">
     <!-- Sidebar  -->
     <nav class="sidebar card fixed-top">
         <ul class="nav flex-column" id="nav_accordion">
-            <div class="d-flex justify-content-around sidebar-heading">
-                <a class="nav-link sidebar-heading" href="#">User: ${username} </a>
+            <div class="sidebar-heading d-flex justify-content-between mb-4">
+                <a class="nav-link sidebar-heading ml-1 username" href="#">User: ${username} </a>
                 <%-- avatar: random image   credit: https://picsum.photos/--%>
-                <img src="https://picsum.photos/150" class="image-avatar rounded" alt="Cinque Terre">
+                <img src="https://picsum.photos/150" class="image-avatar rounded mr-1" alt="Cinque Terre">
             </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/blogs?action=create">Bài viết mới </a>
+                        </li>
+
             <li class="nav-item has-submenu">
                 <a class="nav-link" href="#"> Quản lý tài khoản
                     <i class="bi bi-caret-down-fill"></i>
                 </a>
-                <ul class="submenu">
-                    <li><a class="nav-link" href="/blogs?action=create">Bài viết mới </a></li>
+                <ul class="submenu collapse">
                     <li><a class="nav-link" href="/blogs?action=viewMyBlog">Quản lý Blog </a></li>
                     <li><a class="nav-link" href="/logout">Đăng xuất </a></li>
                 </ul>
@@ -89,7 +54,8 @@
                 </a>
                 <ul class="submenu collapse">
                     <c:forEach var="category" items="${categories}">
-                        <li><a class="nav-link" href="/blogs?action=viewCategoryBlog&id=${category.id}">${category.name}</a></li>
+                        <li><a class="nav-link"
+                               href="/blogs?action=viewCategoryBlog&id=${category.id}">${category.name}</a></li>
                     </c:forEach>
                 </ul>
             </li>
@@ -105,9 +71,9 @@
                 </li>
             </c:if>
 
-<%--            <li class="nav-item">--%>
-<%--                <a class="nav-link" href="#"> Other link </a>--%>
-<%--            </li>--%>
+            <%--            <li class="nav-item">--%>
+            <%--                <a class="nav-link" href="#"> Other link </a>--%>
+            <%--            </li>--%>
         </ul>
     </nav>
 
@@ -117,44 +83,51 @@
         <c:forEach var="blog"
                    items="${blogs}">
             <div class="blog-container border" style="margin: 15px">
-                <div class="mb-3">
-                    <a href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
+                <div class="blog-heading d-flex justify-content-between">
+                    <a class="author" href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
                             ${map_userId_userName.get(blog.user_id)}
                     </a>
+
+                    <div>
+                        <c:if test="${blog.user_id == loginUserId}">
+                            <%-- Edit, delete --%>
+                        <li style="list-style-type: none" class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle container-username" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                ...
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="/blogs?action=edit&id=${blog.id}">
+                                        Sửa
+                                    </a>
+                                </li>
+                                <hr>
+                                <li>
+                                    <a class="dropdown-item" href="/blogs?action=delete&id=${blog.id}">
+                                        Xóa
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        </c:if>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <p style="font-size: 150%">${blog.tittle}</p>
+
+                </div>
+                <div class="mb-3">
+                    <p class="blog-title">${blog.tittle}</p>
                 </div>
                 <div class="mb-3">
                     <p id="content${loop.count}"></p>
                     <script>
-                        document.getElementById(`content${loop.count}`).innerHTML = `${blog.content}`;
+                        document.getElementById(`content${loop.count}`).innerHTML = `${blog.getContentPreview()}`;
                     </script>
                 </div>
                 <div style="position: relative; left: 1180px">
-                    <li style="list-style-type: none" class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle container-username" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            ...
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="/blogs?action=edit&id=${blog.id}">
-                                    Sửa
-                                </a>
-                            </li>
-                            <hr>
-                            <li>
-                                <a class="dropdown-item" href="/blogs?action=delete&id=${blog.id}">
-                                    Xóa
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+
                 </div>
-                    <%--                <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>--%>
-                    <%--                <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>--%>
-                    <%--                </a>--%>
             </div>
         </c:forEach>
 

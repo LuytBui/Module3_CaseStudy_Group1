@@ -21,8 +21,16 @@ public class LogInServlet extends HttpServlet {
     UserService userService = new UserService(new UserDAO());
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
-        requestDispatcher.forward(request, response);
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute("user");
+
+        if (loginUser == null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            response.sendRedirect("/blogs");
+        }
+
     }
 
     @Override

@@ -1,13 +1,1 @@
 
-.sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    height: 100vh;
-    background: #E9ECEF;
-    color: #fff;
-}
-
-.sidebar ul li>a {
-    font-weight: bold;
-    color: darkslateblue;
-}
