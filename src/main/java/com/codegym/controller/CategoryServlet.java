@@ -134,7 +134,7 @@ public class CategoryServlet extends HttpServlet {
         Category category = new Category( name);
         categoryService.create(category);
 
-        request.setAttribute("massage", "Tạo mới thành công");
+        request.setAttribute("message", "Tạo mới thành công");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/category/create.jsp");
         dispatcher.forward(request, response);
         return;

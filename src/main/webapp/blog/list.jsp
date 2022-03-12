@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style/blog-list.css">
     <link rel="stylesheet" href="style/blog-sidebar.css">
 </head>
@@ -65,33 +66,48 @@
 
 <div class="wrapper d-flex">
     <!-- Sidebar  -->
-    <nav class="sidebar card py-2 mb-4 fixed-top">
+    <nav class="sidebar card fixed-top">
         <ul class="nav flex-column" id="nav_accordion">
-            <li class="nav-item">
-                <a class="nav-link" href="#"> Link name </a>
-            </li>
+            <div class="d-flex justify-content-around sidebar-heading">
+                <a class="nav-link sidebar-heading" href="#">User: ${username} </a>
+                <%-- avatar: random image   credit: https://picsum.photos/--%>
+                <img src="https://picsum.photos/150" class="image-avatar rounded" alt="Cinque Terre">
+            </div>
             <li class="nav-item has-submenu">
-                <a class="nav-link" href="#"> Admin menu  </a>
-                <ul class="submenu collapse">
-                    <li><a class="nav-link" href="#">Bài Viết mới </a></li>
-                    <li><a class="nav-link" href="#">Quản lý Blog </a></li>
-                    <li><a class="nav-link" href="#">Đăng xuất </a> </li>
+                <a class="nav-link" href="#"> Quản lý tài khoản
+                    <i class="bi bi-caret-down-fill"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a class="nav-link" href="/blogs?action=create">Bài viết mới </a></li>
+                    <li><a class="nav-link" href="/blogs?action=viewMyBlog">Quản lý Blog </a></li>
+                    <li><a class="nav-link" href="/logout">Đăng xuất </a></li>
                 </ul>
             </li>
             <li class="nav-item has-submenu">
-                <a class="nav-link" href="#"> More menus  </a>
+                <a class="nav-link" href="#"> Danh mục bài viết
+                    <i class="bi bi-caret-down-fill"></i>
+                </a>
                 <ul class="submenu collapse">
-                    <li><a class="nav-link" href="#">Quản lý User </a></li>
-                    <li><a class="nav-link" href="#">Quản lý Category </a></li>
-                    <li><a class="nav-link" href="#">Quản lý Blog </a> </li>
+                    <c:forEach var="category" items="${categories}">
+                        <li><a class="nav-link" href="/blogs?action=viewCategoryBlog&id=${category.id}">${category.name}</a></li>
+                    </c:forEach>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"> Something </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"> Other link </a>
-            </li>
+            <c:if test="${isAdmin}">
+                <li class="nav-item has-submenu">
+                    <a class="nav-link" href="#"> Admin menu
+                        <i class="bi bi-caret-down-fill"></i>
+                    </a>
+                    <ul class="submenu collapse">
+                        <li><a class="nav-link" href="/users">Quản lý Users </a></li>
+                        <li><a class="nav-link" href="/categories">Quản lý Categories </a></li>
+                    </ul>
+                </li>
+            </c:if>
+
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link" href="#"> Other link </a>--%>
+<%--            </li>--%>
         </ul>
     </nav>
 
@@ -110,41 +126,41 @@
                     <p style="font-size: 150%">${blog.tittle}</p>
                 </div>
                 <div class="mb-3">
-                    <p  id="content${loop.count}"></p>
+                    <p id="content${loop.count}"></p>
                     <script>
                         document.getElementById(`content${loop.count}`).innerHTML = `${blog.content}`;
                     </script>
                 </div>
-            <div style="position: relative; left: 1180px">
-                <li style="list-style-type: none" class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle container-username" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        ...
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="/blogs?action=edit&id=${blog.id}">
-                                Sua
-                            </a>
-                        </li>
-                        <hr>
-                        <li>
-                            <a class="dropdown-item" href="/blogs?action=delete&id=${blog.id}">
-                                Xoa
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <div style="position: relative; left: 1180px">
+                    <li style="list-style-type: none" class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle container-username" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            ...
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="/blogs?action=edit&id=${blog.id}">
+                                    Sửa
+                                </a>
+                            </li>
+                            <hr>
+                            <li>
+                                <a class="dropdown-item" href="/blogs?action=delete&id=${blog.id}">
+                                    Xóa
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+                    <%--                <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>--%>
+                    <%--                <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>--%>
+                    <%--                </a>--%>
             </div>
-<%--                <a class="btn btn-danger" href="/blogs?action=delete&id=${blog.id}"><i class="fas fa-trash"></i></a>--%>
-<%--                <a class="btn btn-info" href="/blogs?action=edit&id=${blog.id}"><i class="fas fa-edit"></i>--%>
-<%--                </a>--%>
-        </div>
-    </c:forEach>
+        </c:forEach>
 
-    </tbody>
-    </table>
-</div>
+        </tbody>
+        </table>
+    </div>
 </div>
 
 

@@ -13,13 +13,12 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "BlogServlet", value = "/blogs")
 public class BlogServlet extends HttpServlet {
+    public static final int ROLE_ID_ADMIN = 1;
     IBlogService blogService = new BlogService(new BlogDAO());
     ICategoryService categoryService = new CategoryService();
 
@@ -28,23 +27,23 @@ public class BlogServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) {
-            response.sendRedirect("");
+            response.sendRedirect("/");
         } else {
             String action = request.getParameter("action");
             if (action == null) {
                 action = "";
             }
+            List<Category> categories = categoryService.findAll();
+            request.setAttribute("categories", categories);
+            boolean isAdmin = loginUser.getRole_id() == ROLE_ID_ADMIN;
+            request.setAttribute("isAdmin", isAdmin);
             switch (action) {
                 case "create": {
-                    List<Category> categories = categoryService.findAll();
-                    request.setAttribute("categories", categories);
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/blog/create.jsp");
                     requestDispatcher.forward(request, response);
                     break;
                 }
                 case "edit": {
-                    List<Category> categories = categoryService.findAll();
-                    request.setAttribute("categories", categories);
                     int id = Integer.parseInt(request.getParameter("id"));
                     Blog blog = blogService.findByID(id);
                     request.setAttribute("blog", blog);
@@ -79,6 +78,7 @@ public class BlogServlet extends HttpServlet {
                     List<Blog> blogs = blogService.findAllBlogByUserId(id);
                     Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
                     String username = loginUser.getUsername();
+                    request.setAttribute("blogs", blogs);
                     request.setAttribute("blogs", blogs);
                     request.setAttribute("map_userId_userName", map_userId_userName);
                     request.setAttribute("username", username);
