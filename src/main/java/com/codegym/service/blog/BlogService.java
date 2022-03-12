@@ -58,6 +58,10 @@ public class BlogService implements IBlogService{
     }
 
     @Override
+    public Map<Integer, String> getMap_categoryId_categoryName() {return blogDAO.getMap_categoryId_categoryName();
+    }
+
+    @Override
     public List<Blog> findAllBlogByUserId(int user_id) {
         return blogDAO.findAllBlogByUserId(user_id);
     }

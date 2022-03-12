@@ -22,6 +22,7 @@ public class BlogDAO implements IBlogDAO {
     public static final String SELECT_CATEGORY_BY_BLOG_ID = "select C.id, C.name from blogs B join categories C on B.category_id = C.id where B.id = ?";
     public static final String SELECT_USERNAME_BY_BLOG_ID = "select U.username from blogs B join users U on B.user_id = U.id where B.id = ?";
     public static final String SELECT_USERNAME_FROM_USERS = "select id, username from users";
+    public static final String SELECT_CATEGORIES = "select id, name from categories";
     public static final String SELECT_BLOGS_BY_USER_ID = "SELECT * FROM blogs WHERE user_id = ? order by dateModified desc";
     public static final String SELECT_BLOGS_BY_CATEGORY_ID = "SELECT * FROM blogs  WHERE category_id = ? order by dateModified desc";
     Connection connection = DBConnection.getConnection();
@@ -169,6 +170,25 @@ public class BlogDAO implements IBlogDAO {
         }
 
         return map_userId_userName;
+    }
+
+    @Override
+    public Map<Integer, String> getMap_categoryId_categoryName() {
+        Map<Integer, String> categoryId_categoryName = new HashMap<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CATEGORIES);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                categoryId_categoryName.put(id, name);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return categoryId_categoryName;
     }
 
     @Override

@@ -12,6 +12,7 @@ public interface IBlogService extends IGeneralService<Blog> {
     Category findCategoryByBlogId (int id);
     String getUserNameByBlogId (int id);
     Map<Integer, String> getMap_userId_userName();
+    Map<Integer, String> getMap_categoryId_categoryName();
     List<Blog> findAllBlogByUserId (int user_id);
     List<Blog> findAllBlogByCategoryID (int category_id);
     String getCurrentTime ();

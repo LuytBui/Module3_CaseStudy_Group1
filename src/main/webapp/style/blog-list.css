@@ -42,6 +42,7 @@ nav.sidebar {
 }
 
 .blog-container {
+    position: relative;
     width: 100%;
     max-width: 860px;
     border-radius: 6px;
@@ -54,12 +55,25 @@ nav.sidebar {
     color: darkslateblue;
 }
 
+
 .blog-title {
     font-weight: bold;
     text-decoration: underline;
 }
+.blog-container .blog-heading .span-date {
+    font-size:80%;
+    font-style: italic;
+    font-weight: lighter;
+}
+.blog-container .blog-heading .span-category {
+    font-weight: bold;
+}
 
-
+.blog-container .dropMenu-edit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
 .image-avatar{
     width: 60px;
     height: 60px;

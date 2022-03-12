@@ -41,6 +41,11 @@ public class BlogServlet extends HttpServlet {
             request.setAttribute("username", username);
             int loginUserId = loginUser.getId();
             request.setAttribute("loginUserId", loginUserId);
+            Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
+            request.setAttribute("map_userId_userName", map_userId_userName);
+            Map<Integer, String> map_categoryId_categoryName = blogService.getMap_categoryId_categoryName();
+            request.setAttribute("map_categoryId_categoryName", map_categoryId_categoryName);
+
 
             switch (action) {
                 case "create": {
@@ -81,10 +86,7 @@ public class BlogServlet extends HttpServlet {
                 case "viewMyBlog": {
                     int id = loginUser.getId();
                     List<Blog> blogs = blogService.findAllBlogByUserId(id);
-                    Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
                     request.setAttribute("blogs", blogs);
-                    request.setAttribute("blogs", blogs);
-                    request.setAttribute("map_userId_userName", map_userId_userName);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
                     dispatcher.forward(request, response);
                     break;
@@ -92,9 +94,7 @@ public class BlogServlet extends HttpServlet {
                 case "viewCategoryBlog": {
                     int id = Integer.parseInt(request.getParameter("id"));
                     List<Blog> blogs = blogService.findAllBlogByCategoryID(id);
-                    Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
                     request.setAttribute("blogs", blogs);
-                    request.setAttribute("map_userId_userName", map_userId_userName);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
                     dispatcher.forward(request, response);
                     break;
@@ -102,9 +102,7 @@ public class BlogServlet extends HttpServlet {
                 case "viewUserBlog": {
                     int user_id = Integer.parseInt(request.getParameter("user_id"));
                     List<Blog> blogs = blogService.findAllBlogByUserId(user_id);
-                    Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
                     request.setAttribute("blogs", blogs);
-                    request.setAttribute("map_userId_userName", map_userId_userName);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
                     dispatcher.forward(request, response);
                     break;
@@ -114,9 +112,7 @@ public class BlogServlet extends HttpServlet {
                 }
                 default: {
                     List<Blog> blogs = blogService.findAll();
-                    Map<Integer, String> map_userId_userName = blogService.getMap_userId_userName();
                     request.setAttribute("blogs", blogs);
-                    request.setAttribute("map_userId_userName", map_userId_userName);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/blog/list.jsp");
                     dispatcher.forward(request, response);
                     break;
@@ -143,8 +139,8 @@ public class BlogServlet extends HttpServlet {
                     int user_id = loginUser.getId();
                     String tittle = request.getParameter("tittle");
                     String content = request.getParameter("content");
-                    String createModified = blogService.getCurrentTime();
-                    Blog blog = new Blog(category_id, user_id, tittle, content, createModified);
+                    String dateModified = blogService.getCurrentTime();
+                    Blog blog = new Blog(category_id, user_id, tittle, content, dateModified);
                     blogService.create(blog);
                     response.sendRedirect("/blogs");
                     break;

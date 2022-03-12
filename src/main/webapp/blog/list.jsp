@@ -35,9 +35,9 @@
                 <%-- avatar: random image   credit: https://picsum.photos/--%>
                 <img src="https://picsum.photos/150" class="image-avatar rounded mr-1" alt="Cinque Terre">
             </div>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/blogs?action=create">Bài viết mới </a>
-                        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/blogs?action=create">Bài viết mới </a>
+            </li>
 
             <li class="nav-item has-submenu">
                 <a class="nav-link" href="#"> Quản lý tài khoản
@@ -83,14 +83,9 @@
         <c:forEach var="blog"
                    items="${blogs}">
             <div class="blog-container border" style="margin: 15px">
-                <div class="blog-heading d-flex justify-content-between">
-                    <a class="author" href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
-                            ${map_userId_userName.get(blog.user_id)}
-                    </a>
 
-                    <div>
-                        <c:if test="${blog.user_id == loginUserId}">
-                            <%-- Edit, delete --%>
+                <c:if test="${blog.user_id == loginUserId}">
+                    <div class="dropMenu-edit">
                         <li style="list-style-type: none" class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle container-username" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -110,7 +105,22 @@
                                 </li>
                             </ul>
                         </li>
-                        </c:if>
+                    </div>
+                </c:if>
+                <div class="blog-heading d-flex justify-content-between">
+                    <a class="author" href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
+                            ${map_userId_userName.get(blog.user_id)}
+                    </a>
+
+                    <div class="d-flex justify-content-between">
+                        <p>
+                        <span class="span-date mr-2">Đã tạo ngày ${blog.dateModified}</span>
+                        <span class="span-category-label"> trong
+                            <a class="span-category" href="/blogs?action=viewCategoryBlog&id=${category.id}">
+                                    ${map_categoryId_categoryName.get(blog.category_id)}
+                            </a>
+                        </span>
+                        </p>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -124,9 +134,6 @@
                     <script>
                         document.getElementById(`content${loop.count}`).innerHTML = `${blog.getContentPreview()}`;
                     </script>
-                </div>
-                <div style="position: relative; left: 1180px">
-
                 </div>
             </div>
         </c:forEach>
