@@ -9,39 +9,95 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-
+    <link type="text/css" rel="stylesheet" href="style/blog-list.css">
     <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
 
 </head>
 <body>
-<div class="container">
-    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>
-    <h2>Tạo bài viết</h2>
+<!-- Navbar  -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-around fixed-top">
+    <div class="d-flex navbar-div-left">
+        <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
-    <form action="/blogs?action=create" method="post">
-        <div class="mb-3">
-            <label for="tittle" class="form-label">Tiêu đề</label>
-<%--            <input type="text" class="form-control" id="tittle" name="tittle">--%>
-            <textarea name="tittle" id="tittle" rows="2"></textarea>
+        <form class="form-inline my-2 my-lg-0 d-flex" action="/search" method="get">
+            <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm gì đó ..."
+                   aria-label="Search" name="q">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+        </form>
+    </div>
+</nav>
+<!-- Sidebar  -->
+<nav class="sidebar card fixed-top">
+    <ul class="nav flex-column" id="nav_accordion">
+        <div class="sidebar-heading d-flex justify-content-between mb-4">
+            <a class="nav-link sidebar-heading ml-1 username" href="#">User: ${username} </a>
+            <%-- avatar: random image   credit: https://picsum.photos/--%>
+            <img src="https://picsum.photos/150" class="image-avatar rounded mr-1" alt="Cinque Terre">
         </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">Nội dung </label>
-            <textarea name="content" id="content"></textarea>
-            <%--            <textarea style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10"></textarea>--%>
-        </div>
-        <div class="mb-3">
-            <label for="category" class="form-label">Thêm bài viết vào</label>
-            <select  class="form-control" name="category_id" id="category">
+        <li class="nav-item">
+            <a class="nav-link" href="/blogs?action=create">Bài viết mới </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/blogs?action=viewMyBlog">Quản lý Blog </a>
+        </li>
+        <li class="nav-item has-submenu">
+            <a class="nav-link" href="#"> Danh mục bài viết
+                <i class="bi bi-caret-down-fill"></i>
+            </a>
+            <ul class="submenu collapse">
                 <c:forEach var="category" items="${categories}">
-                    <option value="${category.id}">${category.name}</option>
+                    <li><a class="nav-link"
+                           href="/blogs?action=viewCategoryBlog&id=${category.id}">${category.name}</a></li>
                 </c:forEach>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Tạo</button>
-    </form>
-</div>
+            </ul>
+        </li>
+        <c:if test="${isAdmin}">
+            <li class="nav-item has-submenu">
+                <a class="nav-link" href="#"> Admin menu
+                    <i class="bi bi-caret-down-fill"></i>
+                </a>
+                <ul class="submenu collapse">
+                    <li><a class="nav-link" href="/users">Quản lý Users </a></li>
+                    <li><a class="nav-link" href="/categories">Quản lý Categories </a></li>
+                </ul>
+            </li>
+        </c:if>
 
+        <a class="nav-link btn btn-secondary btn-logout" href="/logout">Đăng xuất </a></li>
+
+    </ul>
+</nav>
+
+<div class="div-middle container">
+    <div class="blog-container border">
+        <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>
+        <h2>Tạo bài viết</h2>
+
+        <form action="/blogs?action=create" method="post">
+            <div class="mb-3">
+                <label for="tittle" class="form-label">Tiêu đề</label>
+                <%--            <input type="text" class="form-control" id="tittle" name="tittle">--%>
+                <textarea name="tittle" id="tittle" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Nội dung </label>
+                <textarea name="content" id="content"></textarea>
+                <%--            <textarea style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10"></textarea>--%>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Thêm bài viết vào</label>
+                <select  class="form-control" name="category_id" id="category">
+                    <c:forEach var="category" items="${categories}">
+                        <option value="${category.id}">${category.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Tạo</button>
+        </form>
+    </div>
+
+</div>
 
 <script>
     CKEDITOR.replace( 'content' );
