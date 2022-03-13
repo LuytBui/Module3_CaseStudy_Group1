@@ -18,6 +18,10 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", value = "")
 public class LogInServlet extends HttpServlet {
 
+    public static final String MSG_USER_BLOCKED = "Tai khoan da bi khoa, vui long lien he Admin de giai quyet.";
+    public static final String USER_NOT_EXIST = "User khong ton tai!";
+    public static final String WRONG_PASSWORD = "Mat khau khong dung!";
+
     UserService userService = new UserService(new UserDAO());
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,11 +39,9 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String USER_NOT_EXIST = "User khong ton tai!";
-        String WRONG_PASSWORD = "Mat khau khong dung!";
 
-        boolean loginSuccess;
-        String email = request.getParameter("email");
+
+        String email = request.getParameter("email").toLowerCase();
         String password = request.getParameter("password");
 
         User user = userService.findByEmail(email);
@@ -53,8 +55,16 @@ public class LogInServlet extends HttpServlet {
 
         // user exist
         // check for password
-        loginSuccess = password.equals(user.getPassword());
-        if (loginSuccess) {
+        boolean passwordMatch = password.equals(user.getPassword());
+
+        if (passwordMatch) {
+            boolean userBlocked = !user.isStatus();
+            if (userBlocked) {
+                request.setAttribute("message", MSG_USER_BLOCKED);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+                requestDispatcher.forward(request, response);
+                return;
+            }
 
             HttpSession session = request.getSession();
             session.setAttribute("user", user);

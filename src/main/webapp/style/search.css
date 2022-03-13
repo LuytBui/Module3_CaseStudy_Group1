@@ -1,0 +1,24 @@
+.searchResult-container{
+    box-sizing: content-box;
+    width: 80%;
+    min-width: 400px;
+    max-width: 800px;
+    padding: 15px;
+    background: #E9ECEF;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+.searchResult-type {
+    margin-right: 25px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.searchResult-name {
+    font-weight: bold;
+    color: blue;
+    text-decoration: underline;
+}
+
+.searchResult-preview {
+    margin-left: 25px;
+}

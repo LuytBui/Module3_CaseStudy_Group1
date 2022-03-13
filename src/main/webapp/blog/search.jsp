@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link type="text/css" rel="stylesheet" href="style/blog-list.css">
     <link type="text/css" rel="stylesheet" href="style/blog-sidebar.css">
+    <link type="text/css" rel="stylesheet" href="style/search.css">
 </head>
 <body>
 <!-- Navbar  -->
@@ -18,7 +19,7 @@
     <div class="d-flex navbar-div-left">
         <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
-        <form class="form-inline my-2 my-lg-0 d-flex" action="/blogs/search" method="get">
+        <form class="form-inline my-2 my-lg-0 d-flex" action="/search" method="get">
             <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm gì đó ..."
                    aria-label="Search" name="q">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
@@ -74,9 +75,21 @@
 
     <!-- Middle Section  -->
     <div class="div-middle container">
-        <%--        <h1>Blogs Management</h1>--%>
+        <h1>${tittle}</h1>
         <c:forEach var="searchResult" items="${searchResults}" varStatus="loop">
-
+            <div class="searchResult-container text-left">
+                <div class="d-flex">
+                    <span class="searchResult-type">
+                            ${searchResult.type}
+                    </span>
+                    <a class="searchResult-name"
+                       href=${searchResult.url}>
+                            ${searchResult.name}
+                    </a>
+                </div>
+                <p class="searchResult-preview">${searchResult.previewContent}</p>
+            </div>
+            <hr>
         </c:forEach>
 
         </tbody>

@@ -2,6 +2,8 @@ package com.codegym.dao.category;
 
 import com.codegym.dao.DBConnection;
 import com.codegym.model.Category;
+import com.codegym.model.SearchResult;
+import com.codegym.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -85,5 +87,33 @@ public class CategoryDAO implements ICategoryDAO{
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<SearchResult> searchKeyword(String q) {
+        String searchPattern = "%" + q + "%";
+        List<SearchResult> searchResults = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("select name, id from categories where name like ?");
+            preparedStatement.setString(1, searchPattern);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+
+                SearchResult searchResult = new SearchResult();
+                searchResult.setType("Category");
+                searchResult.setName(name);
+                searchResult.setUrl("/blogs?action=viewCategoryBlog&id=" + id);
+                searchResult.setPreviewContent("");
+
+                searchResults.add(searchResult);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return searchResults;
     }
 }

@@ -25,7 +25,7 @@ public class UserServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) {
-            response.sendRedirect("");
+            response.sendRedirect("/");
         } else {
             boolean isAdmin = loginUser.getRole_id() == ROLE_ID_ADMIN;
             if (isAdmin) {

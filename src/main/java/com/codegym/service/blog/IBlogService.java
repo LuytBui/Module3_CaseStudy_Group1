@@ -2,6 +2,7 @@ package com.codegym.service.blog;
 
 import com.codegym.model.Blog;
 import com.codegym.model.Category;
+import com.codegym.model.SearchResult;
 import com.codegym.service.IGeneralService;
 
 import java.time.LocalDateTime;
@@ -16,5 +17,6 @@ public interface IBlogService extends IGeneralService<Blog> {
     List<Blog> findAllBlogByUserId (int user_id);
     List<Blog> findAllBlogByCategoryID (int category_id);
     String getCurrentTime ();
+    List<SearchResult> searchKeyword(String q);
 }
 
