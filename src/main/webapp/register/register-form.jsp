@@ -30,7 +30,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Đăng ký tài khoản</p>
 
                                 <form class="mx-1 mx-md-4" method="post">
 
@@ -44,15 +44,15 @@
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="text" id="form3Example1c" class="form-control"
-                                                   name="username"/>
-                                            <label class="form-label" for="form3Example1c">Ten nguoi dung</label>
+                                                   name="username" value="${username}"/>
+                                            <label class="form-label" for="form3Example1c">Tên người dùng</label>
                                         </div>
                                     </div>
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="email" id="form3Example3c" class="form-control" name="email"/>
+                                            <input type="email" id="form3Example3c" class="form-control" name="email" value="${email}"/>
                                             <label class="form-label" for="form3Example3c">Email</label>
                                         </div>
                                     </div>
@@ -61,8 +61,8 @@
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="phone" id="form3Example3c-1" class="form-control"
-                                                   name="phone"/>
-                                            <label class="form-label" for="form3Example3c-1">So dien thoai</label>
+                                                   name="phone" value="${phone}"/>
+                                            <label class="form-label" for="form3Example3c-1">Số điện thoại</label>
                                         </div>
                                     </div>
 
@@ -71,7 +71,7 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="password" id="form3Example4c" class="form-control"
                                                    name="password"/>
-                                            <label class="form-label" for="form3Example4c">Password</label>
+                                            <label class="form-label" for="form3Example4c">Mật khẩu</label>
                                         </div>
                                     </div>
 
@@ -80,7 +80,7 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input type="password" id="form3Example4cd" class="form-control"
                                                    name="password-repeat"/>
-                                            <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                                            <label class="form-label" for="form3Example4cd">Nhập lại mật khẩu</label>
                                         </div>
                                     </div>
 
@@ -91,15 +91,15 @@
                                                 value=""
                                                 id="form2Example3c"
                                                 name="agree-ToS"
+                                                <c:if test="${agreed}">checked</c:if>
                                         />
                                         <label class="form-check-label" for="form2Example3c">
-                                            I agree all statements in <a href="register/terms-of-service.html">Terms of
-                                            service</a>
+                                            Tôi đồng ý với <a href="register/terms-of-service.html"> điều khoản dịch vụ</a>.
                                         </label>
                                     </div>
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                                        <button type="submit" class="btn btn-primary btn-lg">Đồng ý</button>
                                     </div>
 
                                 </form>

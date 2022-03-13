@@ -41,8 +41,8 @@
                                                                                                   id="pwd"
                                                                                                   placeholder="Password">
         </div>
-        <button class="btn btn-primary mt-3" type="submit">Dang nhap</button>
-        <a href="/register"><button class="btn btn-light mt-3" type="button">Dang ky</button></a>
+        <button class="btn btn-primary mt-3" type="submit">Đăng nhập</button>
+        <a href="/register"><button class="btn btn-secondary mt-3" type="button">Đăng ký</button></a>
     </form>
 </div>
 
