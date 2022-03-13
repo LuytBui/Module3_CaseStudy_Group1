@@ -1,6 +1,7 @@
 package com.codegym.model;
 
 public class SearchResult {
+    private String type;
     private String name;
     private String url;
     private String previewContent;
@@ -8,10 +9,19 @@ public class SearchResult {
     public SearchResult() {
     }
 
-    public SearchResult(String name, String url, String previewContent) {
+    public SearchResult(String type, String name, String url, String previewContent) {
+        this.type = type;
         this.name = name;
         this.url = url;
         this.previewContent = previewContent;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getName() {

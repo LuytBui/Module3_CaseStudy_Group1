@@ -1,6 +1,7 @@
 package com.codegym.dao.user;
 
 import com.codegym.dao.DBConnection;
+import com.codegym.model.SearchResult;
 import com.codegym.model.User;
 
 import java.sql.Connection;
@@ -143,7 +144,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<User> result = getListUserFromResultSet(resultSet);
-            if (result.size() > 0){
+            if (result.size() > 0) {
                 user = result.get(0);
             }
         } catch (SQLException e) {
@@ -160,7 +161,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(1, phone);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<User> result = getListUserFromResultSet(resultSet);
-            if (result.size() > 0){
+            if (result.size() > 0) {
                 user = result.get(0);
             }
         } catch (SQLException e) {
@@ -175,9 +176,9 @@ public class UserDAO implements IUserDAO {
             PreparedStatement preparedStatement = connection.prepareStatement("select users.id, count(users.id) as \"count\"\n" +
                     "from users join blogs on users.id = blogs.user_id\n" +
                     "where users.id = ?;");
-            preparedStatement.setInt(1,user.getId());
+            preparedStatement.setInt(1, user.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() ){
+            while (resultSet.next()) {
                 count = resultSet.getInt("count");
                 break;
             }
@@ -188,5 +189,32 @@ public class UserDAO implements IUserDAO {
         return count;
     }
 
+    @Override
+    public List<SearchResult> searchKeyword(String q) {
+        String searchPattern = "%" + q + "%";
+        List<SearchResult> searchResults = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("select username, id from users where username like ?");
+            preparedStatement.setString(1, searchPattern);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                User user = findByID(id);
+                String username = resultSet.getString("username");
 
+                SearchResult searchResult = new SearchResult();
+                searchResult.setType("User");
+                searchResult.setName(username);
+                searchResult.setUrl("/blogs?action=viewUserBlog&user_id=" + id);
+                searchResult.setPreviewContent("Co " + countBlog(user) + " bai viet.");
+
+                searchResults.add(searchResult);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return searchResults;
+    }
 }

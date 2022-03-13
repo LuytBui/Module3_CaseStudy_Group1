@@ -3,6 +3,7 @@ package com.codegym.dao.blog;
 import com.codegym.dao.IGeneralDAO;
 import com.codegym.model.Blog;
 import com.codegym.model.Category;
+import com.codegym.model.SearchResult;
 import com.codegym.model.User;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface IBlogDAO extends IGeneralDAO<Blog> {
     Map<Integer, String>getMap_categoryId_categoryName();
     List<Blog> findAllBlogByUserId (int user_id);
     List<Blog> findAllBlogByCategoryID (int category_id);
+    List<SearchResult> searchKeyword(String q);
 }

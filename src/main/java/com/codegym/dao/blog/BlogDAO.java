@@ -3,6 +3,8 @@ package com.codegym.dao.blog;
 import com.codegym.dao.DBConnection;
 import com.codegym.model.Blog;
 import com.codegym.model.Category;
+import com.codegym.model.SearchResult;
+import com.codegym.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -239,6 +241,35 @@ public class BlogDAO implements IBlogDAO {
         }
 
         return blogs;
+    }
+
+    @Override
+    public List<SearchResult> searchKeyword(String q) {
+        String searchPattern = "%" + q + "%";
+        List<SearchResult> searchResults = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("select tittle, id from blogs where content like ?");
+            preparedStatement.setString(1, searchPattern);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                Blog blog = findByID(id);
+                String tittle = resultSet.getString("tittle");
+
+                SearchResult searchResult = new SearchResult();
+                searchResult.setType("Blog");
+                searchResult.setName(tittle);
+                searchResult.setUrl("/blogs?action=view&id=" + id);
+                searchResult.setPreviewContent(blog.getContentPreview());
+
+                searchResults.add(searchResult);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return searchResults;
     }
 
 }

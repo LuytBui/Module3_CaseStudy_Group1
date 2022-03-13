@@ -1,5 +1,7 @@
 package com.codegym.dao;
 
+import com.codegym.model.SearchResult;
+
 import java.util.List;
 
 public interface IGeneralDAO<T> {
@@ -12,5 +14,6 @@ public interface IGeneralDAO<T> {
     boolean deleteById(int id);  // thanh cong = true
 
     boolean updateById(int id, T t);  // thanh cong = true
+
 
 }

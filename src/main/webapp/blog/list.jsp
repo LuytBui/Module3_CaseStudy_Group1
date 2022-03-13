@@ -18,7 +18,7 @@
     <div class="d-flex navbar-div-left">
         <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
-        <form class="form-inline my-2 my-lg-0 d-flex" action="/blogs/search" method="get">
+        <form class="form-inline my-2 my-lg-0 d-flex" action="/search" method="get">
             <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm gì đó ..."
                    aria-label="Search" name="q">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
