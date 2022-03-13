@@ -40,13 +40,13 @@
 
                 <td>
                     <c:if test="${user.status == true}">
-                    <a class="btn btn-danger" href="/users?action=block&id=${user.id}"><i
-                            class="fas fa-trash">Block</i></a>
-                </c:if>
+                        <a class="btn btn-danger" href="/users?action=block&id=${user.id}"><i
+                                class="fas fa-trash">Block</i></a>
+                    </c:if>
                     <c:if test="${user.status   == false}">
                         <a class="btn btn-success" href="/users?action=unblock&id=${user.id}"><i
-                        class="fas fa-trash">Unblock</i></a>
-                </c:if>
+                                class="fas fa-trash">Unblock</i></a>
+                    </c:if>
                 </td>
 
             </tr>

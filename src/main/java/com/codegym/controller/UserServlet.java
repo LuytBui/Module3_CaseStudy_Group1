@@ -47,10 +47,6 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("users", users);
 
         switch (action) {
-            case "create": {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/users/create.jsp");
-                dispatcher.forward(request, response);
-            }
             case "block": {
                 int id = Integer.parseInt(request.getParameter("id"));
                 User user = userService.findByID(id);
@@ -77,7 +73,6 @@ public class UserServlet extends HttpServlet {
                     blogCounts.add(count);
                 }
                 Boolean status = Boolean.parseBoolean(request.getParameter("status"));
-
                 request.setAttribute("blogCounts", blogCounts);
                 request.setAttribute("status", status);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/user/list.jsp");
@@ -94,22 +89,7 @@ public class UserServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "create": {
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                String phone = request.getParameter("phone");
-                String email = request.getParameter("email");
-                String dateOfBirth = request.getParameter("dateOfBirth");
-                boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
-                String address = request.getParameter("address");
-                boolean status = Boolean.parseBoolean(request.getParameter("status"));
-                int roleId = Integer.parseInt("role_id");
-                User user = new User(username, password, phone, email, dateOfBirth, gender, address, status);
-                user.setRole_id(roleId);
-                userService.create(user);
-                response.sendRedirect("/users");
-                break;
-            }
+
 
         }
     }

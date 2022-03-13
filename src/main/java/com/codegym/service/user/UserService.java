@@ -59,7 +59,7 @@ public class UserService implements IUserService {
     @Override
     public User findAllUserByUserName(String username) {
         username = "%" + username + "%";
-        return userDAO.findAllUserByUserName(username);
+        return (User) userDAO.findAllUserByUserName(username);
     }
 
     public int countBlog(User user) {
