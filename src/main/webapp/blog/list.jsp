@@ -10,7 +10,6 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link type="text/css" rel="stylesheet" href="style/blog-list.css">
-    <link type="text/css" rel="stylesheet" href="style/blog-sidebar.css">
 </head>
 <body>
 <!-- Navbar  -->
