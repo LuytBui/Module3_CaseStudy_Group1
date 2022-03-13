@@ -66,9 +66,6 @@
 
             <a class="nav-link btn btn-secondary btn-logout" href="/logout">Đăng xuất </a></li>
 
-            <%--            <li class="nav-item">--%>
-            <%--                <a class="nav-link" href="#"> Other link </a>--%>
-            <%--            </li>--%>
         </ul>
     </nav>
 
@@ -117,7 +114,7 @@
                             <a class="span-category" href="/blogs?action=viewCategoryBlog&id=${blog.category_id}">
                                     ${map_categoryId_categoryName.get(blog.category_id)}
                             </a>
-                        </span>
+                            </span>
                         </p>
                     </div>
                 </div>
