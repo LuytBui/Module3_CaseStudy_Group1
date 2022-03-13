@@ -107,6 +107,8 @@ public class BlogServlet extends HttpServlet {
                     break;
                 }
                 case "viewUserBlog": {
+                    int loginId = loginUser.getId();
+                    request.setAttribute("loginId", loginId);
                     int user_id = Integer.parseInt(request.getParameter("user_id"));
                     List<Blog> blogs = blogService.findAllBlogByUserId(user_id);
                     request.setAttribute("blogs", blogs);
@@ -154,7 +156,7 @@ public class BlogServlet extends HttpServlet {
                 }
                 case "edit": {
                     int id = Integer.parseInt(request.getParameter("id"));
-                    int user_id = 1;
+                    int user_id = loginUser.getId();
                     int category_id = Integer.parseInt(request.getParameter("category_id"));
                     String tittle = request.getParameter("tittle");
                     String content = request.getParameter("content");

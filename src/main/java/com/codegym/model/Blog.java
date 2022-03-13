@@ -1,7 +1,7 @@
 package com.codegym.model;
 
 public class Blog {
-    public static final int MAX_CHAR_PREVIEW = 500;
+    public static final int MAX_CHAR_PREVIEW = 10;
     private int id;
 
     private int category_id;

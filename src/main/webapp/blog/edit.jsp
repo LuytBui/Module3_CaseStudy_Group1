@@ -9,19 +9,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
 <div class="container">
-    <a class="btn btn-primary float-end" href="/blogs">Back to blogs list</a>
+    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>
+    <h2>Sửa bài viết</h2>
     <form action="/blogs?action=edit&id=${blog.id}" method="post">
         <div class="mb-3">
-            <label for="tittle" class="form-label">Tittle</label>
-            <input type="text" class="form-control" id="tittle" name="tittle" value="${blog.tittle}">
+            <div class="mb-3">
+                <label for="tittle" class="form-label">Tiêu đề</label>
+                <%--            <input type="text" class="form-control" id="tittle" name="tittle">--%>
+                <textarea name="tittle" id="tittle" rows="2">${blog.tittle}</textarea>
+            </div>
         </div>
         <div class="mb-3">
-            <label for="content" class="form-label">Content </label>
-            <textarea style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10" value="${blog.content}">${blog.content}</textarea>
-<%--            <input type="text" class="form-control" id="price" name="price" >--%>
+            <label for="content" class="form-label">Nội dung </label>
+            <textarea name="content" id="content">${blog.content}</textarea>
+            <%--            <textarea style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10"></textarea>--%>
         </div>
         <div class="mb-3">
             <label for="category" class="form-label">Thêm bài viết vào</label>
@@ -33,9 +40,25 @@
                 </c:forEach>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
     </form>
 </div>
+
+
+<script>
+    CKEDITOR.replace( 'content' );
+</script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#tittle' ) )
+        .then( editor => {
+            console.log( editor );
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
