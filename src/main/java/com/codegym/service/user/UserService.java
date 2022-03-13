@@ -2,6 +2,7 @@ package com.codegym.service.user;
 
 import com.codegym.dao.user.IUserDAO;
 import com.codegym.dao.user.UserDAO;
+import com.codegym.model.SearchResult;
 import com.codegym.model.User;
 
 import java.util.List;
@@ -51,9 +52,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User findAllUserByUserName(String username) {
-        username = "%" + username + "%";
-        return userDAO.findAllUserByUserName(username);
+    public List<SearchResult> searchKeyword(String q) {
+        return userDAO.searchKeyword(q);
     }
 
     public int countBlog(User user) {
@@ -64,7 +64,5 @@ public class UserService implements IUserService {
     public User findByUsername(String searchUsername) {
         return userDAO.findByUsername(searchUsername);
     }
-
-
 
 }

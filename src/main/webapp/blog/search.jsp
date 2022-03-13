@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link type="text/css" rel="stylesheet" href="style/blog-list.css">
     <link type="text/css" rel="stylesheet" href="style/blog-sidebar.css">
+    <link type="text/css" rel="stylesheet" href="style/search.css">
 </head>
 <body>
 <!-- Navbar  -->
@@ -74,65 +75,21 @@
 
     <!-- Middle Section  -->
     <div class="div-middle container">
-        <%--        <h1>Blogs Management</h1>--%>
-        <c:forEach var="blog" items="${blogs}" varStatus="loop">
-            <div class="blog-container border" style="margin: 15px">
-
-                <c:if test="${blog.user_id == loginUserId}">
-                    <div class="dropMenu-edit">
-                        <li style="list-style-type: none" class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle container-username" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                ...
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="/blogs?action=edit&id=${blog.id}">
-                                        Sửa
-                                    </a>
-                                </li>
-                                <hr>
-                                <li>
-                                    <a class="dropdown-item" href="/blogs?action=delete&id=${blog.id}">
-                                        Xóa
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </div>
-                </c:if>
-                <div class="blog-heading d-flex justify-content-between">
-                    <div>
-                        <a class="blog-title" href="/blogs?action=view&id=${blog.id}">${blog.tittle}</a>
-                    </div>
-                    <div>
-                        <p class="text-right">
-                            <span>
-                                <a class="author" href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
-                                        ${map_userId_userName.get(blog.user_id)}
-                                </a>
-                            </span>
-                            <span class="span-date mr-2">Đã tạo ngày ${blog.dateModified}</span>
-                            <span class="span-category-label"> trong
-                            <a class="span-category" href="/blogs?action=viewCategoryBlog&id=${blog.category_id}">
-                                    ${map_categoryId_categoryName.get(blog.category_id)}
-                            </a>
-                        </span>
-                        </p>
-                    </div>
+        <h1>${tittle}</h1>
+        <c:forEach var="searchResult" items="${searchResults}" varStatus="loop">
+            <div class="searchResult-container text-left">
+                <div class="d-flex">
+                    <span class="searchResult-type">
+                            ${searchResult.type}
+                    </span>
+                    <a class="searchResult-name"
+                       href=${searchResult.url}>
+                            ${searchResult.name}
+                    </a>
                 </div>
-                <div class="mb-3">
-                </div>
-                <div class="mb-1">
-                    <p class="blog-content-preview " id="content${loop.count}"></p>
-                    <script>
-                        document.getElementById(`content${loop.count}`).innerHTML = `${blog.getContentPreview()}`;
-                    </script>
-                </div>
-                <div>
-                    <a href="/blogs?action=view&id=${blog.id}" class="btn-view-blog">Xem bài viết >>></a>
-                </div>
+                <p class="searchResult-preview">${searchResult.previewContent}</p>
             </div>
+            <hr>
         </c:forEach>
 
         </tbody>

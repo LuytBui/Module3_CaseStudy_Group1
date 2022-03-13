@@ -1,6 +1,7 @@
 package com.codegym.dao.user;
 
 import com.codegym.dao.DBConnection;
+import com.codegym.model.SearchResult;
 import com.codegym.model.User;
 
 import java.sql.Connection;
@@ -205,5 +206,32 @@ public class UserDAO implements IUserDAO {
         return count;
     }
 
+    @Override
+    public List<SearchResult> searchKeyword(String q) {
+        String searchPattern = "%" + q + "%";
+        List<SearchResult> searchResults = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("select username, id from users where username like ?");
+            preparedStatement.setString(1, searchPattern);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                User user = findByID(id);
+                String username = resultSet.getString("username");
 
+                SearchResult searchResult = new SearchResult();
+                searchResult.setType("User");
+                searchResult.setName(username);
+                searchResult.setUrl("/blogs?action=viewUserBlog&user_id=" + id);
+                searchResult.setPreviewContent("Co " + countBlog(user) + " bai viet.");
+
+                searchResults.add(searchResult);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return searchResults;
+    }
 }

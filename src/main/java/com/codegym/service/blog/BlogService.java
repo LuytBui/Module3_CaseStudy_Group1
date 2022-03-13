@@ -3,6 +3,7 @@ package com.codegym.service.blog;
 import com.codegym.dao.blog.IBlogDAO;
 import com.codegym.model.Blog;
 import com.codegym.model.Category;
+import com.codegym.model.SearchResult;
 import com.codegym.service.IGeneralService;
 
 import java.time.LocalDateTime;
@@ -76,6 +77,11 @@ public class BlogService implements IBlogService{
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         return String.valueOf(now);
+    }
+
+    @Override
+    public List<SearchResult> searchKeyword(String q) {
+        return blogDAO.searchKeyword(q);
     }
 
 }
