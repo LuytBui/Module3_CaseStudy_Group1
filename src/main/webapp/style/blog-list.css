@@ -54,7 +54,8 @@ nav.sidebar {
 
 .div-middle {
     margin-top: 100px;
-    width: calc(90% - 250px);
+    margin-left: 250px;
+    width: calc(95% - 250px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -128,7 +129,7 @@ nav.sidebar {
 
 @media only screen and (max-width: 1380px) {
     nav.sidebar {
-        width: 150px;
+        width: 200px;
     }
 
     nav.sidebar .sidebar-heading {
@@ -136,7 +137,7 @@ nav.sidebar {
     }
 
     .div-middle {
-        margin-left: 150px;
-        width: calc(90% - 150px);
+        margin-left: 200px;
+        width: calc(95% - 200px);
     }
 }
