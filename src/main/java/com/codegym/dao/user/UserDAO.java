@@ -14,7 +14,7 @@ public class UserDAO implements IUserDAO {
     public static final String SQL_SELECT_ALL_USER = "SELECT * FROM users;";
     public static final String SQL_SELECT_USER_BY_ID = "SELECT * from users where  id = ?;";
     public static final String SQL_INSERT_USER = "INSERT into users (username,password,phone,email) value (?,?,?,?);";
-    public static final String SQL_UPDATE_USER_BY_ID = "update users set username =?,password =?,phone =?,email =?,dateOfBirth =?,gender=?,address = ?,status =? , role_id =?;";
+    public static final String SQL_UPDATE_USER_BY_ID = "update users set username =?,password =?,phone =?,email =?,dateOfBirth =?,gender=?,address = ?,status =? , role_id =? where id =?;";
     public static final String SQL_DELETE_USER_BY_ID = "delete  from users where  id = ?;";
     public static final String SELECT_FROM_USERS_WHERE_EMAIL = "SELECT *from users where email =?;";
     private Connection connection = DBConnection.getConnection();
@@ -111,6 +111,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(7, user.getAddress());
             preparedStatement.setBoolean(8, user.isStatus());
             preparedStatement.setInt(9, user.getRole_id());
+            preparedStatement.setInt(10, user.getId());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -186,4 +187,6 @@ public class UserDAO implements IUserDAO {
         }
         return count;
     }
+
+
 }

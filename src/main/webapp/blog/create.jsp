@@ -16,16 +16,17 @@
 </head>
 <body>
 <div class="container">
-    <h1>Create blog</h1>
-<%--    <a class="btn btn-primary float-end" href="/blogs">Back to blogs list</a>--%>
+    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>
+    <h2>Tạo bài viết</h2>
+
     <form action="/blogs?action=create" method="post">
         <div class="mb-3">
-            <label for="tittle" class="form-label">Tittle</label>
+            <label for="tittle" class="form-label">Tiêu đề</label>
 <%--            <input type="text" class="form-control" id="tittle" name="tittle">--%>
             <textarea name="tittle" id="tittle" rows="2"></textarea>
         </div>
         <div class="mb-3">
-            <label for="content" class="form-label">Content </label>
+            <label for="content" class="form-label">Nội dung </label>
             <textarea name="content" id="content"></textarea>
             <%--            <textarea style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10"></textarea>--%>
         </div>
@@ -37,7 +38,7 @@
                 </c:forEach>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Tạo</button>
     </form>
 </div>
 

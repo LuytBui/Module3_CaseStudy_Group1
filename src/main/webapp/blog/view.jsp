@@ -12,20 +12,34 @@
 </head>
 <body>
 <div class="container">
-    <a class="btn btn-primary float-end" href="/blogs">Back to blogs list</a>
+    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>
     <form action="/blogs?action=vew&id=${blog.id}" method="post">
         <div class="mb-3">
-            <label for="tittle" class="form-label">Tittle</label>
-            <input type="text" class="form-control" id="tittle" name="tittle" value="${blog.tittle}" disabled>
+            <a href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
+                ${map_userId_userName.get(blog.user_id)}
+            </a>
+            <span class="span-date mr-2">Đã tạo lúc ${blog.dateModified}</span>
         </div>
         <div class="mb-3">
-            <label for="content" class="form-label">Content </label>
-            <textarea style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10" value="${blog.content}" disabled>${blog.content}</textarea>
-<%--            <input type="text" class="form-control" id="price" name="price" >--%>
+            <label for="tittle" class="form-label">Tiêu đề </label>
+            <p class="form-control" id="tittle"></p>
+            <script>
+                document.getElementById(`tittle`).innerHTML = `${blog.tittle}`;
+            </script>
+        </div>
+        <div class="mb-3">
+            <label for="content${loop.count}" class="form-label">Nội dung </label>
+            <p class="form-control" id="content"></p>
+            <script>
+                document.getElementById(`content`).innerHTML = `${blog.content}`;
+            </script>
         </div>
         <div class="mb-3">
             <label for="category" class="form-label">Danh mục</label>
-            <input type="text" class="form-control" id="category" name="category" value="${category.name}" disabled >
+            <p id="category"class="form-control"></p>
+            <script>
+                document.getElementById(`category`).innerHTML = `${category.name}`;
+            </script>
         </div>
     </form>
 </div>
