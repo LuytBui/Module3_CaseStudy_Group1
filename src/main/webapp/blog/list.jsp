@@ -74,7 +74,6 @@
         <%--        <h1>Blogs Management</h1>--%>
         <c:forEach var="blog" items="${blogs}" varStatus="loop">
             <div class="blog-container border" style="margin: 15px">
-
                 <c:if test="${blog.user_id == loginUserId}">
                     <div class="dropMenu-edit">
                         <li style="list-style-type: none" class="nav-item dropdown">
