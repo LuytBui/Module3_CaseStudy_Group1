@@ -56,6 +56,12 @@ public class UserService implements IUserService {
         return userDAO.searchKeyword(q);
     }
 
+    @Override
+    public User findAllUserByUserName(String username) {
+        username = "%" + username + "%";
+        return userDAO.findAllUserByUserName(username);
+    }
+
     public int countBlog(User user) {
         return userDAO.countBlog(user);
     }
