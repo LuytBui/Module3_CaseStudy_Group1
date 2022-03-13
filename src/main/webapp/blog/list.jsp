@@ -28,7 +28,7 @@
         <div class="d-flex navbar-div-left">
             <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
-            <form class="form-inline my-2 my-lg-0 d-flex" action="/blogs/search" method="get">
+            <form class="form-inline my-2 my-lg-0 d-flex" action="/search" method="get">
                 <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm gì đó ..."
                        aria-label="Search" name="q">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
@@ -170,29 +170,6 @@
                                                         <a href="/blogs?action=view&id=${blog.id}"
                                                            class="btn-view-blog">Xem bài viết >>></a>
                                                     </div>
-                                                </div>
-                                                <div class="we-video-info">
-                                                    <ul>
-                                                        <li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-<%--																<ins>1.2k</ins>--%>
-															</span>
-                                                        </li>
-                                                        <li>
-															<span class="comment" data-toggle="tooltip"
-                                                                  title="Comments">
-																<i class="fa fa-comments-o"></i>
-<%--																<ins>52</ins>--%>
-															</span>
-                                                        </li>
-                                                        <li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-<%--																<ins>2.2k</ins>--%>
-															</span>
-                                                        </li>
-                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
