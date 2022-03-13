@@ -58,4 +58,5 @@ public class UserService implements IUserService {
     public User findByUsername(String searchUsername) {
         return userDAO.findByUsername(searchUsername);
     }
+
 }

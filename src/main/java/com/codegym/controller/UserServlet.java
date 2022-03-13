@@ -5,6 +5,7 @@ import com.codegym.model.User;
 import com.codegym.service.user.IUserService;
 import com.codegym.service.user.UserService;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/users")
+//@WebServlet(name = "SearchUserServlet", value = "/users/search")
 public class UserServlet extends HttpServlet {
     public static final int ROLE_ID_ADMIN = 1;
     private IUserService userService = new UserService(new UserDAO());
@@ -38,26 +40,46 @@ public class UserServlet extends HttpServlet {
     private void doGetAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
-            action = "";
+            action = "/";
         }
+
+        List<User> users = userService.findAll();
+        request.setAttribute("users", users);
+
         switch (action) {
             case "create": {
-                List<User> users = userService.findAll();
-                request.setAttribute("users", users);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/users/create.jsp");
                 dispatcher.forward(request, response);
             }
+            case "block": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                User user = userService.findByID(id);
+                user.setStatus(false);
+                userService.updateById(id, user);
+                response.sendRedirect("/users");
+                break;
+            }
+
+            case "unblock": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                User user = userService.findByID(id);
+                user.setStatus(true);
+                userService.updateById(id, user);
+                response.sendRedirect("/users");
+                break;
+            }
+
             default: {
-                List<User> users = userService.findAll();
 
                 List<Integer> blogCounts = new ArrayList<>();
                 for (User user : users) {
                     int count = ((UserService) userService).countBlog(user);
                     blogCounts.add(count);
                 }
+                Boolean status = Boolean.parseBoolean(request.getParameter("status"));
 
-                request.setAttribute("users", users);
                 request.setAttribute("blogCounts", blogCounts);
+                request.setAttribute("status", status);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/user/list.jsp");
                 dispatcher.forward(request, response);
                 break;
