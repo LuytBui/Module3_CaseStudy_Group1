@@ -143,7 +143,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<User> result = getListUserFromResultSet(resultSet);
-            if (result.size() > 0){
+            if (result.size() > 0) {
                 user = result.get(0);
             }
         } catch (SQLException e) {
@@ -160,7 +160,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(1, phone);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<User> result = getListUserFromResultSet(resultSet);
-            if (result.size() > 0){
+            if (result.size() > 0) {
                 user = result.get(0);
             }
         } catch (SQLException e) {
@@ -169,15 +169,32 @@ public class UserDAO implements IUserDAO {
         return user;
     }
 
+    @Override
+    public User findAllUserByUserName(String username) {
+        User users = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where username = ?");
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<User> result = getListUserFromResultSet(resultSet);
+            if (result.size() > 0) {
+                users = result.get(0);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
     public int countBlog(User user) {
         int count = 0;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("select users.id, count(users.id) as \"count\"\n" +
                     "from users join blogs on users.id = blogs.user_id\n" +
                     "where users.id = ?;");
-            preparedStatement.setInt(1,user.getId());
+            preparedStatement.setInt(1, user.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next() ){
+            while (resultSet.next()) {
                 count = resultSet.getInt("count");
                 break;
             }

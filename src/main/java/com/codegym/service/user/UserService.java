@@ -50,6 +50,12 @@ public class UserService implements IUserService {
         return userDAO.findByPhone(phone);
     }
 
+    @Override
+    public User findAllUserByUserName(String username) {
+        username = "%" + username + "%";
+        return userDAO.findAllUserByUserName(username);
+    }
+
     public int countBlog(User user) {
         return userDAO.countBlog(user);
     }
@@ -58,5 +64,7 @@ public class UserService implements IUserService {
     public User findByUsername(String searchUsername) {
         return userDAO.findByUsername(searchUsername);
     }
+
+
 
 }
