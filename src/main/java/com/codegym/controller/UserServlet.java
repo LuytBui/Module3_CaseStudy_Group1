@@ -31,7 +31,7 @@ public class UserServlet extends HttpServlet {
             if (isAdmin) {
                 doGetAdmin(request, response);
             } else {
-                response.sendRedirect("https://google.com.vn");
+                response.sendRedirect("/blogs");
             }
 
         }

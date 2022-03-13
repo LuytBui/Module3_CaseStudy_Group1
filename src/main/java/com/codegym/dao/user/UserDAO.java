@@ -77,7 +77,7 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPhone());
-            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(4, user.getEmail().toLowerCase());
 
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
