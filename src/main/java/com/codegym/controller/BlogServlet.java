@@ -107,8 +107,6 @@ public class BlogServlet extends HttpServlet {
                     break;
                 }
                 case "viewUserBlog": {
-                    int loginId = loginUser.getId();
-                    request.setAttribute("loginId", loginId);
                     int user_id = Integer.parseInt(request.getParameter("user_id"));
                     List<Blog> blogs = blogService.findAllBlogByUserId(user_id);
                     request.setAttribute("blogs", blogs);
