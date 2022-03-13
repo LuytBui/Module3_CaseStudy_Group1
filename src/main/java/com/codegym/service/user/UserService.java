@@ -58,9 +58,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User findAllUserByUserName(String username) {
-        username = "%" + username + "%";
-        return (User) userDAO.findAllUserByUserName(username);
+    public List<User> findAllUserByUserName(String searchUsername){
+        searchUsername = "%" + searchUsername + "%";
+        return userDAO.findAllUserByUserName(searchUsername);
     }
 
     @Override

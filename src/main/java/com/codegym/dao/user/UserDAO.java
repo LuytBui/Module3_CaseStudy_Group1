@@ -174,12 +174,13 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public List<User> findAllUserByUserName(String username) {
+    public List<User> findAllUserByUserName(String searchUsername) {
         List<User> userList = new ArrayList<>();
         try {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("select * from users where username = ?");
-            preparedStatement.setString(1, username);
+                    connection.prepareStatement("select * from users where username like ?");
+            String searchPattern = "%" + searchUsername + "%";
+            preparedStatement.setString(1, searchPattern);
             ResultSet rs = preparedStatement.executeQuery();
             userList = getListUserFromResultSet(rs);
         } catch (SQLException e) {
