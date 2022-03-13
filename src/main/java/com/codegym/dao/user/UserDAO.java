@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserDAO implements IUserDAO {
     public static final String SQL_SELECT_ALL_USER = "SELECT * FROM users;";
@@ -233,5 +235,24 @@ public class UserDAO implements IUserDAO {
         }
 
         return searchResults;
+    }
+
+    @Override
+    public Map<Integer, String> map_roleId_roleName() {
+        Map<Integer, String> map_roleId_roleName = new HashMap<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "select id, role from roles;");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int roleId = resultSet.getInt("id");
+                String roleName = resultSet.getString("role");
+                map_roleId_roleName.put(roleId, roleName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return map_roleId_roleName;
     }
 }

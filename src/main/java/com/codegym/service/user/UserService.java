@@ -6,6 +6,7 @@ import com.codegym.model.SearchResult;
 import com.codegym.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 public class UserService implements IUserService {
 
@@ -60,6 +61,11 @@ public class UserService implements IUserService {
     public User findAllUserByUserName(String username) {
         username = "%" + username + "%";
         return userDAO.findAllUserByUserName(username);
+    }
+
+    @Override
+    public Map<Integer, String> map_roleId_roleName() {
+        return userDAO.map_roleId_roleName();
     }
 
     public int countBlog(User user) {

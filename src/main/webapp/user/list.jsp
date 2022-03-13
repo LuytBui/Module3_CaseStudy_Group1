@@ -13,7 +13,7 @@
         <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
         <form class="form-inline my-2 my-lg-0 d-flex" action="/userSearch" method="get">
-            <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm gì đó ..."
+            <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm người dùng ..."
                    aria-label="Search" name="q">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
         </form>
@@ -68,16 +68,17 @@
     </nav>
 
     <!-- Middle Section  -->
-    <div class="container">
+    <div class="div-middle container">
         <h1>Danh sách người dùng</h1>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Username</th>
                 <th scope="col">Số bài viết</th>
-                <th scope="col">Ngày viết bài gần đây</th>
-                <th scope="col">block</th>
+                <th scope="col">Vai trò</th>
+                <th scope="col">Thay đổi quyền</th>
+                <th scope="col">Block</th>
                 <th colspan="2"></th>
             </tr>
             </thead>
@@ -91,19 +92,28 @@
                             ${blogCounts.get(loop.index)}
                     </td>
                     <td>
-                        <a class="btn btn-info" href="/users?action=edit&id=${user.id}">
-                            <i class="fas fa-edit"></i>
-                        </a>
+                        ${map_roleId_roleName.get(user.role_id)}
+                    </td>
+
+                    <td>
+                        <c:if test="${user.isAdmin()}">
+                            <a class="btn btn-secondary" href="/users?action=unsetAdmin&id=${user.id}"><i
+                                    class="fas fa-trash">Unset admin </i></a>
+                        </c:if>
+                        <c:if test="${!user.isAdmin()}">
+                            <a class="btn btn-primary" href="/users?action=setAdmin&id=${user.id}"><i
+                                    class="fas fa-trash">Set admin</i></a>
+                        </c:if>
                     </td>
 
                     <td>
                         <c:if test="${user.status == true}">
                             <a class="btn btn-danger" href="/users?action=block&id=${user.id}"><i
-                                    class="fas fa-trash">Block</i></a>
+                                    class="fas fa-trash">Block user</i></a>
                         </c:if>
-                        <c:if test="${user.status   == false}">
+                        <c:if test="${user.status == false}">
                             <a class="btn btn-success" href="/users?action=unblock&id=${user.id}"><i
-                                    class="fas fa-trash">Unblock</i></a>
+                                    class="fas fa-trash">Unblock user</i></a>
                         </c:if>
                     </td>
 
