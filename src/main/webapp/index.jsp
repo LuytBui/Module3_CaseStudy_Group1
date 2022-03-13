@@ -31,7 +31,7 @@
     </c:if>
 
     <form class="p-3 mt-3" method="post">
-        <div class="form-field d-flex align-items-center"><span class="far fa-user"></span> <input type="text"
+        <div class="form-field d-flex align-items-center"><span class="far fa-user"></span> <input type="email"
                                                                                                    name="email"
                                                                                                    id="email"
                                                                                                    placeholder="Email">
