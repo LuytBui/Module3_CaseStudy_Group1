@@ -12,11 +12,13 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "UserServlet", value = "/users")
 //@WebServlet(name = "SearchUserServlet", value = "/users/search")
 public class UserServlet extends HttpServlet {
     public static final int ROLE_ID_ADMIN = 1;
+    public static final int ROLE_ID_BLOGGER = 2;
     private IUserService userService = new UserService(new UserDAO());
 
     @Override
@@ -24,14 +26,14 @@ public class UserServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         User loginUser = (User) session.getAttribute("user");
-        if (loginUser == null) {
+        if (loginUser == null || loginUser.isBlocked()) {
             response.sendRedirect("/");
         } else {
             boolean isAdmin = loginUser.getRole_id() == ROLE_ID_ADMIN;
             if (isAdmin) {
                 doGetAdmin(request, response);
             } else {
-                response.sendRedirect("https://google.com.vn");
+                response.sendRedirect("/blogs");
             }
 
         }
@@ -47,6 +49,10 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("users", users);
 
         switch (action) {
+            case "create": {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/users/create.jsp");
+                dispatcher.forward(request, response);
+            }
             case "block": {
                 int id = Integer.parseInt(request.getParameter("id"));
                 User user = userService.findByID(id);
@@ -64,7 +70,22 @@ public class UserServlet extends HttpServlet {
                 response.sendRedirect("/users");
                 break;
             }
-
+            case "setAdmin": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                User user = userService.findByID(id);
+                user.setRole_id(ROLE_ID_ADMIN); //ROLE_ID_
+                userService.updateById(id, user);
+                response.sendRedirect("/users");
+                break;
+            }
+            case "unsetAdmin": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                User user = userService.findByID(id);
+                user.setRole_id(ROLE_ID_BLOGGER);
+                userService.updateById(id, user);
+                response.sendRedirect("/users");
+                break;
+            }
             default: {
 
                 List<Integer> blogCounts = new ArrayList<>();
@@ -72,9 +93,9 @@ public class UserServlet extends HttpServlet {
                     int count = ((UserService) userService).countBlog(user);
                     blogCounts.add(count);
                 }
-                Boolean status = Boolean.parseBoolean(request.getParameter("status"));
                 request.setAttribute("blogCounts", blogCounts);
-                request.setAttribute("status", status);
+                Map<Integer, String> map_roleId_roleName = userService.map_roleId_roleName();
+                request.setAttribute("map_roleId_roleName", map_roleId_roleName);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/user/list.jsp");
                 dispatcher.forward(request, response);
                 break;
@@ -89,7 +110,22 @@ public class UserServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-
+            case "create": {
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String phone = request.getParameter("phone");
+                String email = request.getParameter("email");
+                String dateOfBirth = request.getParameter("dateOfBirth");
+                boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
+                String address = request.getParameter("address");
+                boolean status = Boolean.parseBoolean(request.getParameter("status"));
+                int roleId = Integer.parseInt("role_id");
+                User user = new User(username, password, phone, email, dateOfBirth, gender, address, status);
+                user.setRole_id(roleId);
+                userService.create(user);
+                response.sendRedirect("/users");
+                break;
+            }
 
         }
     }

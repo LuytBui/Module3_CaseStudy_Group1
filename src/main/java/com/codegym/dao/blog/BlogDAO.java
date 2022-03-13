@@ -104,7 +104,6 @@ public class BlogDAO implements IBlogDAO {
 
     @Override
     public boolean updateById(int id, Blog blog) {
-        List<Blog> blogs = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BLOG_BY_ID);
             preparedStatement.setInt(1, blog.getCategory_id());
@@ -201,7 +200,7 @@ public class BlogDAO implements IBlogDAO {
             preparedStatement.setInt(1, user_id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("category_id");
+                int id = rs.getInt("id");
                 int category_id = rs.getInt("category_id");
                 int user_idSql = rs.getInt("user_id");
                 String tittle = rs.getString("tittle");

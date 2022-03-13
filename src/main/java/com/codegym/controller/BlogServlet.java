@@ -27,9 +27,9 @@ public class BlogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User loginUser = (User) session.getAttribute("user");
-        if (loginUser == null) {
+        if (loginUser == null || loginUser.isBlocked()) {
             response.sendRedirect("/");
-        } else {
+        }   else {
             String action = request.getParameter("action");
             if (action == null) {
                 action = "";
@@ -107,8 +107,6 @@ public class BlogServlet extends HttpServlet {
                     break;
                 }
                 case "viewUserBlog": {
-                    int loginId = loginUser.getId();
-                    request.setAttribute("loginId", loginId);
                     int user_id = Integer.parseInt(request.getParameter("user_id"));
                     List<Blog> blogs = blogService.findAllBlogByUserId(user_id);
                     request.setAttribute("blogs", blogs);

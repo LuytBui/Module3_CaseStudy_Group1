@@ -1,8 +1,8 @@
 package com.codegym.model;
 
-import java.util.Date;
 
 public class User {
+    public static final int ROLE_ID_ADMIN = 1;
     private int id;
     private int role_id ;
     private String username;
@@ -132,4 +132,13 @@ public class User {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    public boolean isAdmin(){
+        return this.role_id == ROLE_ID_ADMIN;
+    }
+
+    public boolean isBlocked() {
+        return !this.status;
+    }
+
 }
