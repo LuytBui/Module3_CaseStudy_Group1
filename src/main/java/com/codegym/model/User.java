@@ -136,4 +136,9 @@ public class User {
     public boolean isAdmin(){
         return this.role_id == ROLE_ID_ADMIN;
     }
+
+    public boolean isBlocked() {
+        return !this.status;
+    }
+
 }

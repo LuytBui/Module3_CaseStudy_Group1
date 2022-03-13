@@ -75,11 +75,11 @@
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Username</th>
+                <th scope="col">Email</th>
                 <th scope="col">Số bài viết</th>
                 <th scope="col">Vai trò</th>
                 <th scope="col">Thay đổi quyền</th>
                 <th scope="col">Block</th>
-                <th colspan="2"></th>
             </tr>
             </thead>
             <tbody>
@@ -88,6 +88,7 @@
                 <tr>
                     <td>${loop.count}</td>
                     <td><a href="/users?action=view&id=${user.id}">${user.username}</a></td>
+                    <td>${user.email}</td>
                     <td>
                             ${blogCounts.get(loop.index)}
                     </td>

@@ -106,7 +106,7 @@
 
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex flex-column align-self-center align-items-center order-1 order-lg-2">
-                                <h2>BlogSieuHay.com</h2>
+                                <a href="/blogs"><h2>BlogSieuHay.com</h2></a>
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                                      class="img-fluid" alt="Sample image">
 

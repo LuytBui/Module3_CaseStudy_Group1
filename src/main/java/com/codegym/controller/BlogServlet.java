@@ -27,9 +27,9 @@ public class BlogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User loginUser = (User) session.getAttribute("user");
-        if (loginUser == null) {
+        if (loginUser == null || loginUser.isBlocked()) {
             response.sendRedirect("/");
-        } else {
+        }   else {
             String action = request.getParameter("action");
             if (action == null) {
                 action = "";
