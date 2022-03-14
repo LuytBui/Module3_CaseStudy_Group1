@@ -92,7 +92,7 @@
                 <select  class="form-control" name="category_id" id="category" >
                     <c:forEach var="category" items="${categories}">
                         <option value="${category.id}"
-                                <c:if test="${blogCategory.id == category.id}"> selected </c:if>
+                                <c:if test="${category.id == blogCategory.id}"> selected </c:if>
                         >${category.name}</option>
                     </c:forEach>
                 </select>
