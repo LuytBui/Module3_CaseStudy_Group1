@@ -11,6 +11,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+import static com.codegym.controller.BlogServlet.ROLE_ID_ADMIN;
+
 
 @WebServlet(name = "CategoryServlet", value = "/categories")
 public class CategoryServlet extends HttpServlet {
@@ -27,7 +29,15 @@ public class CategoryServlet extends HttpServlet {
         if (loginUser == null || loginUser.isBlocked()) {
             response.sendRedirect("/");
         } else {
+            List<Category> categories = categoryService.findAll();
+            request.setAttribute("categories", categories);
             boolean isAdmin = loginUser.getRole_id() == ROLE_ID_ADMIN;
+            request.setAttribute("isAdmin", isAdmin);
+            String username = loginUser.getUsername();
+            request.setAttribute("username", username);
+            int loginUserId = loginUser.getId();
+            request.setAttribute("loginUserId", loginUserId);
+
             if (isAdmin) {
                 doGetAdmin(request, response);
             } else {

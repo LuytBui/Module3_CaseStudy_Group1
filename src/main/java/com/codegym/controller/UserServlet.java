@@ -1,7 +1,10 @@
 package com.codegym.controller;
 
 import com.codegym.dao.user.UserDAO;
+import com.codegym.model.Category;
 import com.codegym.model.User;
+import com.codegym.service.category.CategoryService;
+import com.codegym.service.category.ICategoryService;
 import com.codegym.service.user.IUserService;
 import com.codegym.service.user.UserService;
 
@@ -14,12 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.codegym.controller.BlogServlet.ROLE_ID_ADMIN;
+
 @WebServlet(name = "UserServlet", value = "/users")
 //@WebServlet(name = "SearchUserServlet", value = "/users/search")
 public class UserServlet extends HttpServlet {
     public static final int ROLE_ID_ADMIN = 1;
     public static final int ROLE_ID_BLOGGER = 2;
     private IUserService userService = new UserService(new UserDAO());
+    ICategoryService categoryService = new CategoryService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,7 +35,17 @@ public class UserServlet extends HttpServlet {
         if (loginUser == null || loginUser.isBlocked()) {
             response.sendRedirect("/");
         } else {
+
+            List<Category> categories = categoryService.findAll();
+            request.setAttribute("categories", categories);
             boolean isAdmin = loginUser.getRole_id() == ROLE_ID_ADMIN;
+            request.setAttribute("isAdmin", isAdmin);
+            String username = loginUser.getUsername();
+            request.setAttribute("username", username);
+            int loginUserId = loginUser.getId();
+            request.setAttribute("loginUserId", loginUserId);
+
+
             if (isAdmin) {
                 doGetAdmin(request, response);
             } else {
