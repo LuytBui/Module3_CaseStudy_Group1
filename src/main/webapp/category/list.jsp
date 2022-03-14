@@ -9,7 +9,9 @@
 <body>
 <div class="container">
     <h1>Danh sách thể loại</h1>
-    <a class="btn btn-primary float-end" href="/categories?action=create">Tạo mới thể loại</a>
+    <button><a  href="/blogs">Trang chủ</a></button>
+    <button><a  href="/categories?action=create">Tạo mới thể loại</a></button>
+
     <table class="table table-bordered">
         <thead>
         <tr>
