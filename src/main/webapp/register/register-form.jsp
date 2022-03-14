@@ -94,7 +94,7 @@
                                                 <c:if test="${agreed}">checked</c:if>
                                         />
                                         <label class="form-check-label" for="form2Example3c">
-                                            Tôi đồng ý với <a href="register/terms-of-service.html"> điều khoản dịch vụ</a>.
+                                            Tôi đồng ý với <a href="register/terms-of-service.html"  target="_blank" rel="noopener noreferrer"> điều khoản dịch vụ</a>.
                                         </label>
                                     </div>
 
