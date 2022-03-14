@@ -93,7 +93,7 @@
                             <%-- kết thúc left sidebar--%>
                             <%------------------------------------------------------------------------------%>
                             <%--bắt đầu Phân thân--%>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mt-4">
                                 <div class="blog-container border">
 
                                     <h2>Tạo bài viết</h2>

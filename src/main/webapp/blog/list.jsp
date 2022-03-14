@@ -84,7 +84,6 @@
                                                 </li>
                                             </c:if>
                                             <a href="/logout" class="btn">Đăng xuất</a>
-<%--                                            <li class="nav-item"><a href="/logout">Đăng xuất </a></li>--%>
                                         </ul>
                                     </div><!-- Shortcuts -->
                                 </aside>
@@ -92,7 +91,7 @@
                             <%-- kết thúc left sidebar--%>
                             <%------------------------------------------------------------------------------%>
                             <%--bắt đầu Phân thân--%>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6  mt-4">
                                 <c:forEach var="blog" items="${blogs}" varStatus="loop">
                                     <div class="central-meta item blog-container">
                                         <c:if test="${blog.user_id == loginUserId}">
@@ -123,7 +122,6 @@
                                         </c:if>
                                         <div class="user-post">
                                             <div class="friend-info">
-                                            </p>
                                                 <figure>
                                                     <img src="https://picsum.photos/150"
                                                          class="image-avatar rounded mr-1" alt="Cinque Terre">
@@ -131,12 +129,16 @@
                                                 </figure>
 
                                                 <div class="friend-name">
-                                                    <ins>
+                                                    <div class="d-flex justify-content-between">
                                                         <a class="author"
                                                            href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
                                                                 ${map_userId_userName.get(blog.user_id)}
                                                         </a>
-                                                    </ins>
+                                                        <a class="btn btn-outline-info blog-category"
+                                                           href="/blogs?action=viewCategoryBlog&id=${blog.category_id}">
+                                                                ${map_categoryId_categoryName.get(blog.category_id)}
+                                                        </a>
+                                                    </div>
                                                     <span>Cập nhật lúc ${blog.dateModified}</span>
                                                 </div>
                                                 <div class="description">

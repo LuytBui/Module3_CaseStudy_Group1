@@ -28,7 +28,7 @@
             <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
             <form class="form-inline my-2 my-lg-0 d-flex" action="/search" method="get">
-                <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm gì đó ..."
+                <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm người dùng ..."
                        aria-label="Search" name="q">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
             </form>
@@ -91,8 +91,8 @@
                             <%-- kết thúc left sidebar--%>
                             <%------------------------------------------------------------------------------%>
                             <%--bắt đầu Phân thân--%>
-                            <div class="col-lg-6">
-                                <div class="div-middle container">
+                            <div class="col-lg-6 mt-4">
+                                <div class="container">
                                     <h1>Danh sách người dùng</h1>
                                     <table class="table table-bordered table-striped">
                                         <thead>

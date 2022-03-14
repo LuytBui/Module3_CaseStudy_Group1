@@ -225,7 +225,7 @@ public class BlogDAO implements IBlogDAO {
             preparedStatement.setInt(1, category_id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("category_id");
+                int id = rs.getInt("id");
                 int category_idSql = rs.getInt("category_id");
                 int user_idSql = rs.getInt("user_id");
                 String tittle = rs.getString("tittle");

@@ -20,6 +20,14 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link type="text/css" rel="stylesheet" href="style/blog-list.css">
     <link type="text/css" rel="stylesheet" href="style/blog-sidebar.css">
+    <style>
+        .blog-container {
+            max-width: 1280px;
+        }
+        .blog-tittle{
+            font-size: 135%;
+        }
+    </style>
 </head>
 <body>
 
@@ -94,21 +102,20 @@
                             <%------------------------------------------------------------------------------%>
                             <%--bắt đầu Phân thân--%>
                             <div class="col-lg-6">
-                                <div  class="blog-container border">
+                                <div  class="blog-container border  mt-3">
 <%--                                    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>--%>
                                     <form action="/blogs?action=vew&id=${blog.id}" method="post">
                                         <div class="mb-3">
-                                            <a href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
+                                            <a class="author" href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
                                                 ${map_userId_userName.get(blog.user_id)}
                                             </a>
                                             <span class="span-date mr-2">Đã tạo lúc ${blog.dateModified}</span>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="tittle" class="form-label">Tiêu đề </label>
-                                            <p class="form-control" id="tittle"></p>
-                                            <script>
-                                                document.getElementById(`tittle`).innerHTML = `${blog.tittle}`;
-                                            </script>
+<%--                                            <label for="tittle" class="form-label">Tiêu đề </label>--%>
+<%--                                            Tiêu đề--%>
+                                            <p class="blog-tittle" id="tittle">${blog.tittle}</p>
+
                                         </div>
                                         <div class="mb-3">
                                             <label for="content${loop.count}" class="form-label">Nội dung </label>
