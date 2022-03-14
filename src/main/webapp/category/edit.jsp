@@ -92,15 +92,17 @@
                             <%------------------------------------------------------------------------------%>
                             <%--bắt đầu Phân thân--%>
                             <div class="col-lg-6">
-                                <div class="container">
-                                    <a href="/categories">Danh sách thể loại</a>
-                                    <h1>Cập nhật </h1>
+                                <div class="mt-4 container">
+                                    <h1>Cập nhật Danh mục </h1>
                                     <form action="/categories?action=edit&id=${category.id}" method="post">
                                         <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Tên thể loại:</label>
+                                            <label for="exampleInputPassword1" class="form-label">Tên danh mục:</label>
                                             <input type="text" class="form-control" id="exampleInputPassword1" name="name" value="${category.name}">
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            <a class="btn btn-primary" href="/categories">Quay lại</a>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

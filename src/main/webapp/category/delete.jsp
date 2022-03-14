@@ -93,20 +93,22 @@
                             <%------------------------------------------------------------------------------%>
                             <%--bắt đầu Phân thân--%>
                             <div class="col-lg-6">
-                                <div class="container">
-                                    <a href="/categories">Danh sách thể loại</a>
-                                    <h1>Xóa thể loại</h1>
+                                <div class="mt-4 container">
+                                    <h1>Xóa danh mục</h1>
                                     <form action="/categories?action=delete&id=${category.id}" method="post">
                                         <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Mã thể loại:</label>
+                                            <label for="exampleInputEmail1" class="form-label">Mã danh mục:</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" name="d_id" value="${category.id}" disabled>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Tên thể loại:</label>
+                                            <label for="exampleInputPassword1" class="form-label">Tên danh mục:</label>
                                             <input type="text" class="form-control" id="exampleInputPassword1" name="name" value="${category.name}"
                                                    disabled>
                                         </div>
-                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
+                                            <a class="btn btn-primary" href="/categories">Quay lại</a>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

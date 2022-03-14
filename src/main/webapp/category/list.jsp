@@ -92,33 +92,35 @@
                             <%------------------------------------------------------------------------------%>
                             <%--bắt đầu Phân thân--%>
                             <div class="col-lg-6">
-                                <h1>Danh sách thể loại</h1>
-                                <button><a href="/blogs">Trang chủ</a></button>
-                                <button><a href="/categories?action=create">Tạo mới thể loại</a></button>
+                                <div class="mt-4 container">
+                                    <h1>Danh sách danh mục</h1>
+                                    <a href="/blogs" class="btn btn-primary">Trang chủ</a>
+                                    <a href="/categories?action=create" class="btn btn-primary">Tạo mới danh mục</a>
 
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">STT</th>
-                                        <th scope="col">Tên thể loại</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="category" items="${categories}" varStatus="loop">
+                                    <table class="table table-bordered">
+                                        <thead>
                                         <tr>
-                                            <td>${loop.count}</td>
-                                            <td><a href="/categories?action=view&id=${category.id}">${category.name}</a></td>
-                                            <td>
-                                                <a class="btn btn-info" href="/categories?action=edit&id=${category.id}">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                            </td>
-                                            <td><a class="btn btn-danger" href="/categories?action=delete&id=${category.id}"><i
-                                                    class="fas fa-trash"></i></a></td>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Tên danh mục</th>
                                         </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach var="category" items="${categories}" varStatus="loop">
+                                            <tr>
+                                                <td>${loop.count}</td>
+                                                <td><a href="/categories?action=view&id=${category.id}">${category.name}</a></td>
+                                                <td>
+                                                    <a class="btn btn-info" href="/categories?action=edit&id=${category.id}">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                </td>
+                                                <td><a class="btn btn-danger" href="/categories?action=delete&id=${category.id}"><i
+                                                        class="fas fa-trash"></i></a></td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <%--kết thúc Phân thân--%>
                             <%------------------------------------------------------------------------------%>
