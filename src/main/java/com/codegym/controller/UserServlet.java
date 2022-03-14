@@ -45,8 +45,7 @@ public class UserServlet extends HttpServlet {
             action = "/";
         }
 
-        List<User> users = userService.findAll();
-        request.setAttribute("users", users);
+
 
         switch (action) {
             case "create": {
@@ -86,8 +85,10 @@ public class UserServlet extends HttpServlet {
                 response.sendRedirect("/users");
                 break;
             }
-            default: {
 
+            default: {
+                List<User> users = userService.findAll();
+                request.setAttribute("users", users);
                 List<Integer> blogCounts = new ArrayList<>();
                 for (User user : users) {
                     int count = ((UserService) userService).countBlog(user);

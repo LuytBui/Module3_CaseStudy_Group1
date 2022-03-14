@@ -9,8 +9,7 @@
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link type="text/css" rel="stylesheet" href="style/blog-list.css">
-    <link type="text/css" rel="stylesheet" href="style/blog-sidebar.css">
+
 
     <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
 
@@ -18,7 +17,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/color.css">
     <link rel="stylesheet" href="css/responsive.css">
-
+    <link type="text/css" rel="stylesheet" href="style/blog-list.css">
+    <link type="text/css" rel="stylesheet" href="style/blog-sidebar.css">
 </head>
 <body>
 
@@ -35,9 +35,6 @@
             </form>
         </div>
     </nav>
-    <%--    -------------------------------------------------------------------------------------------------%>
-    <%--    <div class="topbar stick">--%>
-    <%--    </div><!-- topbar -->--%>
 
     <section>
         <div class="gap gray-bg">
@@ -54,7 +51,7 @@
                                                href="#">User: ${username} </a>
                                             <%-- avatar: random image   credit: https://picsum.photos/--%>
                                             <img src="https://picsum.photos/150" class="image-avatar rounded mr-1"
-                                                 alt="Cinque Terre">
+                                                 alt="User avatar">
                                         </div>
                                         <ul class="naves">
                                             <li class="nav-item">
@@ -128,14 +125,7 @@
                                         </c:if>
                                         <div class="user-post">
                                             <div class="friend-info">
-                                                    <%--                                                    <p class="text-right">--%>
-                                                    <%--                                                         <span class="span-category-label"> Danh mục:--%>
-                                                    <%--                                                          <a class="span-category"--%>
-                                                    <%--                                                             href="/blogs?action=viewCategoryBlog&id=${blog.category_id}">--%>
-                                                    <%--                                                                  ${map_categoryId_categoryName.get(blog.category_id)}--%>
-                                                    <%--                                                          </a>--%>
-                                                    <%--                                                         </span>--%>
-                                                    <%--                                                    </p>--%>
+                                            </p>
                                                 <figure>
                                                     <img src="https://picsum.photos/150"
                                                          class="image-avatar rounded mr-1" alt="Cinque Terre">
@@ -153,11 +143,7 @@
                                                 </div>
                                                 <div class="description">
                                                     <div class="mb-1">
-                                                        <p class="blog-content-preview "
-                                                           id="tittle${loop.count}"></p>
-                                                        <script>
-                                                            document.getElementById(`tittle${loop.count}`).innerHTML = `${blog.tittle}`;
-                                                        </script>
+                                                        <h3 class="blog-tittle">${blog.tittle}</h3>
                                                     </div>
                                                     <div class="mb-1">
                                                         <p class="blog-content-preview "
@@ -185,26 +171,6 @@
                                         <h4 class="widget-title">Friends</h4>
                                         <div id="searchDir"></div>
                                         <ul id="people-list" class="friendz-list">
-                                            <li>
-                                                <%--                                                <figure>--%>
-                                                <%--                                                    <img src="images/resources/friend-avatar.jpg" alt="">--%>
-                                                <%--                                                    <span class="status f-online"></span>--%>
-                                                <%--                                                </figure>--%>
-                                                <%--                                                <div class="friendz-meta">--%>
-                                                <%--                                                    <a href="time-line.html">bucky barnes</a>--%>
-                                                <%--                                                    <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d7c9ced4c5d2d3cfccc4c5d2e0c7cdc1c9cc8ec3cfcd">[email&#160;protected]</a></i>--%>
-                                                <%--                                                </div>--%>
-                                            </li>
-                                            <li>
-
-                                            </li>
-                                            <li>
-
-                                            </li>
-                                            <li>
-
-                                            </li>
-
                                         </ul>
                                     </div><!-- friends list sidebar -->
                                 </aside>
