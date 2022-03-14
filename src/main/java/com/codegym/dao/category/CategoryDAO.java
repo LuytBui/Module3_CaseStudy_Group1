@@ -67,9 +67,12 @@ public class CategoryDAO implements ICategoryDAO{
     @Override
     public boolean deleteById(int id) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE from categories where  id = ?");
-            preparedStatement.setInt(1, id);
-            return preparedStatement.executeUpdate() > 0;
+            PreparedStatement statement_unlinkBlogs = connection.prepareStatement("update blogs set category_id = null where category_id = ?;");
+            PreparedStatement statement_deleteCategory = connection.prepareStatement("DELETE from categories where  id = ?");
+            statement_unlinkBlogs.setInt(1, id);
+            statement_unlinkBlogs.executeUpdate();
+            statement_deleteCategory.setInt(1, id);
+            return statement_deleteCategory.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
