@@ -3,6 +3,7 @@ package com.codegym.controller;
 import com.codegym.dao.blog.BlogDAO;
 import com.codegym.dao.category.CategoryDAO;
 import com.codegym.dao.user.UserDAO;
+import com.codegym.model.Category;
 import com.codegym.model.SearchResult;
 import com.codegym.model.User;
 import com.codegym.service.blog.BlogService;
@@ -23,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codegym.controller.BlogServlet.ROLE_ID_ADMIN;
+
 
 @WebServlet(name = "BlogSearchServlet", value = "/search")
 public class BlogSearchServlet extends HttpServlet {
@@ -38,6 +41,17 @@ public class BlogSearchServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
             requestDispatcher.forward(request, response);
         } else {
+
+            List<Category> categories = categoryService.findAll();
+            request.setAttribute("categories", categories);
+            boolean isAdmin = loginUser.getRole_id() == ROLE_ID_ADMIN;
+            request.setAttribute("isAdmin", isAdmin);
+            String username = loginUser.getUsername();
+            request.setAttribute("username", username);
+            int loginUserId = loginUser.getId();
+            request.setAttribute("loginUserId", loginUserId);
+
+
             String q = request.getParameter("q");
             if (q.length() == 0) {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("blog/search.jsp");

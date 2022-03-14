@@ -1,6 +1,8 @@
+
 .searchResult-container{
+    margin-bottom: 20px;
     box-sizing: content-box;
-    width: 80%;
+    width: 100%;
     min-width: 400px;
     max-width: 800px;
     padding: 15px;
