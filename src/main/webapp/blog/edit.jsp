@@ -78,8 +78,8 @@
             <div class="mb-3">
                 <div class="mb-3">
                     <label for="tittle" class="form-label">Tiêu đề</label>
-                    <%--            <input type="text" class="form-control" id="tittle" name="tittle">--%>
-                    <textarea name="tittle" id="tittle" rows="2">${blog.tittle}</textarea>
+                    <input type="text" class="form-control" id="tittle" name="tittle">
+
                 </div>
             </div>
             <div class="mb-3">
@@ -106,16 +106,6 @@
 
 <script>
     CKEDITOR.replace( 'content' );
-</script>
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#tittle' ) )
-        .then( editor => {
-            console.log( editor );
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
