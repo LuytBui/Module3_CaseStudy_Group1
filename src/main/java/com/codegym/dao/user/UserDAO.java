@@ -4,6 +4,7 @@ import com.codegym.dao.DBConnection;
 import com.codegym.model.SearchResult;
 import com.codegym.model.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -173,21 +174,21 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public User findAllUserByUserName(String username) {
-        User users = null;
+    public List<User> findAllUserByUserName(String searchUsername) {
+        List<User> userList = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where username = ?");
-            preparedStatement.setString(1, username);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<User> result = getListUserFromResultSet(resultSet);
-            if (result.size() > 0) {
-                users = result.get(0);
-            }
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("select * from users where username like ?");
+            String searchPattern = "%" + searchUsername + "%";
+            preparedStatement.setString(1, searchPattern);
+            ResultSet rs = preparedStatement.executeQuery();
+            userList = getListUserFromResultSet(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return users;
+        return userList;
     }
+
 
     public int countBlog(User user) {
         int count = 0;

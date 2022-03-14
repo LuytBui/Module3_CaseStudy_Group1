@@ -5,6 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="style/blog-list.css">
+    <link type="text/css" rel="stylesheet" href="style/blog-sidebar.css">
 </head>
 <body>
 <!-- Navbar  -->
@@ -12,7 +13,7 @@
     <div class="d-flex navbar-div-left">
         <a class="navbar-brand main-logo" href="/blogs">BlogSieuHay.com</a>
 
-        <form class="form-inline my-2 my-lg-0 d-flex" action="/userSearch" method="get">
+        <form class="form-inline my-2 my-lg-0 d-flex" action="/searchUser" method="get">
             <input class="form-control mr-sm-2 input-search" type="search" placeholder="Tìm người dùng ..."
                    aria-label="Search" name="q">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>

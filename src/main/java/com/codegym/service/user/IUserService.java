@@ -12,6 +12,6 @@ public interface IUserService extends IGeneralService<User> {
     User findByEmail(String email);
     User findByPhone(String phone);
     List<SearchResult> searchKeyword(String q);
-    User findAllUserByUserName(String username);
+    List<User> findAllUserByUserName(String searchUsername);
     Map<Integer, String> map_roleId_roleName();
 }
