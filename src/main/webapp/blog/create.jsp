@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Create blog</title>
@@ -77,8 +77,7 @@
         <form action="/blogs?action=create" method="post">
             <div class="mb-3">
                 <label for="tittle" class="form-label">Tiêu đề</label>
-                <%--            <input type="text" class="form-control" id="tittle" name="tittle">--%>
-                <textarea name="tittle" id="tittle" rows="2"></textarea>
+                <input type="text" class="form-control" id="tittle" name="tittle">
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">Nội dung </label>
@@ -87,7 +86,7 @@
             </div>
             <div class="mb-3">
                 <label for="category" class="form-label">Thêm bài viết vào</label>
-                <select  class="form-control" name="category_id" id="category">
+                <select class="form-control" name="category_id" id="category">
                     <c:forEach var="category" items="${categories}">
                         <option value="${category.id}">${category.name}</option>
                     </c:forEach>
@@ -100,18 +99,9 @@
 </div>
 
 <script>
-    CKEDITOR.replace( 'content' );
+    CKEDITOR.replace('content');
 </script>
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#tittle' ) )
-        .then( editor => {
-            console.log( editor );
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
