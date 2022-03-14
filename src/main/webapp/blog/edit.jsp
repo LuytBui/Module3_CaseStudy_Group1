@@ -107,7 +107,7 @@
                                         <div class="mb-3">
                                             <label for="content" class="form-label">Nội dung </label>
                                             <textarea name="content" id="content">${blog.content}</textarea>
-                                                        <textarea style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10"></textarea>
+<%--                                                        <textarea style="resize: none" class="form-control"  name="content" id="content" cols="30" rows="10"></textarea>--%>
                                         </div>
                                         <div class="mb-3">
                                             <label for="category" class="form-label">Thêm bài viết vào</label>
@@ -149,16 +149,6 @@
 
 <script>
     CKEDITOR.replace( 'content' );
-</script>
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#tittle' ) )
-        .then( editor => {
-            console.log( editor );
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
