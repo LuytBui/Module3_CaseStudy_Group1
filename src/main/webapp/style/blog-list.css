@@ -98,6 +98,11 @@
     right: 0;
 }
 
+.blog-container .blog-tittle {
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: 90%;
+}
 .blog-container .btn-view-blog {
     font-size: 85%;
     position: absolute;

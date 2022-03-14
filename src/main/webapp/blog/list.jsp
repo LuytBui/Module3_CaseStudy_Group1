@@ -143,11 +143,7 @@
                                                 </div>
                                                 <div class="description">
                                                     <div class="mb-1">
-                                                        <p class="blog-content-preview "
-                                                           id="tittle${loop.count}"></p>
-                                                        <script>
-                                                            document.getElementById(`tittle${loop.count}`).innerHTML = `${blog.tittle}`;
-                                                        </script>
+                                                        <h3 class="blog-tittle">${blog.tittle}</h3>
                                                     </div>
                                                     <div class="mb-1">
                                                         <p class="blog-content-preview "
