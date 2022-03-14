@@ -95,7 +95,6 @@
                             <%--bắt đầu Phân thân--%>
                             <div class="col-lg-6">
                                 <div class="blog-container border">
-                                    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>
                                     <form action="/blogs?action=delete&id=${blog.id}" method="post">
                                         <div class="mb-3">
                                             <label for="tittle" class="form-label">Tiêu đề</label>
@@ -117,7 +116,11 @@
                                             </div>
 
                                         </div>
-                                        <button type="submit" class="btn btn-danger">Xóa</button>
+
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
+                                            <a class="btn btn-primary" href="/blogs">Quay lại</a>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

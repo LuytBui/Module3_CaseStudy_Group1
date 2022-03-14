@@ -95,7 +95,7 @@
                             <%--bắt đầu Phân thân--%>
                             <div class="col-lg-6">
                                 <div  class="blog-container border">
-                                    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>
+<%--                                    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>--%>
                                     <form action="/blogs?action=vew&id=${blog.id}" method="post">
                                         <div class="mb-3">
                                             <a href="/blogs?action=viewUserBlog&user_id=${blog.user_id}">
@@ -123,6 +123,9 @@
                                             <script>
                                                 document.getElementById(`category`).innerHTML = `${category.name}`;
                                             </script>
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <a class="btn btn-primary" href="/blogs">Quay lại</a>
                                         </div>
                                     </form>
                                 </div>

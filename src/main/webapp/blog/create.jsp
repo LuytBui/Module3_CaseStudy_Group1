@@ -95,7 +95,7 @@
                             <%--bắt đầu Phân thân--%>
                             <div class="col-lg-6">
                                 <div class="blog-container border">
-                                    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>
+
                                     <h2>Tạo bài viết</h2>
 
                                     <form action="/blogs?action=create" method="post">
@@ -116,7 +116,10 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Tạo</button>
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <button class="btn btn-primary" type="submit">Tạo</button>
+                                            <a class="btn btn-primary" href="/blogs">Quay lại</a>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

@@ -94,7 +94,6 @@
                             <%--bắt đầu Phân thân--%>
                             <div class="col-lg-6">
                                 <div  class="blog-container border">
-                                    <a class="btn btn-primary float-end" href="/blogs">Quay lại</a>
                                     <h2>Sửa bài viết</h2>
                                     <form action="/blogs?action=edit&id=${blog.id}" method="post">
                                         <div class="mb-3">
@@ -119,7 +118,11 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                            <a class="btn btn-primary" href="/blogs">Quay lại</a>
+                                        </div>
+
                                     </form>
                                 </div>
                             </div>
