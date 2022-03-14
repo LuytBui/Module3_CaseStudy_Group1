@@ -12,17 +12,16 @@
     margin-inline: 20px;
 }
 
-nav.sidebar {
+.sidebar {
     width: 250px;
-    top: 79px;
-    height: 100vh;
-    background: #E9ECEF;
+    margin-top: 90px;
     color: #fff;
-    padding: 20px;
-    border-radius: 0;
-    border: 1px solid black;
+    padding: 8px;
 }
 
+.sidebar-heading{
+    padding: 8px;
+}
 .username {
     font-size: 108%;
     font-weight: bold;
@@ -102,9 +101,10 @@ nav.sidebar {
 .blog-container .btn-view-blog {
     font-size: 85%;
     position: absolute;
-    bottom: 0;
+    bottom: -50px;
     left: 0;
     margin: 15px;
+    padding: 15px;
 }
 
 .blog-container .blog-content-preview {
