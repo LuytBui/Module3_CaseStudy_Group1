@@ -62,7 +62,6 @@
                                             </li>
                                             <li class="nav-item has-submenu">
                                                 <a class="nav-link" href="#"> Danh mục bài viết
-                                                    <i class="bi bi-caret-down-fill"></i>
                                                 </a>
                                                 <ul class="submenu collapse">
                                                     <c:forEach var="category" items="${categories}">
@@ -76,7 +75,6 @@
                                             <c:if test="${isAdmin}">
                                                 <li class="nav-item has-submenu">
                                                     <a class="nav-link" href="#"> Admin menu
-                                                        <i class="bi bi-caret-down-fill"></i>
                                                     </a>
                                                     <ul class="submenu collapse">
                                                         <li><a class="nav-link" href="/users">Quản lý Users </a></li>
@@ -85,8 +83,8 @@
                                                     </ul>
                                                 </li>
                                             </c:if>
-
-                                            <li class="nav-item"><a href="/logout">Đăng xuất </a></li>
+                                            <a href="/logout" class="btn">Đăng xuất</a>
+<%--                                            <li class="nav-item"><a href="/logout">Đăng xuất </a></li>--%>
                                         </ul>
                                     </div><!-- Shortcuts -->
                                 </aside>
