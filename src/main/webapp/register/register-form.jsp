@@ -94,7 +94,7 @@
                                                 <c:if test="${agreed}">checked</c:if>
                                         />
                                         <label class="form-check-label" for="form2Example3c">
-                                            Tôi đồng ý với <a href="register/terms-of-service.html"> điều khoản dịch vụ</a>.
+                                            Tôi đồng ý với <a href="register/terms-of-service.html"  target="_blank" rel="noopener noreferrer"> điều khoản dịch vụ</a>.
                                         </label>
                                     </div>
 
@@ -106,7 +106,7 @@
 
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex flex-column align-self-center align-items-center order-1 order-lg-2">
-                                <a href="/blogs" target="_blank" rel="noopener noreferrer"><h2>BlogSieuHay.com</h2></a>
+                                <a href="/blogs"><h2>BlogSieuHay.com</h2></a>
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                                      class="img-fluid" alt="Sample image">
 
